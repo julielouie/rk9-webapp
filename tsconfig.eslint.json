@@ -1,0 +1,8 @@
+{
+    "include": [
+        "./packages/frontend/.eslintrc.js",
+        "./packages/frontend/.prettierrc.js",
+        "jest.config.js"
+    ],
+    "exclude": []
+}

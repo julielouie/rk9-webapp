@@ -1,0 +1,30 @@
+{
+  "name": "root",
+  "private": true,
+  "scripts": {
+    "start": "",
+    "build:docker": "docker-compose build",
+    "dev:docker": "docker-compose up",
+    "dev:backend": "cd packages/backend && npm run dev",
+    "test": "lerna run test",
+    "bootstrap": "lerna bootstrap",
+    "compile": "lerna run compile",
+    "build": "lerna run build",
+    "build:common": "cd packages/common && npm run build",
+    "package": "lerna run package",
+    "lint": "eslint '*/**/*.{js,ts,tsx}'",
+    "clean:code": "lerna run clean",
+    "clean:deps": "lerna clean -y && rm -rf node_modules",
+    "clean:db": "docker-compose down -v",
+    "clean:all": "npm run clean:code && npm run clean:deps && npm run clean:db"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "@commitlint/config-lerna-scopes": "^11.0.0",
+    "@types/jest": "^26.0.24",
+    "husky": "^4.3.8",
+    "lerna": "^3.22.1",
+    "lint-staged": "^10.5.4"
+  }
+}

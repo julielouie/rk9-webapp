@@ -1,0 +1,15 @@
+{
+  "packages": ["packages/*"],
+  "version": "independent",
+  "npmClient": "npm",
+  "command": {
+    "version": {
+      "message": "chore: release [skip ci]",
+      "conventionalCommits": true,
+      "allowBranch": "master"
+    },
+    "bootstrap": {
+      "hoist": false
+    }
+  }
+}

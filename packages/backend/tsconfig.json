@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "allowJs": false,
+    "checkJs": false,
+    "resolveJsonModule": true,
+    "noEmitOnError": true,
+    "strict": true,
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es6",
+    "noImplicitAny": true,
+    "noImplicitThis": false,
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "outDir": "dist",
+    "baseUrl": ".",
+    "paths": {
+      "*": ["node_modules/@types/*", "src/types/*"]
+    }
+  },
+  "references": [],
+  "include": ["src/**/*"],
+  "exclude": ["./node_modules", "__tests__", "out"]
+}
