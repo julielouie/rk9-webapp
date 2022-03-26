@@ -2,54 +2,54 @@
 
 RK9 monorepo source project, containing the frontend (ReactJS) and backend (Express API server).
 
+## TLDR SETUP COMMANDS
+**Run the following commands at the root of the project, in the following order:**
+1) ./setup.sh
+2) npm run build:docker
+3) npm run dev:docker
+4) cd packages/frontend && npm start
 
-## Development & Operations:
+**Continue reading below for a more in-depth explanation on our setup**
 
-RK9 Webapp is currently broken into three services: a backend, a frontend, and a database service. These services are containerized for development and production purposes. Below, you can lean more on how you can use the provided `Makefile` for your development operations.
-
-### Service Requirements
- - Docker (Or OCI complaint agent)
- - make
- - git
-
-## Getting Started
-
-1. Clone the repo and enter base directory:
-
-```bash
-git clone gitlab/rk9/rk9-webapp.git
-cd rk9-webapp
+# Setup
+1) Install root dependencies
+```
+$ npm ci
 ```
 
-2. Move from the base directory to the backend directory via `cd packages/backend`, and run `npm ci`. Then, move to the frontend directory via `../frontend`, and again run `npm ci`. Return to the base directory via `../..`
-
-3. Build the backend, frontend, and database service containers on your localhost. This will take a few minutes to complete:
-```bash
-make build
+2) Install package dependencies
+```
+$ lerna bootstrap
 ```
 
-4. Run the services on your localhost, to see live updates as you develop. This will take a few minutes to complete:
-```bash
-make serve
+### Backend 
+To get the RK9 backend stack up in a short time, the use of docker is recommended. We utilize docker images for mongo, and containerize our REST api.
+
+1) Build docker images
+```
+$ npm run build:docker
+```
+or
+```
+docker-compose build
 ```
 
-5. Open `localhost:3000` on your web browser to view the application.
-
-
-## Utilizing Makefile
-
-### To run any unit test or integration test, if desired:
+2) Run the project:
 ```
-make unit-test
-make integration-test
+$ npm run dev:docker
+```
+or
+```
+docker-compose up
 ```
 
-### To investigate backend service logs:
+### Frontend
+You can now run the frontend, once the backend is running.
+
+1. Start frontend
 ```
-make logs-backend
+$ cd packages/frontend
+$ npm run start
 ```
 
-### To update `package-lock.json` files for services, if you update any `package.json` files:
-```
-make update-package-locks
-```
+2. Open `localhost:3000` in your browser to view live updates.
