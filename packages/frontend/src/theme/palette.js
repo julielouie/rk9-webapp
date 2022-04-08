@@ -21,7 +21,7 @@ const palette = {
     primary: white,
     secondary: '#f4effc',
     tertiary: '#e2daeb',
-    quaternary: '#301e4e',
+    quaternary: '#2D2B2B',
     highlight,
     secondaryHighlight,
   },

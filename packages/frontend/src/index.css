@@ -2,6 +2,7 @@
 
 html {
   background-color: #ffffff;
+  color: #1f1235;
 }
 
 body {
@@ -14,6 +15,10 @@ body {
 
 #root {
   height: 100%;
+}
+
+#content {
+  min-height: calc(100vh - 600px);
 }
 
 code {

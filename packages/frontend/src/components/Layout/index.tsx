@@ -1,9 +1,9 @@
-import React, { ReactNode, useContext, useState } from 'react';
+import React, { ReactNode } from 'react';
 import { CSSObject, styled, Theme } from '@mui/material/styles';
 import MuiBox from '@mui/material/Box';
 import { drawerWidthOpen } from '../../constants/GlobalConstants';
 import NavigationView from './Navigation';
-import { SessionContext } from '../../context/SessionContext';
+import Footer from './Navigation/Footer';
 
 const closedDrawerBody = (theme: Theme): CSSObject => ({
   marginLeft: `calc(${theme.spacing(7)} + 1px)`,
@@ -30,25 +30,14 @@ interface LayoutProps {
 
 export const Layout: React.FC<LayoutProps> = (props) => {
   const { children } = props;
-  const {
-    state: { drawerOpened },
-  } = useContext(SessionContext);
-  const [open, setOpen] = useState(drawerOpened);
-
-  const toggleDrawer = (change: React.SetStateAction<boolean>) => {
-    setOpen(change);
-  };
 
   return (
     <>
-      <NavigationView open={open} drawerChange={toggleDrawer} />
-      <Box
-        component="main"
-        sx={{ flexGrow: 1, p: 3 }}
-        marginLeft={drawerOpened ? drawerWidthOpen : 0}
-      >
+      <NavigationView />
+      <Box id="content" sx={{ flexGrow: 1, p: 3 }}>
         {children}
       </Box>
+      <Footer />
     </>
   );
 };
