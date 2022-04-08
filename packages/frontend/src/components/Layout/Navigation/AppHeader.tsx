@@ -47,32 +47,12 @@ const AppHeader: React.FC = () => {
               <Grid item>
                 {!loggedIn ? (
                   <IconButton onClick={() => setLoggedIn(true)}>
-                    <small>Login</small>
+                    <small style={{ color: palette.text.primary }}>Login</small>
                   </IconButton>
                 ) : (
-                  <SpeedDial
-                    ariaLabel="User SpeedDial"
-                    icon={<AccountCircleIcon style={{ color: palette.text.primary }} />}
-                    direction="down"
-                    sx={{ height: '40px', width: '40px', margin: '4px 15px 0 10px' }}
-                    FabProps={{
-                      size: 'small',
-                      sx: {
-                        bgcolor: palette.paper.primary,
-                        '&:hover': {
-                          bgcolor: 'rgba(0, 0, 0, 0.04)',
-                        },
-                      },
-                    }}
-                  >
-                    {actions.map((action) => (
-                      <SpeedDialAction
-                        key={action.name}
-                        icon={action.icon}
-                        tooltipTitle={action.name}
-                      />
-                    ))}
-                  </SpeedDial>
+                  <IconButton onClick={() => setLoggedIn(false)}>
+                    <AccountCircleIcon style={{ color: palette.text.primary }} />
+                  </IconButton>
                 )}
               </Grid>
             </Grid>
