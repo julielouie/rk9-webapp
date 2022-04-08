@@ -1,24 +1,15 @@
 import React, { useState } from 'react';
 import { Route, useHistory } from 'react-router-dom';
 import { IconButton, Grid, Toolbar, Box } from '@material-ui/core';
-import SpeedDial from '@mui/material/SpeedDial';
-import SpeedDialAction from '@mui/material/SpeedDialAction';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import SettingsIcon from '@mui/icons-material/Settings';
-import LogoutIcon from '@mui/icons-material/Logout';
 import palette from '../../../theme/palette';
 import RK9Logo from '../../../assets/images/RK9 Logo.png';
 
 const AppHeader: React.FC = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const history = useHistory();
-
-  const actions = [
-    { icon: <SettingsIcon />, name: 'User Settings' },
-    { icon: <LogoutIcon onClick={() => setLoggedIn(false)} />, name: 'Logout' },
-  ];
 
   return (
     <Route
