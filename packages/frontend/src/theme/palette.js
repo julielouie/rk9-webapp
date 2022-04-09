@@ -19,7 +19,7 @@ const palette = {
   },
   paper: {
     primary: white,
-    secondary: '#f4effc',
+    secondary: '#7E0C6D',
     tertiary: '#e2daeb',
     quaternary: '#2D2B2B',
     highlight,

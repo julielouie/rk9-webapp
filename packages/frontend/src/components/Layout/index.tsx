@@ -34,7 +34,7 @@ export const Layout: React.FC<LayoutProps> = (props) => {
   return (
     <>
       <NavigationView />
-      <Box id="content" sx={{ flexGrow: 1, p: 3 }}>
+      <Box id="content" sx={{ flexGrow: 1 }}>
         {children}
       </Box>
       <Footer />

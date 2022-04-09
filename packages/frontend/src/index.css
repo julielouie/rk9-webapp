@@ -19,6 +19,7 @@ body {
 
 #content {
   min-height: calc(100vh - 600px);
+  margin-left: 0;
 }
 
 code {
