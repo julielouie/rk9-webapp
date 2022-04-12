@@ -31,18 +31,6 @@ const userSchema = new mongoose.Schema({
 
 // ────────────────────────────────────────────────────────────────────────────────
 
-userSchema.pre<IUserDocument>('save', async function () {
-  const doc = this;
-
-  // check if user already exists
-  const user = await doc.model('User').findOne({ username: doc.username });
-
-  if (user) {
-    const errorMsg = `A user with the username ${doc.username} already exists`;
-    throw new PayloadValidationException(errorMsg);
-  }
-});
-
 userSchema.set('toObject', { virtuals: true });
 
 export default mongoose.model<IUserDocument>('User', userSchema);

@@ -1,7 +1,7 @@
 import React, { Component, ErrorInfo, ReactNode } from 'react';
 import { Typography, Grid, AccordionSummary, AccordionDetails, Accordion } from '@material-ui/core';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { LEVEL_ERROR, LogError } from '../../dataServices/Logger';
 
 interface ErrorBoundaryProps extends RouteComponentProps {
@@ -45,7 +45,6 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
         >
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              {/* RK9 Logo Here */}
               <Typography variant="h1">Oops...</Typography>
             </Grid>
             <Grid item xs={12}>
