@@ -7,7 +7,7 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
     sourceType: 'module', // Allows for the use of imports
-    project: ['./tsconfig.eslint.json', './tsconfig.eslint.json'],
+    project: ['./tsconfig.eslint.json', './packages/*/tsconfig.eslint.json'],
     ecmaFeatures: {},
     settings: {},
   },
@@ -34,6 +34,7 @@ module.exports = {
     'no-plusplus': 'off',
     'no-console': 'off',
     'no-underscore-dangle': 'off',
+    'max-classes-per-file': 'off',
     'no-return-await': 'warn',
     'no-unsafe-member-access': 'off',
     'restrict-template-expressions': 'off',

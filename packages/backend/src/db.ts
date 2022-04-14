@@ -1,6 +1,6 @@
 import mongoose, { Mongoose } from 'mongoose';
 
-const DEFAULT_DB_URL = 'mongodb://rk9-database:27017/rk9';
+const DEFAULT_DB_URL = process.env.MONGODB_URI || '';
 
 export class Database {
   private db: Mongoose | null;
@@ -9,7 +9,7 @@ export class Database {
 
   constructor(dbUrl?: string) {
     this.db = null;
-    this.dbUrl = dbUrl ?? DEFAULT_DB_URL;
+    this.dbUrl = dbUrl || DEFAULT_DB_URL;
   }
 
   async connect(): Promise<void> {

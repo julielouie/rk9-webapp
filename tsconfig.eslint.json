@@ -1,6 +1,7 @@
 {
     "include": [
         "./packages/frontend/.eslintrc.js",
+        "./packages/backend/.eslintrc.js",
         "./packages/frontend/.prettierrc.js",
         "jest.config.js"
     ],

@@ -10,11 +10,6 @@ const http: HttpServer = createServer(app);
 // ─── MIDDLEWARE SETUP ───────────────────────────────────────────────────────────
 //
 
-// const env = process.env.ENVIRONMENT || 'development';
-// const host = process.env.HOST || '0.0.0.0';
-// const port = process.env.PORT || 7777;
-// const mongo_uri = process.env.MONGODB_URI || 'mongodb://rk9-database:27017/rk9';
-
 app.use(cors());
 app.use(express.json());
 

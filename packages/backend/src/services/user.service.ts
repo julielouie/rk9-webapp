@@ -1,4 +1,5 @@
 import { map } from 'p-iteration';
+import { cloneDeep } from 'lodash';
 import * as db from '../db/user.db';
 import { UserMap } from '../mappers/UserMap';
 import * as userSchema from '../schemas/user.schema';
@@ -16,8 +17,9 @@ export const getUser = async (username: string): Promise<IUser> => {
 };
 
 export const createUser = async (payload: userSchema.PostUser): Promise<IUser> => {
-  payload.username = payload.username.toLowerCase();
-  const createdUser = await db.createUser(payload);
+  const newPayload = cloneDeep(payload);
+  newPayload.username = newPayload.username.toLowerCase();
+  const createdUser = await db.createUser(newPayload);
   return UserMap.toDTO(createdUser);
 };
 
