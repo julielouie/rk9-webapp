@@ -4,43 +4,31 @@ RK9 monorepo source project, containing the frontend (ReactJS) and backend (Expr
 
 ## TLDR SETUP COMMANDS
 **Run the following commands at the root of the project, in the following order:**
-1) ./setup.sh
-2) npm run build:docker
-3) npm run dev:docker
-4) cd packages/frontend && npm start
+1) Contact me for mongo database uri information
+2) npm install (inside of `packages/backend` and `packages/frontend`)
+3) npm run start (inside of `packages/backend`)
+4) npm run start (inside of `packages/frontend`)
 
-**Continue reading below for a more in-depth explanation on our setup**
+**Continue reading below, for a more in-depth explanation on our setup.**
 
 # Setup
-1) Install root dependencies
+1) Install backend package dependencies
 ```
-$ npm ci
+cd packages/backend
+npm install
 ```
-
-2) Install package dependencies
+2) Install frontend package dependencies
 ```
-$ lerna bootstrap
+cd ../frontend
+npm install
 ```
 
 ### Backend 
-To get the RK9 backend stack up in a short time, the use of docker is recommended. We utilize docker images for mongo, and containerize our REST api.
+To get the RK9 backend stack up, please contact me for the mongo database uri.
 
-1) Build docker images
+1) Add mongodb uri to your own `.env` file in `packages/backend`
 ```
-$ npm run build:docker
-```
-or
-```
-docker-compose build
-```
-
-2) Run the project:
-```
-$ npm run dev:docker
-```
-or
-```
-docker-compose up
+MONGODB_URI=<provided_uri>
 ```
 
 ### Frontend
@@ -48,8 +36,8 @@ You can now run the frontend, once the backend is running.
 
 1. Start frontend
 ```
-$ cd packages/frontend
+$ cd ../frontend
 $ npm run start
 ```
 
-2. Open `localhost:3000` in your browser to view live updates.
+2. The browser should automatically load, but if not, open `localhost:3000` in your browser to view live updates.
