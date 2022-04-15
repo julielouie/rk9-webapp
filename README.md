@@ -2,6 +2,11 @@
 
 RK9 monorepo source project, containing the frontend (ReactJS) and backend (Express API server).
 
+# Required Software
+- git
+- Node.js
+- MongoDB Compass (helpful)
+
 ## TLDR SETUP COMMANDS
 **Run the following commands at the root of the project, in the following order:**
 1) Contact me for mongo database uri information
