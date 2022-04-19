@@ -12,7 +12,6 @@ export const About: FC = () => {
         container
         style={{
           marginTop: '70px',
-          marginBottom: '50px',
           backgroundColor: palette.gray,
           display: 'flex',
           justifyContent: 'center',
@@ -58,7 +57,7 @@ export const About: FC = () => {
           />
         </Grid>
       </Grid>
-      <Grid item md={12} style={{ marginBottom: '50px' }}>
+      <Grid item md={12}>
         <Typography variant="h5" style={{ padding: '50px' }}>
           My passion is working with <span style={{ fontWeight: 600 }}>aggressive dogs</span>.
         </Typography>
@@ -67,7 +66,6 @@ export const About: FC = () => {
         item
         container
         style={{
-          marginBottom: '50px',
           backgroundColor: palette.paper.secondary,
           display: 'flex',
           justifyContent: 'center',
@@ -102,7 +100,7 @@ export const About: FC = () => {
           </div>
         </Grid>
       </Grid>
-      <Grid item md={12} style={{ marginBottom: '50px' }}>
+      <Grid item md={12}>
         <Typography variant="h5" style={{ padding: '50px' }}>
           <span style={{ fontWeight: 600 }}>Foundation Style Dog Training</span> is hack-free
           training that simply seeks to develop relationships between the handler and canine,
@@ -115,7 +113,6 @@ export const About: FC = () => {
         item
         container
         style={{
-          marginBottom: '50px',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
@@ -161,7 +158,7 @@ export const About: FC = () => {
         </Typography>
       </Grid>
       <Grid item md={12}>
-        <Typography variant="h5" style={{ padding: '50px' }}>
+        <Typography variant="h5" style={{ padding: '50px 50px 0 50px' }}>
           I am also part of a group of active trainers who meet weekly to discuss cases, support
           each other, and hold ourselves accountable to a higher standard in this un-standardized
           industry. In addition, I am constantly learning more about how to better help our dogs.
@@ -170,7 +167,7 @@ export const About: FC = () => {
       <Grid item md={12}>
         <Typography
           variant="h3"
-          style={{ padding: '50px', color: palette.paper.secondary, fontWeight: 800 }}
+          style={{ padding: '50px 50px 0 50px', color: palette.paper.secondary, fontWeight: 800 }}
         >
           Beyond Training, I am Certified in
         </Typography>
@@ -179,7 +176,6 @@ export const About: FC = () => {
         item
         container
         style={{
-          marginBottom: '70px',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',

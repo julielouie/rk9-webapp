@@ -13,7 +13,7 @@ export const Home: FC = () => {
         item
         md={12}
         style={{
-          marginTop: '50px',
+          marginTop: '70px',
           height: '100vh',
           width: '100%',
           backgroundColor: palette.disabled,
