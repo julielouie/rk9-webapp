@@ -15,6 +15,7 @@ export const Home: FC = () => {
         style={{
           marginTop: '50px',
           height: '100vh',
+          width: '100%',
           backgroundColor: palette.disabled,
           display: 'flex',
           justifyContent: 'center',
@@ -35,9 +36,11 @@ export const Home: FC = () => {
       >
         <Grid
           item
-          md={5}
+          sm={12}
+          md={6}
           style={{
             marginTop: '50px',
+            width: '100%',
             height: '300px',
             backgroundColor: palette.disabled,
             display: 'flex',
@@ -47,15 +50,15 @@ export const Home: FC = () => {
         >
           Temp Image
         </Grid>
-        <Grid md={2} />
         <Grid
           item
-          md={5}
+          sm={12}
+          md={6}
           style={{
             marginTop: '50px',
             display: 'flex',
             flexDirection: 'column',
-            paddingRight: '30px',
+            padding: '30px 30px 30px 70px',
           }}
         >
           <Typography variant="h4">A PLACE OF RESPECT</Typography>
@@ -77,13 +80,14 @@ export const Home: FC = () => {
       >
         <Grid
           item
-          md={5}
+          sm={12}
+          md={6}
           style={{
             marginTop: '50px',
             display: 'flex',
             flexDirection: 'column',
             textAlign: 'right',
-            paddingLeft: '30px',
+            padding: '30px 70px 30px 30px',
           }}
         >
           <Typography variant="h4">HUMAN and CANINE</Typography>
@@ -92,13 +96,14 @@ export const Home: FC = () => {
             address all of your concerns and goals, with everything from:
           </Typography>
         </Grid>
-        <Grid md={2} />
         <Grid
           item
-          md={5}
+          sm={12}
+          md={6}
           style={{
             marginTop: '50px',
             height: '300px',
+            width: '100%',
             backgroundColor: palette.disabled,
             display: 'flex',
             justifyContent: 'center',
@@ -121,10 +126,11 @@ export const Home: FC = () => {
       >
         <Grid
           item
-          md={5}
+          md={6}
           style={{
             marginTop: '50px',
             height: '300px',
+            width: '100%',
             backgroundColor: palette.disabled,
             display: 'flex',
             justifyContent: 'center',
@@ -133,15 +139,14 @@ export const Home: FC = () => {
         >
           Temp Image
         </Grid>
-        <Grid md={2} />
         <Grid
           item
-          md={5}
+          md={6}
           style={{
             marginTop: '50px',
             display: 'flex',
             flexDirection: 'column',
-            paddingRight: '30px',
+            padding: '30px 30px 30px 70px',
           }}
         >
           <Typography variant="h4">PUPPY REARING, to SEVERE AGGRESSION, to WORKING DOGS</Typography>
@@ -153,26 +158,26 @@ export const Home: FC = () => {
       </Grid>
       <Grid
         item
-        md={12}
+        container
         style={{
           marginBottom: '50px',
-          height: '70vh',
           backgroundColor: palette.paper.secondary,
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          paddingLeft: '30px',
           cursor: 'pointer',
         }}
         onClick={() => history.push('/about')}
       >
         <Grid
           item
+          sm={12}
           md={6}
           style={{
             display: 'flex',
             flexDirection: 'column',
             color: palette.text.contrast,
+            padding: '30px',
           }}
         >
           <Typography variant="h4" style={{ fontWeight: 'bold', marginBottom: '30px' }}>
@@ -186,18 +191,8 @@ export const Home: FC = () => {
             implementing operant conditioning, applied behavior analysis, and cynopraxis....
           </Typography>
         </Grid>
-        <Grid
-          item
-          md={6}
-          style={{
-            height: '100%',
-            backgroundColor: palette.disabled,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          Temp Image
+        <Grid item sm={12} md={6} style={{ display: 'flex', justifyContent: 'center' }}>
+          <div style={{ backgroundColor: palette.disabled }}>Temp Image</div>
         </Grid>
       </Grid>
     </Grid>

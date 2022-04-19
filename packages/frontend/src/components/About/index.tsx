@@ -77,7 +77,7 @@ export const About: FC = () => {
         <Grid
           item
           sm={12}
-          md={4}
+          md={5}
           style={{
             display: 'flex',
             flexDirection: 'column',
@@ -92,7 +92,7 @@ export const About: FC = () => {
             achievable.
           </Typography>
         </Grid>
-        <Grid item sm={12} md={8} style={{ display: 'flex', justifyContent: 'center' }}>
+        <Grid item sm={12} md={7} style={{ display: 'flex', justifyContent: 'center' }}>
           <div
             style={{
               backgroundColor: palette.disabled,
