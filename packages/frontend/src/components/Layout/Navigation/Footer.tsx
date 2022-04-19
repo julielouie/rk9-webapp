@@ -20,18 +20,29 @@ const Footer: FC = () => {
     >
       <Container maxWidth="lg">
         <Grid container spacing={5}>
-          <Grid item xs={12} sm={12} style={{ display: 'flex', justifyContent: 'center' }}>
-            <Typography variant="h5" style={{ fontWeight: 'bold' }}>
+          <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
+            <Typography variant="h5" style={{ fontWeight: 'bold', textAlign: 'center' }}>
               Empowering Relationships with Difficult and Aggressive Dogs
             </Typography>
           </Grid>
           <Grid
             item
             container
-            style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+            style={{
+              display: 'flex',
+              textAlign: 'center',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
           >
-            <Grid item>
-              <Box style={{ display: 'flex', alignItems: 'center' }}>
+            <Grid item xs={12} sm={4}>
+              <Box
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
                 Allie McCain
                 <FacebookIcon style={{ marginLeft: '15px' }} />
                 <InstagramIcon style={{ marginLeft: '15px' }} />
@@ -47,37 +58,39 @@ const Footer: FC = () => {
                 </Link>
               </Box>
             </Grid>
-            <Grid item style={{ padding: '0 200px' }}>
-              <Box>
-                <Link href="/about" color="inherit">
-                  About
-                </Link>
-              </Box>
-              <Box>
-                <Link href="/philosophy" color="inherit">
-                  Philosophy
-                </Link>
-              </Box>
-              <Box>
-                <Link href="/training" color="inherit">
-                  Training
-                </Link>
+            <Grid item xs={12} sm={4}>
+              <Box style={{ padding: '30px' }}>
+                <Box>
+                  <Link href="/about" color="inherit">
+                    ABOUT
+                  </Link>
+                </Box>
+                <Box>
+                  <Link href="/philosophy" color="inherit">
+                    PHILOSOPHY
+                  </Link>
+                </Box>
+                <Box>
+                  <Link href="/training" color="inherit">
+                    TRAINING
+                  </Link>
+                </Box>
               </Box>
             </Grid>
-            <Grid item>
+            <Grid item xs={12} sm={4}>
               <Box>
                 <Link href="/testimonials" color="inherit">
-                  Testimonials
+                  TESTIMONIALS
                 </Link>
               </Box>
               <Box>
                 <Link href="/blog" color="inherit">
-                  Blog
+                  BLOG
                 </Link>
               </Box>
               <Box>
                 <Link href="/clientPortal" color="inherit">
-                  Client Portal
+                  CLIENT PORTAL
                 </Link>
               </Box>
             </Grid>
