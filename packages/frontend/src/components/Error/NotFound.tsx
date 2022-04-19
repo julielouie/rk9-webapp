@@ -15,7 +15,7 @@ const NotFound: FC = () => {
       justifyContent="center"
       style={{ minHeight: '80vh' }}
     >
-      <Grid container spacing={4}>
+      <Grid container spacing={4} style={{ padding: '50px' }}>
         <Grid item md={12} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
           <img
             src={RK9Icon}

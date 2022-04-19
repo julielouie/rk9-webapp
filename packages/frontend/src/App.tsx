@@ -10,6 +10,7 @@ import IndexRedirect from './components/utils/IndexRedirect';
 import DelayedSpinner from './components/utils/DelayedSpinner';
 import ScrollToTop from './components/utils/ScrollToTop';
 import Home from './components/Home';
+import About from './components/About';
 
 const App: React.FC = () => {
   return (
@@ -27,6 +28,7 @@ const App: React.FC = () => {
               <Switch>
                 <Route exact path="/" component={IndexRedirect} />
                 <Route exact path="/home" component={Home} />
+                <Route exact path="/about" component={About} />
                 <Route component={NotFound} />
               </Switch>
             </ErrorBoundary>

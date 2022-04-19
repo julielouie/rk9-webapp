@@ -1,5 +1,6 @@
 const white = '#FFFFFF';
 const black = '#000000';
+const gray = '#2D2B2B';
 const disabled = '#AAABA6';
 const primary = '#1f1235';
 const secondary = '#1b1425';
@@ -8,6 +9,7 @@ const secondaryHighlight = '#fbdd74';
 
 const palette = {
   black,
+  gray,
   white,
   disabled,
   text: {

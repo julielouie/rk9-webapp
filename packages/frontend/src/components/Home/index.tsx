@@ -1,9 +1,12 @@
 import React, { FC } from 'react';
 import { Grid } from '@material-ui/core';
 import { Typography } from '@mui/material';
+import { useHistory } from 'react-router-dom';
 import palette from '../../theme/palette';
 
 export const Home: FC = () => {
+  const history = useHistory();
+
   return (
     <Grid container>
       <Grid
@@ -159,7 +162,9 @@ export const Home: FC = () => {
           justifyContent: 'center',
           alignItems: 'center',
           paddingLeft: '30px',
+          cursor: 'pointer',
         }}
+        onClick={() => history.push('/about')}
       >
         <Grid
           item

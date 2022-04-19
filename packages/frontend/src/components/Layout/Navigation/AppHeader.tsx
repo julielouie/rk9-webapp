@@ -60,7 +60,9 @@ const AppHeader: React.FC = () => {
             </Grid>
             <Grid container md={12} style={{ display: 'flex', justifyContent: 'center' }}>
               <Grid item style={{ paddingRight: '50px', fontWeight: 'bold' }}>
-                <Box style={{ cursor: 'pointer' }}>About</Box>
+                <Box style={{ cursor: 'pointer' }} onClick={() => history.push('/about')}>
+                  About
+                </Box>
               </Grid>
               <Grid item style={{ padding: '0 50px', fontWeight: 'bold' }}>
                 <Box style={{ cursor: 'pointer' }} onClick={() => history.push('/philosophy')}>
