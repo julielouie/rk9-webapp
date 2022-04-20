@@ -46,8 +46,8 @@ You can now run the frontend in `packages/frontend`, once the backend is running
 
 1. Start frontend
 ```
-$ cd ../frontend
-$ npm run start
+cd ../frontend
+npm run start
 ```
 
 2. The browser should automatically load, but if not, open `localhost:3000` in your browser to view live updates.
