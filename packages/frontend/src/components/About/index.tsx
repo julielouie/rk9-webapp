@@ -123,16 +123,16 @@ export const About: FC = () => {
           sm={12}
           md={6}
           style={{
-            padding: '0 50px',
             display: 'flex',
             flexDirection: 'column',
+            alignItems: 'center',
             color: palette.text.contrast,
           }}
         >
           <iframe
             width="500px"
             height="300px"
-            src="https://www.youtube.com/embed/8nYpvkeBq-c"
+            src="https://www.youtube.com/embed/-vDBns5hlyk"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
@@ -140,7 +140,7 @@ export const About: FC = () => {
           />
         </Grid>
         <Grid item sm={12} md={6}>
-          <Typography variant="h5" style={{ padding: '50px', textAlign: 'right' }}>
+          <Typography variant="h5" style={{ padding: '50px' }}>
             I am fully committed to your success, and offer a hands-on approach. I belong to a
             mentorship program, and believe in always continuing my education to become better, not
             just in relation to dog training, but in canine nutrition and in disease prevention, so
