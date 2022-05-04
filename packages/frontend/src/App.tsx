@@ -12,6 +12,7 @@ import ScrollToTop from './components/utils/ScrollToTop';
 import Home from './components/Home';
 import About from './components/About';
 import Philosophy from './components/Philosophy';
+import Training from './components/Training';
 
 const App: React.FC = () => {
   return (
@@ -31,6 +32,7 @@ const App: React.FC = () => {
                 <Route exact path="/home" component={Home} />
                 <Route exact path="/about" component={About} />
                 <Route exact path="/philosophy" component={Philosophy} />
+                <Route exact path="/training" component={Training} />
                 <Route component={NotFound} />
               </Switch>
             </ErrorBoundary>
