@@ -1,9 +1,27 @@
-import React, { FC } from 'react';
-import { Box, Grid } from '@material-ui/core';
-import { Typography } from '@mui/material';
+import React, { FC, useState } from 'react';
+import {
+  Typography,
+  Box,
+  Grid,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Collapse,
+} from '@material-ui/core';
+import { ListItemButton } from '@mui/material';
+import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+import { ExpandLess, ExpandMore } from '@material-ui/icons';
 import palette from '../../theme/palette';
 
 export const Training: FC = () => {
+  const [showPrivateSessions, setShowPrivateSessions] = useState(false);
+  const [showGroupClasses, setShowGroupClasses] = useState(false);
+  const [showBiothaneLeash, setShowBiothaneLeash] = useState(false);
+  const [showSessionSupport, setShowSessionSupport] = useState(false);
+  const [showWellnessCoaching, setShowWellnessCoaching] = useState(false);
+  const [showPersonalShopping, setShowPersonalShopping] = useState(false);
+
   return (
     <Grid container>
       <Grid
@@ -58,17 +76,110 @@ export const Training: FC = () => {
             *click on each to learn more
           </Typography>
         </Box>
-        <Typography variant="h5" style={{ paddingBottom: '25px' }}>
-          Rather than dictating a one-sided program that cannot be realistically implemented by the
-          family, the cynopraxic counselor should work with the family in a spirit of teamwork, to
-          find a common solution.
-        </Typography>
-        <Typography variant="h5">
-          Toward achieving this aim, the counselor should listen to the family’s needs and be
-          creative. Just as it is certainly true of dogs, people are individuals possessing unique
-          strengths and weaknesses that need to be recognized and integrated into the training plan.
-          Good cynopraxic counselors know how to work well with both people and dogs.
-        </Typography>
+        <Box style={{ display: 'flex', flexDirection: 'column' }}>
+          <List>
+            <ListItemButton onClick={() => setShowPrivateSessions(!showPrivateSessions)}>
+              <ListItemText primary="Five, 60 minute Private Sessions" />
+              {showPrivateSessions ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+            <Collapse in={showPrivateSessions} timeout="auto" unmountOnExit>
+              <List>
+                <ListItem style={{ paddingLeft: '50px' }}>
+                  - One on one, in person coaching. Here you will learn how to teach your dog and
+                  practice new behaviors. This is where the rubber meets the road.
+                </ListItem>
+                <ListItem style={{ paddingLeft: '50px' }}>
+                  - Full access to myself and the RK9 community between sessions to troubleshoot
+                  issues and maintain momentum.
+                </ListItem>
+                <ListItem style={{ paddingLeft: '50px' }}>
+                  - An interactive training journal where you can upload videos of you practicing
+                  your homework, between sessions, and receive feedback in real time.
+                </ListItem>
+                <ListItem style={{ paddingLeft: '50px' }}>
+                  - You and your dog will learn how to communicate predictably, tackling
+                  housebreaking, management, leadership and obedience that will progress at you and
+                  your dog’s pace.
+                </ListItem>
+                <ListItem style={{ paddingLeft: '50px', fontWeight: 600 }}>
+                  - The possibilities are endless. You and your dog deserve the freedom of a mutual
+                  relationship and the loving bond that comes with fair and advanced training.
+                </ListItem>
+              </List>
+            </Collapse>
+            <ListItemButton onClick={() => setShowGroupClasses(!showGroupClasses)}>
+              <ListItemText primary="Group Classes" />
+              {showGroupClasses ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+            <Collapse in={showGroupClasses} timeout="auto" unmountOnExit>
+              <List>
+                <ListItem style={{ paddingLeft: '50px' }}>
+                  - Group classes and social events are scheduled monthly for you to practice
+                  training and proper social skills in a safe and controlled environment. We do
+                  everything from obedience classes, to aggression support groups, to swimming
+                  lessons and fitness with Fido. These classes are uplifting, fun, and will make you
+                  a more confident dog handler, who your dog can trust, in any situation.
+                </ListItem>
+              </List>
+            </Collapse>
+            <ListItemButton onClick={() => setShowBiothaneLeash(!showBiothaneLeash)}>
+              <ListItemText primary="One 6ft Biothane Leash in your color of choice" />
+              {showBiothaneLeash ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+            <Collapse in={showBiothaneLeash} timeout="auto" unmountOnExit>
+              <List>
+                <ListItem style={{ paddingLeft: '50px' }}>
+                  - Super comfy, easy to handle and clean leash, perfect for the dedicated handler!
+                </ListItem>
+              </List>
+            </Collapse>
+            <ListItemButton onClick={() => setShowSessionSupport(!showSessionSupport)}>
+              <ListItemText
+                primary="Between session support, video instruction, troubleshooting, and homelife problem
+            solving"
+              />
+              {showSessionSupport ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+            <Collapse in={showSessionSupport} timeout="auto" unmountOnExit>
+              <List>
+                <ListItem style={{ paddingLeft: '50px' }}>
+                  - Relationship building and keeping momentum takes more than one practice per
+                  week, and, as you will be doing homework between sessions and committed to your
+                  dogs, so will I be. I will keep in touch and respond to questions via text, emails
+                  or phone calls, and communicate solutions as they arise. I will send instructional
+                  videos to help when needed. You will also have access to our group forum where
+                  there will be training tips, videos and a community of other Rogue K9 Academy
+                  members, like yourself, who are working to achieve their goals.
+                </ListItem>
+              </List>
+            </Collapse>
+            <ListItemButton onClick={() => setShowWellnessCoaching(!showWellnessCoaching)}>
+              <ListItemText primary="Wellness Coaching" />
+              {showWellnessCoaching ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+            <Collapse in={showWellnessCoaching} timeout="auto" unmountOnExit>
+              <List>
+                <ListItem style={{ paddingLeft: '50px' }}>
+                  - There is more to dog ownership than obedience. A healthy dog is a happy dog. I
+                  will help you make educated decisions about health care and nutrition.
+                </ListItem>
+              </List>
+            </Collapse>
+            <ListItemButton onClick={() => setShowPersonalShopping(!showPersonalShopping)}>
+              <ListItemText primary="“Personal Shopping”" />
+              {showPersonalShopping ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+            <Collapse in={showPersonalShopping} timeout="auto" unmountOnExit>
+              <List>
+                <ListItem style={{ paddingLeft: '50px' }}>
+                  - I will “personal shop” or help you pick out any additional gear you and your dog
+                  will need, including training collars, and the very best training treats… Consider
+                  me your dog’s concierge service (these items will be charged separately).
+                </ListItem>
+              </List>
+            </Collapse>
+          </List>
+        </Box>
       </Grid>
       <Grid
         item
