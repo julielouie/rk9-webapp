@@ -1,16 +1,6 @@
 import React, { FC, useState } from 'react';
-import {
-  Typography,
-  Box,
-  Grid,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Collapse,
-} from '@material-ui/core';
+import { Typography, Box, Grid, List, ListItem, ListItemText, Collapse } from '@material-ui/core';
 import { ListItemButton } from '@mui/material';
-import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import { ExpandLess, ExpandMore } from '@material-ui/icons';
 import palette from '../../theme/palette';
 
