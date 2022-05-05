@@ -115,10 +115,16 @@ export const Training: FC = () => {
               <List>
                 <ListItem style={{ paddingLeft: '50px' }}>
                   - Group classes and social events are scheduled monthly for you to practice
-                  training and proper social skills in a safe and controlled environment. We do
-                  everything from obedience classes, to aggression support groups, to swimming
-                  lessons and fitness with Fido. These classes are uplifting, fun, and will make you
-                  a more confident dog handler, who your dog can trust, in any situation.
+                  training and proper social skills in a safe and controlled environment.
+                </ListItem>
+                <ListItem style={{ paddingLeft: '50px' }}>
+                  - We do everything from obedience classes, to aggression support groups, to
+                  swimming lessons and fitness with Fido. These classes are uplifting, fun, and will
+                  make you a more confident dog handler, who your dog can trust, in any situation.
+                </ListItem>
+                <ListItem style={{ paddingLeft: '50px' }}>
+                  - These classes are uplifting, fun, and will make you a more confident dog
+                  handler, who your dog can trust, in any situation.
                 </ListItem>
               </List>
             </Collapse>
@@ -129,7 +135,7 @@ export const Training: FC = () => {
             <Collapse in={showBiothaneLeash} timeout="auto" unmountOnExit>
               <List>
                 <ListItem style={{ paddingLeft: '50px' }}>
-                  - Super comfy, easy to handle and clean leash, perfect for the dedicated handler!
+                  - Super comfy, easy to handle and clean, and perfect for the dedicated handler!
                 </ListItem>
               </List>
             </Collapse>
@@ -145,11 +151,17 @@ export const Training: FC = () => {
                 <ListItem style={{ paddingLeft: '50px' }}>
                   - Relationship building and keeping momentum takes more than one practice per
                   week, and, as you will be doing homework between sessions and committed to your
-                  dogs, so will I be. I will keep in touch and respond to questions via text, emails
-                  or phone calls, and communicate solutions as they arise. I will send instructional
-                  videos to help when needed. You will also have access to our group forum where
-                  there will be training tips, videos and a community of other Rogue K9 Academy
-                  members, like yourself, who are working to achieve their goals.
+                  dogs, so will I.
+                </ListItem>
+                <ListItem style={{ paddingLeft: '50px' }}>
+                  - I will keep in touch and respond to questions via text, emails or phone calls,
+                  and communicate solutions as they arise. I will also send instructional videos to
+                  help, when needed.
+                </ListItem>
+                <ListItem style={{ paddingLeft: '50px' }}>
+                  - You will also have access to our group forum where there will be training tips,
+                  videos and a community of other Rogue K9 Academy members, like yourself, who are
+                  working to achieve their goals.
                 </ListItem>
               </List>
             </Collapse>
@@ -172,9 +184,12 @@ export const Training: FC = () => {
             <Collapse in={showPersonalShopping} timeout="auto" unmountOnExit>
               <List>
                 <ListItem style={{ paddingLeft: '50px' }}>
-                  - I will “personal shop” or help you pick out any additional gear you and your dog
-                  will need, including training collars, and the very best training treats… Consider
-                  me your dog’s concierge service (these items will be charged separately).
+                  - I will help you pick out any additional gear you and your dog may need,
+                  including training collars, and the very best training treats.
+                </ListItem>
+                <ListItem style={{ paddingLeft: '50px' }}>
+                  - Consider me your dog’s concierge service (these items will be charged
+                  separately)!
                 </ListItem>
               </List>
             </Collapse>
@@ -217,14 +232,20 @@ export const Training: FC = () => {
         <Typography variant="h5" style={{ paddingBottom: '25px' }}>
           Consultations are held via zoom and last about 1.5 hours.
         </Typography>
-        <Typography variant="h5" style={{ paddingBottom: '25px' }}>
+        <Typography variant="h5" style={{ paddingBottom: '15px' }}>
           Prior to your consultation, you will receive a welcome packet with a bunch of
           complimentary information that will help you right away, and help you decide if you want
-          to invest further. Your consultation will give you tools to start your dog on the right
-          path, regardless of whether or not you decide to move forward with training. We will also
-          be able to answer any questions that you have. Foundation Style Dog Training can help any
-          dog and handler team achieve any goal, because it is based on understanding animal
-          behavior and how to train animals. It is not a hack, or “quick fix”!
+          to invest further.
+        </Typography>
+        <Typography variant="h5" style={{ paddingBottom: '15px' }}>
+          Your consultation will give you tools to start your dog on the right path, regardless of
+          whether or not you decide to move forward with training. We will also be able to answer
+          any questions that you have.
+        </Typography>
+        <Typography variant="h5" style={{ paddingBottom: '25px' }}>
+          <span style={{ fontWeight: 600 }}>Foundation Style Dog Training</span> can help any dog
+          and handler team achieve any goal, because it is based on understanding animal behavior
+          and how to train animals. It is not a hack, or “quick fix”!
         </Typography>
       </Grid>
       <Grid
