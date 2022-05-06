@@ -1,24 +1,21 @@
 import { z } from 'zod';
 
-export const postUser = z.object({
-  username: z.string().min(2).max(255),
-  name: z.string().min(2).max(255).optional(),
+export const postAndPutUser = z.object({
+  name: z.string().min(2).max(255),
   email: z.string().email().optional(),
+  password: z.string().min(2).max(255),
+  groups: z.array(
+    z.object({
+      id: z.string().min(2).max(255),
+      name: z.string().min(2).max(255),
+    }),
+  ),
+  role: z.string().min(2).max(255),
+  dogName: z.string().min(2).max(255),
+  dogName2: z.string().min(2).max(255).optional(),
+  dogName3: z.string().min(2).max(255).optional(),
+  dogName4: z.string().min(2).max(255).optional(),
+  dogName5: z.string().min(2).max(255).optional(),
 });
-export const username = postUser.pick({
-  username: true,
-});
-export const updateUserParams = z.object({
-  username: z.string().min(2).max(255).optional(),
-});
-export const updateUserBody = z.object({});
 
-export const getUserListQuery = updateUserBody.pick({});
-export const getUserParams = postUser.pick({});
-
-export type Username = z.infer<typeof username>;
-export type PostUser = z.infer<typeof postUser>;
-export type UpdateUserParams = z.infer<typeof updateUserParams>;
-export type UpdateUserBody = z.infer<typeof updateUserBody>;
-export type GetUserListQuery = z.infer<typeof getUserListQuery>;
-export type GetUserParams = z.infer<typeof getUserParams>;
+export type PostAndPutUser = z.infer<typeof postAndPutUser>;

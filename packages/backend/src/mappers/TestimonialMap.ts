@@ -8,8 +8,9 @@ export class TestimonialMap {
   static toDTO(testimonial: ITestimonial): ITestimonial {
     return {
       id: testimonial.id,
+      date: testimonial.date,
       title: testimonial.title,
-      review: testimonial.review ?? '',
+      review: testimonial.review,
       image: testimonial.image || null,
     };
   }

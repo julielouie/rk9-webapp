@@ -14,8 +14,8 @@ export const getTestimonial = async (id: string): Promise<ITestimonial> => {
 };
 
 export const createTestimonial = async (payload: any): Promise<ITestimonial> => {
-  const createdUser = await db.createTestimonial(payload);
-  return TestimonialMap.toDTO(createdUser);
+  const createdTestimonial = await db.createTestimonial(payload);
+  return TestimonialMap.toDTO(createdTestimonial);
 };
 
 export const updateTestimonial = async (

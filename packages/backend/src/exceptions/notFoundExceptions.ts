@@ -7,13 +7,37 @@ export class NotFoundException extends HttpException {
 }
 
 export class UserNotFoundException extends NotFoundException {
-  constructor(username: string) {
-    super(`User with username ${username} not found`);
+  constructor(id: string) {
+    super(`User with id ${id} not found`);
   }
 }
 
 export class TestimonialNotFoundException extends NotFoundException {
   constructor(id: string) {
     super(`Testimonial with id ${id} not found`);
+  }
+}
+
+export class GroupNotFoundException extends NotFoundException {
+  constructor(id: string) {
+    super(`Group with id ${id} not found`);
+  }
+}
+
+export class BlogPostNotFoundException extends NotFoundException {
+  constructor(id: string) {
+    super(`Blog post with id ${id} not found`);
+  }
+}
+
+export class JournalPostNotFoundException extends NotFoundException {
+  constructor(id: string) {
+    super(`Journal post with id ${id} not found`);
+  }
+}
+
+export class PostNotFoundException extends NotFoundException {
+  constructor(id: string) {
+    super(`Post with id ${id} not found`);
   }
 }
