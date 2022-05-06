@@ -20,22 +20,3 @@ export class InvalidCredentialsException extends UnauthorizedException {
     super(`invalid credentials, reason: ${accessDeniedErrorMsg}`);
   }
 }
-
-export class UnauthorizedPermissionException extends HttpException {
-  constructor(
-    authzExcType: AuthorizationExceptionType,
-    username: string,
-    programId: string | undefined,
-  ) {
-    super(
-      403,
-      `User ${username} is not authorized for ${authzExcType} in the program ${programId}`,
-    );
-  }
-}
-
-export class UnauthorizedCustomPermissionException extends HttpException {
-  constructor(message: string) {
-    super(403, message);
-  }
-}
