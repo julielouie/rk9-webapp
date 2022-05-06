@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 import { IBase } from '../types/models';
-import { PayloadValidationException } from '../exceptions/badRequestExceptions';
 
 export interface IUser extends IBase {
   username: string;

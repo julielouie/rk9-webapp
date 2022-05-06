@@ -11,3 +11,9 @@ export class UserNotFoundException extends NotFoundException {
     super(`User with username ${username} not found`);
   }
 }
+
+export class TestimonialNotFoundException extends NotFoundException {
+  constructor(id: string) {
+    super(`Testimonial with id ${id} not found`);
+  }
+}
