@@ -17,6 +17,7 @@
   "license": "ISC",
   "dependencies": {
     "@faker-js/faker": "^6.3.1",
+    "@google-cloud/storage": "^6.0.1",
     "@types/lodash": "^4.14.181",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
@@ -26,6 +27,7 @@
     "lodash": "^4.17.21",
     "mongodb": "^4.5.0",
     "mongoose": "^6.0.5",
+    "multer": "^1.4.5-lts.1",
     "needle": "^3.0.0",
     "nodemon": "^2.0.15",
     "p-iteration": "^1.1.8",
@@ -36,6 +38,7 @@
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
     "@types/mongoose": "^5.11.97",
+    "@types/multer": "^1.4.7",
     "@types/needle": "^2.5.3",
     "@types/node": "^17.0.16",
     "@typescript-eslint/eslint-plugin": "^5.16.0",

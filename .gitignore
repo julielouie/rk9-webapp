@@ -43,6 +43,7 @@ typings/
 
 # TypeScript cache
 *.tsbuildinfo
+google-cloud-key.json
 
 # Optional npm cache directory
 .npm

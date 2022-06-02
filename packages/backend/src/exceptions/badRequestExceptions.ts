@@ -6,8 +6,8 @@ export class BadRequestException extends HttpException {
   }
 }
 
-export class PayloadValidationException extends BadRequestException {
-  constructor(validationErrorMsg: string) {
-    super(`payload validation failed, reason: ${validationErrorMsg}`);
+export class InvalidUploadException extends BadRequestException {
+  constructor(message: string) {
+    super(`Upload failed, reason: ${message}`);
   }
 }

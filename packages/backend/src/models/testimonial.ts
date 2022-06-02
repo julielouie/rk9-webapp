@@ -32,7 +32,7 @@ const testimonialSchema = new mongoose.Schema({
     required: true,
   },
   image: {
-    type: BSONType,
+    type: String,
     required: false,
   },
 });

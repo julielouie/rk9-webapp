@@ -2,6 +2,7 @@ import express from 'express';
 import { createServer, Server as HttpServer } from 'http';
 import cors from 'cors';
 import userRouter from './routes/user';
+import uploadRouter from './routes/upload';
 
 export const app = express();
 const http: HttpServer = createServer(app);
@@ -18,6 +19,7 @@ app.use(express.json());
 //
 
 app.use('/api/users', userRouter);
+app.use('/api/uploads', uploadRouter);
 
 //
 // ─── SERVER SETUP ────────────────────────────────────────────────────────────────

@@ -42,12 +42,8 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
-  photo: {
-    type: BSONType,
-    required: false,
-  },
-  video: {
-    type: BSONType,
+  media: {
+    type: String,
     required: false,
   },
 });
