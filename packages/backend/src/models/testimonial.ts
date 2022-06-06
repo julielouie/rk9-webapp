@@ -1,4 +1,3 @@
-import { BSONType } from 'mongodb';
 import mongoose from 'mongoose';
 import { IBase } from '../types/models';
 
@@ -6,7 +5,7 @@ export interface ITestimonial extends IBase {
   title: string;
   date: Date;
   review: string;
-  image?: BSONType | null;
+  image?: string | null;
 }
 
 export type ITestimonialDocument = ITestimonial & mongoose.Document;

@@ -4,7 +4,10 @@ import { ReturnUser } from './user';
 
 export interface IGroup extends IBase {
   name: string;
-  members: ReturnUser[];
+  members: Pick<
+    ReturnUser,
+    'id' | 'name' | 'email' | 'role' | 'dogName' | 'dogName2' | 'dogName3' | 'dogName4' | 'dogName5'
+  >[];
 }
 
 export type IGroupDocument = IGroup & mongoose.Document;

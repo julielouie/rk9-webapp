@@ -37,14 +37,14 @@ export class Backend {
       return;
     }
 
-    if (this.environment === 'development') {
-      try {
-        this.seeder.seed();
-      } catch (err) {
-        console.log('Could not run seed, exiting...', err);
-        return;
-      }
-    }
+    // if (this.environment === 'development') {
+    //   try {
+    //     this.seeder.seed();
+    //   } catch (err) {
+    //     console.log('Could not run seed, exiting...', err);
+    //     return;
+    //   }
+    // }
 
     try {
       await this.server.start();

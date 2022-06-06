@@ -1,4 +1,3 @@
-import { BSONType } from 'mongodb';
 import mongoose from 'mongoose';
 import { IBase } from '../types/models';
 import { IGroup } from './group';
@@ -10,8 +9,7 @@ export interface IPost extends IBase {
   group: Pick<IGroup, 'id' | 'name'>;
   oneOnOneUserId?: string;
   text?: string;
-  photo?: BSONType | null;
-  video?: BSONType | null;
+  media?: string | null;
 }
 
 export type IPostDocument = IPost & mongoose.Document;

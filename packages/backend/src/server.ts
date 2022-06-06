@@ -3,6 +3,10 @@ import { createServer, Server as HttpServer } from 'http';
 import cors from 'cors';
 import userRouter from './routes/user';
 import uploadRouter from './routes/upload';
+import testimonialRouter from './routes/testimonial';
+import groupRouter from './routes/group';
+import blogPostRouter from './routes/blogPost';
+import postRouter from './routes/post';
 
 export const app = express();
 const http: HttpServer = createServer(app);
@@ -20,6 +24,10 @@ app.use(express.json());
 
 app.use('/api/users', userRouter);
 app.use('/api/uploads', uploadRouter);
+app.use('/api/testimonials', testimonialRouter);
+app.use('/api/groups', groupRouter);
+app.use('/api/blogPosts', blogPostRouter);
+app.use('/api/posts', postRouter);
 
 //
 // ─── SERVER SETUP ────────────────────────────────────────────────────────────────

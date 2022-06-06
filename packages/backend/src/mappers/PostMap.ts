@@ -13,8 +13,7 @@ export class PostMap {
       group: post.group,
       oneOnOneUserId: post.oneOnOneUserId || '',
       text: post.text || '',
-      photo: post.photo || null,
-      video: post.video || null,
+      media: post.media || null,
     };
   }
 }
