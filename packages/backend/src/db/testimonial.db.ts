@@ -20,6 +20,7 @@ export const getTestimonial = async (id: string): Promise<ITestimonial> => {
 
 export const createTestimonial = async (payload: any): Promise<ITestimonial> => {
   const testimonial = new TestimonialModel(payload);
+  testimonial.id = testimonial._id;
   const savedTestimonial = await testimonial.save();
 
   const result: ITestimonial = savedTestimonial.toObject();

@@ -5,9 +5,10 @@ import {
   RELOAD_DATA_ON_REFRESH,
   UPDATE_USER,
 } from '../constants/actions';
+import { User } from '../types/User';
 
 interface SessionState {
-  user: any;
+  user: User | null;
   drawerOpened: boolean;
   isLoading: boolean;
 }

@@ -28,28 +28,30 @@ export const getUpload = async (name: string): Promise<any> => {
   return metaData.mediaLink;
 };
 
-export const upload = async (id: string, postType: any, file: any): Promise<string> => {
-  if (!file) throw new InvalidUploadException('No file provided');
+export const upload = async (id: string, postType: any, files: any): Promise<string> => {
+  if (!files) throw new InvalidUploadException('No file provided');
 
-  const blob = bucket.file(file.originalname);
+  const { media } = files;
+  const blob = bucket.file(media.name);
   const publicUrl = format(`https://storage.googleapis.com/${bucket.name}/${blob.name}`);
   const blobStream = blob.createWriteStream({
     resumable: false,
+    public: true,
   });
   blobStream.on('error', () => {
     throw new InvalidUploadException('Unable to upload the file to Google Cloud Storage');
   });
   blobStream.on('finish', async () => {
     await bucket
-      .file(file.originalname)
+      .file(media.name)
       .makePublic()
       .catch(() => {
         throw new InvalidUploadException(
-          `Uploaded the file successfully: ${file.originalname}, but public access at ${publicUrl} is denied!`,
+          `Uploaded the file successfully: ${media.name}, but public access at ${publicUrl} is denied!`,
         );
       });
   });
-  blobStream.end(file.buffer);
+  blobStream.end(media.data);
 
   let result;
   switch (postType) {

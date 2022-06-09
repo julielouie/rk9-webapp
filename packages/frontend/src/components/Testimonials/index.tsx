@@ -1,11 +1,19 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useContext } from 'react';
 import { Typography, Grid, Button } from '@material-ui/core';
+import useSWR from 'swr';
 import palette from '../../theme/palette';
+import { SessionContext } from '../../context/SessionContext';
 import AddOrEditTestimonial from './AddOrEditTestimonial';
+import TestimonialCard from './TestimonialCard';
+import { Testimonial } from '../../types/Testimonial';
 
 export const Testimonials: FC = () => {
   const [openAddOrEditDialog, setOpenAddOrEditDialog] = useState(false);
-  const [openReview, setOpenReview] = useState(false);
+  const {
+    state: { user },
+  } = useContext(SessionContext);
+
+  const { data: testimonials } = useSWR<Testimonial[]>('/testimonials', { suspense: true });
 
   return (
     <>
@@ -25,7 +33,11 @@ export const Testimonials: FC = () => {
             Testimonials
           </Typography>
         </Grid>
-        <Grid item container style={{ padding: '50px' }}>
+        <Grid
+          item
+          container
+          style={{ padding: '50px 50px 0 50px', display: 'flex', justifyContent: 'end' }}
+        >
           <Grid item>
             <Button
               style={{ backgroundColor: palette.button.primary, color: palette.white }}
@@ -36,10 +48,14 @@ export const Testimonials: FC = () => {
           </Grid>
         </Grid>
       </Grid>
+      <Grid item container style={{ paddingBottom: '50px', display: 'flex' }}>
+        {testimonials &&
+          testimonials.map((testimonial) => <TestimonialCard testimonial={testimonial} />)}
+      </Grid>
       <AddOrEditTestimonial
         open={openAddOrEditDialog}
         close={() => setOpenAddOrEditDialog(false)}
-        testimonial={{}}
+        testimonial={null}
       />
     </>
   );
