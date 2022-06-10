@@ -9,7 +9,6 @@ import AddOrEditTestimonial from './AddOrEditTestimonial';
 import TestimonialCard from './TestimonialCard';
 import { Testimonial } from '../../types/Testimonial';
 import { reviewBlurbs } from './constants/reviewBlurbs';
-import PawPrint from '../../assets/images/paw.png';
 
 export const Testimonials: FC = () => {
   const [openAddOrEditDialog, setOpenAddOrEditDialog] = useState(false);
