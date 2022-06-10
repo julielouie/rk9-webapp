@@ -8,7 +8,6 @@ import ErrorBoundary from './components/Error/ErrorBoundary';
 import NotFound from './components/Error/NotFound';
 import IndexRedirect from './components/utils/IndexRedirect';
 import DelayedSpinner from './components/utils/DelayedSpinner';
-import ScrollToTop from './components/utils/ScrollToTop';
 import Home from './components/Home';
 import About from './components/About';
 import Philosophy from './components/Philosophy';
@@ -27,7 +26,6 @@ const App: React.FC = () => {
         >
           <Layout>
             <ErrorBoundary>
-              <ScrollToTop showBelow={250} />
               <Switch>
                 <Route exact path="/" component={IndexRedirect} />
                 <Route exact path="/home" component={Home} />

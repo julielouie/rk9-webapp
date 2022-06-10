@@ -38,6 +38,7 @@ export const Testimonials: FC = () => {
         </Grid>
         <Grid
           item
+          xs={12}
           style={{
             width: '100%',
             backgroundColor: palette.paper.tertiary,
@@ -46,54 +47,58 @@ export const Testimonials: FC = () => {
         >
           <Carousel>
             {reviewBlurbs.map((reviewBlurb) => (
-              <Box
-                style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-                key={reviewBlurb.name}
+              <Grid
+                item
+                container
+                style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}
               >
-                <Box
-                  style={{
-                    width: '60%',
-                    height: '50vh',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'start',
-                    marginLeft: '100px',
-                  }}
-                >
-                  <Typography variant="h2">{reviewBlurb.name}</Typography>
-                  <Box style={{ display: 'flex', width: '90%' }}>
-                    <FormatQuoteIcon
-                      style={{
-                        color: palette.button.primary,
-                        transform: 'scale(-1, 1)',
-                        fontSize: '5rem',
-                      }}
-                    />
-                    <Typography variant="h5" style={{ alignSelf: 'end', fontStyle: 'italic' }}>
-                      {reviewBlurb.description}
+                <Grid item container sm={12} md={7}>
+                  <Grid
+                    item
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'center',
+                      alignItems: 'start',
+                      padding: '0 50px',
+                    }}
+                  >
+                    <Typography variant="h2" style={{ paddingTop: '20px' }}>
+                      {reviewBlurb.name}
                     </Typography>
-                  </Box>
-                </Box>
-                <Box style={{ display: 'flex', width: '40%', marginTop: '40px' }}>
+                    <div style={{ display: 'flex', paddingTop: '20px' }}>
+                      <FormatQuoteIcon
+                        style={{
+                          color: palette.button.primary,
+                          transform: 'scale(-1, 1)',
+                          fontSize: '5rem',
+                        }}
+                      />
+                      <Typography variant="h5" style={{ alignSelf: 'end', fontStyle: 'italic' }}>
+                        {reviewBlurb.description}
+                      </Typography>
+                    </div>
+                  </Grid>
+                </Grid>
+                <Grid
+                  item
+                  sm={12}
+                  md={5}
+                  style={{ display: 'flex', justifyContent: 'center', padding: '50px 0 0 50px' }}
+                >
                   <div
                     style={{
                       backgroundColor: palette.disabled,
                       backgroundImage: `url(${reviewBlurb.image})`,
                       backgroundRepeat: 'no-repeat',
                       backgroundSize: 'cover',
-                      borderRadius: '250px',
-                      height: '450px',
-                      width: '450px',
+                      borderRadius: '1000px',
+                      height: '400px',
+                      width: '400px',
                     }}
                   />
-                </Box>
-              </Box>
+                </Grid>
+              </Grid>
             ))}
           </Carousel>
         </Grid>

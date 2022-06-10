@@ -26,7 +26,7 @@ const TestimonialCard: FC<TestimonialProps> = (props) => {
   return (
     <>
       <Grid item container md={4} sm={6} xs={12}>
-        <Grid item style={{ padding: '50px 50px 0 50px' }}>
+        <Grid item style={{ padding: '50px 50px 0 50px', width: '100%' }}>
           <IconButton
             style={{
               backgroundColor: palette.button.primary,
@@ -47,12 +47,11 @@ const TestimonialCard: FC<TestimonialProps> = (props) => {
                 height="250"
                 image={testimonial.image}
                 alt={testimonial.title}
-                style={{ width: '333.33px' }}
               />
             ) : (
               <Box
                 style={{
-                  width: '333.33px',
+                  width: '100%',
                   height: '250px',
                   backgroundColor: palette.disabled,
                   color: palette.white,
