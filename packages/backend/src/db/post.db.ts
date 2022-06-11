@@ -18,6 +18,7 @@ export const getPost = async (id: string): Promise<IPost> => {
 
 export const createPost = async (payload: any): Promise<IPost> => {
   const post = new PostModel(payload);
+  post.id = post._id;
   const savedPost = await post.save();
 
   const result: IPost = savedPost.toObject();

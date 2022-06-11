@@ -7,18 +7,16 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import palette from '../../theme/palette';
 import { SessionContext } from '../../context/SessionContext';
-import { Testimonial } from '../../types/Testimonial';
-import ReadTestimonial from './ReadTestimonial';
-import AddOrEditTestimonial from './AddOrEditTestimonial';
+import { BlogPost } from '../../types/BlogPost';
+import AddOrEditBlogPost from './AddOrEditBlogPost';
 
-interface TestimonialCardProps {
-  testimonial: Testimonial;
+interface BlogPostCardProps {
+  blogPost: BlogPost;
 }
 
-const TestimonialCard: FC<TestimonialCardProps> = (props) => {
-  const { testimonial } = props;
+const BlogPostCard: FC<BlogPostCardProps> = (props) => {
+  const { blogPost } = props;
   const [openAddOrEditDialog, setOpenAddOrEditDialog] = useState(false);
-  const [openReadTestimonial, setOpenReadTestimonial] = useState(false);
   const {
     state: { user },
   } = useContext(SessionContext);
@@ -38,16 +36,13 @@ const TestimonialCard: FC<TestimonialCardProps> = (props) => {
             <EditIcon />
           </IconButton>
           <Card
-            style={{ cursor: 'pointer', height: '350px', boxShadow: 'none' }}
-            onClick={() => setOpenReadTestimonial(true)}
+            style={{
+              boxShadow: 'none',
+            }}
+            onClick={() => console.log('clicked post')}
           >
-            {testimonial.image ? (
-              <CardMedia
-                component="img"
-                height="250"
-                image={testimonial.image}
-                alt={testimonial.title}
-              />
+            {blogPost.image ? (
+              <CardMedia component="img" height="250" image={blogPost.image} alt={blogPost.title} />
             ) : (
               <Box
                 style={{
@@ -64,7 +59,7 @@ const TestimonialCard: FC<TestimonialCardProps> = (props) => {
                 <ImageNotSupportedIcon style={{ fontSize: '4rem' }} /> <span>No Photo</span>
               </Box>
             )}
-            <CardContent style={{ width: '100%', textAlign: 'center', padding: '20px 0' }}>
+            <CardContent style={{ width: '100%', padding: '20px 0' }}>
               <Typography
                 variant="h6"
                 style={{
@@ -72,26 +67,34 @@ const TestimonialCard: FC<TestimonialCardProps> = (props) => {
                   borderBottom: `5px solid ${palette.paper.secondary}`,
                   paddingBottom: '20px',
                   fontWeight: 'bold',
+                  marginBottom: '20px',
                 }}
               >
-                {testimonial.title}
+                {blogPost.title}
+              </Typography>
+              <Typography>{`${blogPost.post.substring(0, 150)}...`}</Typography>
+              <Typography
+                variant="subtitle2"
+                style={{
+                  cursor: 'pointer',
+                  display: 'inline-flex',
+                  marginTop: '15px',
+                  textDecoration: 'underline',
+                }}
+              >
+                Read More
               </Typography>
             </CardContent>
           </Card>
         </Grid>
       </Grid>
-      <ReadTestimonial
-        open={openReadTestimonial}
-        close={() => setOpenReadTestimonial(false)}
-        testimonial={testimonial}
-      />
-      <AddOrEditTestimonial
+      <AddOrEditBlogPost
         open={openAddOrEditDialog}
         close={() => setOpenAddOrEditDialog(false)}
-        testimonial={testimonial}
+        blogPost={blogPost}
       />
     </>
   );
 };
 
-export default TestimonialCard;
+export default BlogPostCard;

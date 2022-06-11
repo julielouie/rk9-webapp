@@ -19,6 +19,7 @@ export const getGroup = async (id: string): Promise<IGroup> => {
 
 export const createGroup = async (payload: groupSchema.PostAndPutGroup): Promise<IGroup> => {
   const group = new GroupModel(payload);
+  group.id = group._id;
   const savedGroup = await group.save();
 
   const result: IGroup = savedGroup.toObject();

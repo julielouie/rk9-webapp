@@ -48,6 +48,7 @@ export const Testimonials: FC = () => {
           <Carousel>
             {reviewBlurbs.map((reviewBlurb) => (
               <Grid
+                key={reviewBlurb.name}
                 item
                 container
                 style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}
@@ -107,14 +108,12 @@ export const Testimonials: FC = () => {
           container
           style={{ padding: '50px 50px 0 50px', display: 'flex', justifyContent: 'end' }}
         >
-          <Grid item>
-            <Button
-              style={{ backgroundColor: palette.button.primary, color: palette.white }}
-              onClick={() => setOpenAddOrEditDialog(true)}
-            >
-              Add Testimonial
-            </Button>
-          </Grid>
+          <Button
+            style={{ backgroundColor: palette.button.primary, color: palette.white }}
+            onClick={() => setOpenAddOrEditDialog(true)}
+          >
+            Add Testimonial
+          </Button>
         </Grid>
       </Grid>
       <Grid item container style={{ paddingBottom: '50px', display: 'flex' }}>

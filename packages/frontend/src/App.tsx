@@ -13,6 +13,7 @@ import About from './components/About';
 import Philosophy from './components/Philosophy';
 import Training from './components/Training';
 import Testimonials from './components/Testimonials';
+import Blog from './components/Blog';
 
 const App: React.FC = () => {
   return (
@@ -33,6 +34,7 @@ const App: React.FC = () => {
                 <Route exact path="/philosophy" component={Philosophy} />
                 <Route exact path="/training" component={Training} />
                 <Route exact path="/testimonials" component={Testimonials} />
+                <Route exact path="/blog" component={Blog} />
                 <Route component={NotFound} />
               </Switch>
             </ErrorBoundary>

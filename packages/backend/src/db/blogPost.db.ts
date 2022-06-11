@@ -20,6 +20,7 @@ export const getBlogPost = async (id: string): Promise<IBlogPost> => {
 
 export const createBlogPost = async (payload: any): Promise<IBlogPost> => {
   const blogPost = new BlogPostModel(payload);
+  blogPost.id = blogPost._id;
   const savedBlogPost = await blogPost.save();
 
   const result: IBlogPost = savedBlogPost.toObject();

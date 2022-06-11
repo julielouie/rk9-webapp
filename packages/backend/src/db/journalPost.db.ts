@@ -23,6 +23,7 @@ export const createJournalPost = async (
   payload: journalPostSchema.PostAndPutJournalPost,
 ): Promise<IJournalPost> => {
   const journalPost = new JournalPostModel(payload);
+  journalPost.id = journalPost._id;
   const savedJournalPost = await journalPost.save();
 
   const result: IJournalPost = savedJournalPost.toObject();

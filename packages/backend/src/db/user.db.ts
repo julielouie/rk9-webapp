@@ -19,6 +19,7 @@ export const getUser = async (id: string): Promise<IUser> => {
 
 export const createUser = async (payload: userSchema.PostAndPutUser): Promise<IUser> => {
   const user = new UserModel(payload);
+  user.id = user._id;
   const savedUser = await user.save();
 
   const result: IUser = savedUser.toObject();

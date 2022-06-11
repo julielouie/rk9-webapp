@@ -6,41 +6,41 @@ import Button from '@mui/material/Button';
 import { useSnackbar } from 'notistack';
 import { mutate } from 'swr';
 import palette from '../../theme/palette';
-import { Testimonial } from '../../types/Testimonial';
+import { BlogPost } from '../../types/BlogPost';
 import Rk9Api from '../../dataServices/Rk9Api';
 import { DELETE, POST, PUT } from '../../constants/requests';
 import { LEVEL_ERROR, LogError } from '../../dataServices/Logger';
 
-interface AddOrEditTestimonialProps {
+interface AddOrEditBlogPostProps {
   open: boolean;
   close: () => void;
-  testimonial: Testimonial | null;
+  blogPost: BlogPost | null;
 }
 
 const Input = styled('input')({
   display: 'none',
 });
 
-export const AddOrEditTestimonial: FC<AddOrEditTestimonialProps> = (props) => {
-  const { open, close, testimonial } = props;
+export const AddOrEditBlogPost: FC<AddOrEditBlogPostProps> = (props) => {
+  const { open, close, blogPost } = props;
   const [imgFile, setImgFile] = useState<any>(null);
   const [imgUrl, setImgUrl] = useState('');
-  const [updatedTestimonial, setUpdatedTestimonial] = useState<Testimonial>({
+  const [updatedBlogPost, setUpdatedBlogPost] = useState<BlogPost>({
     title: '',
     date: new Date(),
-    review: '',
+    post: '',
     image: '',
   });
   const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
-    if (testimonial) {
-      if (testimonial.image) {
-        setImgUrl(testimonial.image);
+    if (blogPost) {
+      if (blogPost.image) {
+        setImgUrl(blogPost.image);
       }
-      setUpdatedTestimonial(testimonial);
+      setUpdatedBlogPost(blogPost);
     }
-  }, [testimonial]);
+  }, [blogPost]);
 
   const selectFileToUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files && event.target.files[0] ? event.target.files[0] : null;
@@ -51,10 +51,10 @@ export const AddOrEditTestimonial: FC<AddOrEditTestimonialProps> = (props) => {
     }
   };
 
-  const uploadFile = async (testimonialId: string) => {
+  const uploadFile = async (blogPostId: string) => {
     const formData = new FormData();
     formData.append('media', imgFile, imgFile.name);
-    await Rk9Api(POST, `/uploads/${testimonialId}?postType=testimonial`, formData).catch(() =>
+    await Rk9Api(POST, `/uploads/${blogPostId}?postType=blogPost`, formData).catch(() =>
       enqueueSnackbar('There was a problem uploading the image file. Please let someone know!', {
         persist: false,
         variant: 'error',
@@ -63,16 +63,16 @@ export const AddOrEditTestimonial: FC<AddOrEditTestimonialProps> = (props) => {
   };
 
   const closeDialog = () => {
-    if (!testimonial) {
-      const newUpdatedTestimonial = {
+    if (!blogPost) {
+      const newUpdatedBlogPost = {
         title: '',
         date: new Date(),
-        review: '',
+        post: '',
         image: '',
       };
-      setUpdatedTestimonial(newUpdatedTestimonial);
+      setUpdatedBlogPost(newUpdatedBlogPost);
     } else {
-      setUpdatedTestimonial(testimonial);
+      setUpdatedBlogPost(blogPost);
     }
     if (imgFile || imgUrl) {
       setImgFile(null);
@@ -81,62 +81,55 @@ export const AddOrEditTestimonial: FC<AddOrEditTestimonialProps> = (props) => {
     close();
   };
 
-  const saveTestimonial = async () => {
-    let savedTestimonial: Testimonial = {} as Testimonial;
-    if (!testimonial) {
-      savedTestimonial = await Rk9Api(POST, '/testimonials', updatedTestimonial).catch(() =>
-        enqueueSnackbar('There was a problem creating the testimonial. Please let someone know!', {
+  const saveBlogPost = async () => {
+    let savedBlogPost: BlogPost = {} as BlogPost;
+    if (!blogPost) {
+      savedBlogPost = await Rk9Api(POST, '/blogPosts', updatedBlogPost).catch(() =>
+        enqueueSnackbar('There was a problem creating the Blog Post. Please let someone know!', {
           persist: false,
           variant: 'error',
         }),
       );
     } else {
-      savedTestimonial = await Rk9Api(
-        PUT,
-        `/testimonials/${testimonial.id}`,
-        updatedTestimonial,
-      ).catch(() =>
-        enqueueSnackbar('There was a problem updating the testimonial. Please let someone know!', {
+      savedBlogPost = await Rk9Api(PUT, `/blogPosts/${blogPost.id}`, updatedBlogPost).catch(() =>
+        enqueueSnackbar('There was a problem updating the Blog Post. Please let someone know!', {
           persist: false,
           variant: 'error',
         }),
       );
     }
-    if (savedTestimonial.id) {
-      enqueueSnackbar('Testimonial was successfully saved!', {
+    if (savedBlogPost.id) {
+      enqueueSnackbar('Blog Post was successfully saved!', {
         persist: false,
         variant: 'success',
       });
       if (imgFile) {
-        await uploadFile(savedTestimonial.id).catch((error) =>
+        await uploadFile(savedBlogPost.id).catch((error) =>
           LogError(LEVEL_ERROR, error, 'Upload Image'),
         );
       }
     }
-    await mutate('/testimonials');
+    await mutate('/blogPosts');
     closeDialog();
   };
 
-  const deleteTestimonial = async () => {
-    if (testimonial) {
-      await Rk9Api(DELETE, `/testimonials/${testimonial.id}`, updatedTestimonial)
+  const deleteBlogPost = async () => {
+    if (blogPost) {
+      await Rk9Api(DELETE, `/blogPosts/${blogPost.id}`, updatedBlogPost)
         .then(() =>
-          enqueueSnackbar('Testimonial was successfully deleted!', {
+          enqueueSnackbar('Blog Post was successfully deleted!', {
             persist: false,
             variant: 'success',
           }),
         )
         .catch(() =>
-          enqueueSnackbar(
-            'There was a problem deleting the testimonial. Please let someone know!',
-            {
-              persist: false,
-              variant: 'error',
-            },
-          ),
+          enqueueSnackbar('There was a problem deleting the Blog Post. Please let someone know!', {
+            persist: false,
+            variant: 'error',
+          }),
         );
     }
-    await mutate('/testimonials');
+    await mutate('/blogPosts');
     closeDialog();
   };
 
@@ -144,37 +137,33 @@ export const AddOrEditTestimonial: FC<AddOrEditTestimonialProps> = (props) => {
     <Dialog open={open} fullWidth maxWidth="md">
       <Box style={{ padding: '30px' }}>
         <Typography variant="h4" style={{ marginBottom: '20px' }}>
-          {testimonial && testimonial.id ? 'Edit Testimonial' : 'Add New Testimonial'}
+          {blogPost && blogPost.id ? 'Edit Blog Post' : 'Add New Blog Post'}
         </Typography>
         <Box style={{ display: 'flex', flexDirection: 'column' }}>
           <TextField
             variant="outlined"
             InputLabelProps={{ shrink: true }}
-            label="Owner and Pet Names"
-            placeholder="Owner & Pet Names"
+            label="Title"
+            placeholder="Title"
             style={{ marginBottom: '20px' }}
-            value={updatedTestimonial.title}
-            onChange={(e) =>
-              setUpdatedTestimonial({ ...updatedTestimonial, title: e.target.value })
-            }
+            value={updatedBlogPost.title}
+            onChange={(e) => setUpdatedBlogPost({ ...updatedBlogPost, title: e.target.value })}
           />
           <TextField
             variant="outlined"
             InputLabelProps={{ shrink: true }}
-            label="Testimonial"
-            placeholder="Paste testimonial here..."
+            label="Post"
+            placeholder="Paste blog text here..."
             multiline
             rows="5"
             style={{ marginBottom: '20px' }}
-            value={updatedTestimonial.review}
-            onChange={(e) =>
-              setUpdatedTestimonial({ ...updatedTestimonial, review: e.target.value })
-            }
+            value={updatedBlogPost.post}
+            onChange={(e) => setUpdatedBlogPost({ ...updatedBlogPost, post: e.target.value })}
           />
-          <label htmlFor="upload-testimonial-image">
+          <label htmlFor="upload-blog-post-image">
             <Input
               accept="image/*"
-              id="upload-testimonial-image"
+              id="upload-blog-post-image"
               type="file"
               onChange={(e) => selectFileToUpload(e)}
               name="media"
@@ -183,7 +172,7 @@ export const AddOrEditTestimonial: FC<AddOrEditTestimonialProps> = (props) => {
               Upload Image
             </Button>
           </label>
-          {((testimonial && testimonial.id && imgUrl) || imgFile) && (
+          {((blogPost && blogPost.id && imgUrl) || imgFile) && (
             <img
               alt="uploadedImage"
               src={imgUrl}
@@ -198,22 +187,22 @@ export const AddOrEditTestimonial: FC<AddOrEditTestimonialProps> = (props) => {
             justifyContent: 'space-between',
           }}
         >
-          {testimonial && testimonial.id && (
-            <Button variant="contained" onClick={deleteTestimonial} color="error">
+          {blogPost && blogPost.id && (
+            <Button variant="contained" onClick={deleteBlogPost} color="error">
               Delete
             </Button>
           )}
           <Box
             style={{
               display: 'flex',
-              justifyContent: testimonial && testimonial.id ? 'inherit' : 'space-between',
+              justifyContent: blogPost && blogPost.id ? 'inherit' : 'space-between',
             }}
           >
             <Button variant="outlined" onClick={closeDialog}>
               Cancel
             </Button>
             <Button
-              onClick={saveTestimonial}
+              onClick={saveBlogPost}
               style={{
                 backgroundColor: palette.button.primary,
                 color: palette.white,
@@ -229,4 +218,4 @@ export const AddOrEditTestimonial: FC<AddOrEditTestimonialProps> = (props) => {
   );
 };
 
-export default AddOrEditTestimonial;
+export default AddOrEditBlogPost;
