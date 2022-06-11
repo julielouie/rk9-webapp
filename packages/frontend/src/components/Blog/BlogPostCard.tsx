@@ -5,6 +5,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import ImageNotSupportedIcon from '@mui/icons-material/ImageNotSupported';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
+import { useHistory } from 'react-router-dom';
 import palette from '../../theme/palette';
 import { SessionContext } from '../../context/SessionContext';
 import { BlogPost } from '../../types/BlogPost';
@@ -17,9 +18,16 @@ interface BlogPostCardProps {
 const BlogPostCard: FC<BlogPostCardProps> = (props) => {
   const { blogPost } = props;
   const [openAddOrEditDialog, setOpenAddOrEditDialog] = useState(false);
+  const [updatedBlogPost, setUpdatedBlogPost] = useState<BlogPost>({
+    title: '',
+    date: new Date(),
+    post: '',
+    image: '',
+  });
   const {
     state: { user },
   } = useContext(SessionContext);
+  const history = useHistory();
 
   return (
     <>
@@ -38,11 +46,17 @@ const BlogPostCard: FC<BlogPostCardProps> = (props) => {
           <Card
             style={{
               boxShadow: 'none',
+              borderRadius: 0,
             }}
-            onClick={() => console.log('clicked post')}
           >
             {blogPost.image ? (
-              <CardMedia component="img" height="250" image={blogPost.image} alt={blogPost.title} />
+              <CardMedia
+                style={{ borderRadius: '3px' }}
+                component="img"
+                height="250"
+                image={blogPost.image}
+                alt={blogPost.title}
+              />
             ) : (
               <Box
                 style={{
@@ -54,6 +68,7 @@ const BlogPostCard: FC<BlogPostCardProps> = (props) => {
                   flexDirection: 'column',
                   justifyContent: 'center',
                   alignItems: 'center',
+                  borderRadius: '3px',
                 }}
               >
                 <ImageNotSupportedIcon style={{ fontSize: '4rem' }} /> <span>No Photo</span>
@@ -81,6 +96,7 @@ const BlogPostCard: FC<BlogPostCardProps> = (props) => {
                   marginTop: '15px',
                   textDecoration: 'underline',
                 }}
+                onClick={() => history.push(`/blog/${blogPost.id}`)}
               >
                 Read More
               </Typography>
@@ -92,6 +108,8 @@ const BlogPostCard: FC<BlogPostCardProps> = (props) => {
         open={openAddOrEditDialog}
         close={() => setOpenAddOrEditDialog(false)}
         blogPost={blogPost}
+        updatedBlogPost={updatedBlogPost}
+        setUpdatedBlogPost={setUpdatedBlogPost}
       />
     </>
   );

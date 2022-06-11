@@ -165,7 +165,7 @@ export const AddOrEditTestimonial: FC<AddOrEditTestimonialProps> = (props) => {
             placeholder="Paste testimonial here..."
             multiline
             rows="5"
-            style={{ marginBottom: '20px' }}
+            style={{ marginBottom: '20px', whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}
             value={updatedTestimonial.review}
             onChange={(e) =>
               setUpdatedTestimonial({ ...updatedTestimonial, review: e.target.value })

@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, Dispatch, useState, useEffect, SetStateAction } from 'react';
 import { Box, Typography, Dialog, TextField } from '@material-ui/core';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
@@ -15,6 +15,8 @@ interface AddOrEditBlogPostProps {
   open: boolean;
   close: () => void;
   blogPost: BlogPost | null;
+  updatedBlogPost: BlogPost;
+  setUpdatedBlogPost: Dispatch<SetStateAction<BlogPost>>;
 }
 
 const Input = styled('input')({
@@ -22,15 +24,10 @@ const Input = styled('input')({
 });
 
 export const AddOrEditBlogPost: FC<AddOrEditBlogPostProps> = (props) => {
-  const { open, close, blogPost } = props;
+  const { open, close, blogPost, updatedBlogPost, setUpdatedBlogPost } = props;
   const [imgFile, setImgFile] = useState<any>(null);
   const [imgUrl, setImgUrl] = useState('');
-  const [updatedBlogPost, setUpdatedBlogPost] = useState<BlogPost>({
-    title: '',
-    date: new Date(),
-    post: '',
-    image: '',
-  });
+
   const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
@@ -40,7 +37,7 @@ export const AddOrEditBlogPost: FC<AddOrEditBlogPostProps> = (props) => {
       }
       setUpdatedBlogPost(blogPost);
     }
-  }, [blogPost]);
+  }, [blogPost, setUpdatedBlogPost]);
 
   const selectFileToUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files && event.target.files[0] ? event.target.files[0] : null;
@@ -74,9 +71,8 @@ export const AddOrEditBlogPost: FC<AddOrEditBlogPostProps> = (props) => {
     } else {
       setUpdatedBlogPost(blogPost);
     }
-    if (imgFile || imgUrl) {
+    if (imgFile) {
       setImgFile(null);
-      setImgUrl('');
     }
     close();
   };
@@ -146,7 +142,7 @@ export const AddOrEditBlogPost: FC<AddOrEditBlogPostProps> = (props) => {
             label="Title"
             placeholder="Title"
             style={{ marginBottom: '20px' }}
-            value={updatedBlogPost.title}
+            value={updatedBlogPost?.title}
             onChange={(e) => setUpdatedBlogPost({ ...updatedBlogPost, title: e.target.value })}
           />
           <TextField
@@ -156,8 +152,8 @@ export const AddOrEditBlogPost: FC<AddOrEditBlogPostProps> = (props) => {
             placeholder="Paste blog text here..."
             multiline
             rows="5"
-            style={{ marginBottom: '20px' }}
-            value={updatedBlogPost.post}
+            style={{ marginBottom: '20px', whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}
+            value={updatedBlogPost?.post}
             onChange={(e) => setUpdatedBlogPost({ ...updatedBlogPost, post: e.target.value })}
           />
           <label htmlFor="upload-blog-post-image">

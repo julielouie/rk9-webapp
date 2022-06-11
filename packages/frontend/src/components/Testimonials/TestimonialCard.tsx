@@ -38,11 +38,12 @@ const TestimonialCard: FC<TestimonialCardProps> = (props) => {
             <EditIcon />
           </IconButton>
           <Card
-            style={{ cursor: 'pointer', height: '350px', boxShadow: 'none' }}
+            style={{ cursor: 'pointer', height: '350px', boxShadow: 'none', borderRadius: 0 }}
             onClick={() => setOpenReadTestimonial(true)}
           >
             {testimonial.image ? (
               <CardMedia
+                style={{ borderRadius: '3px' }}
                 component="img"
                 height="250"
                 image={testimonial.image}
@@ -59,6 +60,7 @@ const TestimonialCard: FC<TestimonialCardProps> = (props) => {
                   flexDirection: 'column',
                   justifyContent: 'center',
                   alignItems: 'center',
+                  borderRadius: '3px',
                 }}
               >
                 <ImageNotSupportedIcon style={{ fontSize: '4rem' }} /> <span>No Photo</span>

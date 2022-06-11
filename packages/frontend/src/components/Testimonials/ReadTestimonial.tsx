@@ -38,7 +38,15 @@ export const ReadTestimonial: FC<ReadTestimonialProps> = (props) => {
             style={{ borderRadius: '3px' }}
           />
         </Box>
-        <Typography style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-between' }}>
+        <Typography
+          style={{
+            marginTop: '20px',
+            display: 'flex',
+            justifyContent: 'space-between',
+            whiteSpace: 'pre-wrap',
+            wordWrap: 'break-word',
+          }}
+        >
           {testimonial.review}
         </Typography>
       </Box>
