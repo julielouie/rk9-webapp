@@ -92,7 +92,7 @@ export const Blog: FC = () => {
                   <CardMedia
                     style={{ borderRadius: '3px' }}
                     component="img"
-                    height="350"
+                    height="450"
                     image={blogPosts[0].image}
                     alt={blogPosts[0].title}
                   />
