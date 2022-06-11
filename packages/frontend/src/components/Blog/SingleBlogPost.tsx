@@ -13,21 +13,27 @@ export const SingleBlogPost: FC = () => {
 
   return (
     <Grid container>
+      {blogPost?.image && (
+        <Grid
+          item
+          md={12}
+          style={{
+            margin: '120px 0 50px 0',
+            height: '50vh',
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <img alt={blogPost?.title} src={blogPost?.image || ''} style={{ borderRadius: '3px' }} />
+        </Grid>
+      )}
       <Grid
         item
-        md={12}
-        style={{
-          margin: '120px 0 50px 0',
-          height: '50vh',
-          width: '100%',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
+        container
+        style={{ padding: '50px', marginTop: blogPost && blogPost.image ? '0' : '50px' }}
       >
-        <img alt={blogPost?.title} src={blogPost?.image || ''} style={{ borderRadius: '3px' }} />
-      </Grid>
-      <Grid item container style={{ padding: '50px' }}>
         <Grid item md={12}>
           <Typography
             variant="h3"

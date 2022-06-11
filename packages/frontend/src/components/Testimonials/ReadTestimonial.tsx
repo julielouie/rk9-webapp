@@ -31,13 +31,15 @@ export const ReadTestimonial: FC<ReadTestimonialProps> = (props) => {
             <CloseIcon />
           </IconButton>
         </Box>
-        <Box style={{ display: 'flex', flexDirection: 'column' }}>
-          <img
-            alt={testimonial.title}
-            src={testimonial.image || ''}
-            style={{ borderRadius: '3px' }}
-          />
-        </Box>
+        {testimonial.image && (
+          <Box style={{ display: 'flex', flexDirection: 'column' }}>
+            <img
+              alt={testimonial.title}
+              src={testimonial.image || ''}
+              style={{ borderRadius: '3px' }}
+            />
+          </Box>
+        )}
         <Typography
           style={{
             marginTop: '20px',

@@ -79,7 +79,7 @@ export const AddOrEditBlogPost: FC<AddOrEditBlogPostProps> = (props) => {
 
   const saveBlogPost = async () => {
     let savedBlogPost: BlogPost = {} as BlogPost;
-    if (!blogPost) {
+    if (!blogPost || !blogPost.id) {
       savedBlogPost = await Rk9Api(POST, '/blogPosts', updatedBlogPost).catch(() =>
         enqueueSnackbar('There was a problem creating the Blog Post. Please let someone know!', {
           persist: false,
