@@ -19,9 +19,12 @@ const Footer: FC = () => {
       }}
     >
       <Container maxWidth="lg">
-        <Grid container spacing={5}>
+        <Grid container>
           <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
-            <Typography variant="h5" style={{ fontWeight: 'bold', textAlign: 'center' }}>
+            <Typography
+              variant="h5"
+              style={{ fontWeight: 'bold', textAlign: 'center', marginBottom: '30px' }}
+            >
               Empowering Relationships with Difficult and Aggressive Dogs
             </Typography>
           </Grid>

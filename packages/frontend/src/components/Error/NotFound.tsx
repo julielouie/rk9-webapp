@@ -15,8 +15,17 @@ const NotFound: FC = () => {
       justifyContent="center"
       style={{ minHeight: '80vh' }}
     >
-      <Grid container spacing={4} style={{ padding: '50px' }}>
-        <Grid item md={12} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+      <Grid container style={{ padding: '40px' }}>
+        <Grid
+          item
+          md={12}
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            margin: '20px 0',
+          }}
+        >
           <img
             src={RK9Icon}
             alt="Rogue K9 Icon"
@@ -24,7 +33,7 @@ const NotFound: FC = () => {
           />
           <Typography variant="h1">Not Found</Typography>
         </Grid>
-        <Grid item md={12}>
+        <Grid item md={12} style={{ marginBottom: '40px' }}>
           <Typography variant="h4">
             The page you&apos;re trying to reach, doesn&apos;t exist!
           </Typography>

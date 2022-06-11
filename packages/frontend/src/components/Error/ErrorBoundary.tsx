@@ -37,20 +37,19 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
       return (
         <Grid
           container
-          spacing={0}
           direction="column"
           alignItems="center"
           justifyContent="center"
           style={{ minHeight: '70vh' }}
         >
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
+          <Grid container>
+            <Grid item xs={12} style={{ margin: '20px 0' }}>
               <Typography variant="h1">Oops...</Typography>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} style={{ marginBottom: '20px' }}>
               <Typography variant="h4">Something went wrong. Please let someone know!</Typography>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} style={{ marginBottom: '20px' }}>
               <Accordion>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                   <Typography>{error.toString()}</Typography>

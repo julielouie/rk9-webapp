@@ -1,5 +1,5 @@
 import React, { FC, useState, useContext } from 'react';
-import { Typography, Grid, Button, Box } from '@material-ui/core';
+import { Typography, Grid, Button } from '@material-ui/core';
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 import Carousel from 'react-material-ui-carousel';
 import useSWR from 'swr';

@@ -13,7 +13,6 @@ const Loading: React.FunctionComponent = () => {
   return (
     <Grid
       container
-      spacing={0}
       direction="column"
       alignItems="center"
       justifyContent="center"
