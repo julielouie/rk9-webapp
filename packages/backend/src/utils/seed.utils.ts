@@ -5,7 +5,6 @@ import { IBlogPost } from '../models/blogPost';
 import { IGroup } from '../models/group';
 import { IPost } from '../models/post';
 import { ITestimonial } from '../models/testimonial';
-import { IUser } from '../models/user';
 import * as userService from '../services/user.service';
 
 export class Seeder {
