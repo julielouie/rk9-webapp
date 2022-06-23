@@ -159,7 +159,7 @@ export class Seeder {
               name: 'Bite Club',
             },
           ],
-          role: 'dev',
+          role: 'admin',
           dogName: 'Test',
         };
 

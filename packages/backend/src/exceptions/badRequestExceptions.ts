@@ -11,3 +11,9 @@ export class InvalidUploadException extends BadRequestException {
     super(`Upload failed, reason: ${message}`);
   }
 }
+
+export class UserEmailAlreadyExistsException extends BadRequestException {
+  constructor(email: string) {
+    super(`User with email ${email} already exists`);
+  }
+}
