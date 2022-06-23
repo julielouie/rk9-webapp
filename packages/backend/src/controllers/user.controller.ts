@@ -40,11 +40,6 @@ export const getUser = asyncHandler(async (req: Request, res: Response): Promise
   res.status(StatusCode.success).send(user);
 });
 
-export const createUser = asyncHandler(async (req: Request, res: Response): Promise<void> => {
-  const createdUser: ReturnUser = await userService.createUser(req.body);
-  res.status(StatusCode.success).send(createdUser);
-});
-
 export const updateUser = asyncHandler(async (req: Request, res: Response): Promise<void> => {
   const updatedUser: ReturnUser = await userService.updateUser(req.params.id, req.body);
   res.status(StatusCode.success).send(updatedUser);

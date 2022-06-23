@@ -13,10 +13,7 @@ router.route('/log-out').get(userController.logOut);
 
 router.route('/me').get(grantAccess('read', PermissionResource.READ), userController.getSelf);
 
-router
-  .route('/')
-  .get(userController.getUserList)
-  .post(grantAccess('create', PermissionResource.CREATE), userController.createUser);
+router.route('/').get(userController.getUserList);
 
 router
   .route('/:id')

@@ -1,8 +1,5 @@
 import UserModel, { IUser, IUserDocument } from '../models/user';
-import {
-  UserEmailNotFoundException,
-  UserNotFoundException,
-} from '../exceptions/notFoundExceptions';
+import { UserNotFoundException } from '../exceptions/notFoundExceptions';
 import * as userSchema from '../schemas/user.schema';
 
 export const getUserList = async (): Promise<IUser[]> => {
@@ -20,13 +17,15 @@ export const getUser = async (id: string): Promise<IUser> => {
   return result;
 };
 
-export const getUserByEmail = async (email: string): Promise<IUser> => {
+export const getUserByEmail = async (email: string): Promise<IUser | null> => {
   const user: IUserDocument | null = await UserModel.findOne({ email }).select('-__v').exec();
-  if (!user) throw new UserEmailNotFoundException(email);
 
-  const result: IUser = user.toObject();
-  delete result._id;
-  return result;
+  if (user) {
+    const result: IUser = user.toObject();
+    delete result._id;
+    return result;
+  }
+  return null;
 };
 
 export const createUser = async (payload: userSchema.PostAndPutUser): Promise<IUser> => {

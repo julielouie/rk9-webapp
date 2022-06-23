@@ -4,7 +4,7 @@ import bcrypt from 'bcryptjs';
 import * as db from '../db/user.db';
 import { UserMap } from '../mappers/UserMap';
 import * as userSchema from '../schemas/user.schema';
-import { IUser, ReturnUser } from '../models/user';
+import { ReturnUser } from '../models/user';
 import { UserEmailNotFoundException } from '../exceptions/notFoundExceptions';
 import { InvalidCredentialsException } from '../exceptions/unauthorizedExceptions';
 import { UserEmailAlreadyExistsException } from '../exceptions/badRequestExceptions';
@@ -14,6 +14,8 @@ export const signUp = async (
   email: string,
   password: string,
   dogName: string,
+  groups?: { id: string; name: string }[],
+  role?: string,
 ): Promise<ReturnUser> => {
   const user = await db.getUserByEmail(email);
   if (user) throw new UserEmailAlreadyExistsException(email);
@@ -23,8 +25,8 @@ export const signUp = async (
     name,
     email,
     password: encryptedPassword,
-    groups: [],
-    role: 'guest',
+    groups: groups || [],
+    role: role || 'guest',
     dogName,
   };
   const newUser = await db.createUser(newUserData);
@@ -35,13 +37,8 @@ export const logIn = async (
   email: string,
   password: string,
 ): Promise<{ token: string; user: ReturnUser }> => {
-  let user: IUser = {} as IUser;
-
-  try {
-    user = await db.getUserByEmail(email);
-  } catch (err) {
-    throw new UserEmailNotFoundException(email);
-  }
+  const user = await db.getUserByEmail(email);
+  if (!user) throw new UserEmailNotFoundException(email);
 
   let token;
   if (user && (await bcrypt.compare(password, user.password))) {
@@ -63,11 +60,6 @@ export const getUserList = async (): Promise<ReturnUser[]> => {
 export const getUser = async (id: string): Promise<ReturnUser> => {
   const userInfo = await db.getUser(id);
   return UserMap.toDTO(userInfo);
-};
-
-export const createUser = async (payload: userSchema.PostAndPutUser): Promise<ReturnUser> => {
-  const createdUser = await db.createUser(payload);
-  return UserMap.toDTO(createdUser);
 };
 
 export const updateUser = async (
