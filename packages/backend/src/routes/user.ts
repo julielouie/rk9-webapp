@@ -1,6 +1,6 @@
 import express from 'express';
-import { grantAccess } from '../middleware/auth.middleware';
 import * as userController from '../controllers/user.controller';
+import { grantAccess } from '../middleware/auth.middleware';
 import { PermissionResource } from '../permissions/permissionResource';
 
 const router = express.Router();
