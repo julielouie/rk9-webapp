@@ -1,9 +1,11 @@
 import React, { createContext, useReducer } from 'react';
 import {
+  UPDATE_USER,
   UPDATE_DRAWER,
   IS_LOADING,
+  LOGIN,
+  LOGOUT,
   RELOAD_DATA_ON_REFRESH,
-  UPDATE_USER,
 } from '../constants/actions';
 import { User } from '../types/User';
 
@@ -16,8 +18,10 @@ interface SessionState {
 export type SessionAction =
   | { type: typeof UPDATE_USER; payload: any }
   | { type: typeof UPDATE_DRAWER; payload: any }
-  | { type: typeof RELOAD_DATA_ON_REFRESH }
-  | { type: typeof IS_LOADING; payload: any };
+  | { type: typeof IS_LOADING; payload: any }
+  | { type: typeof LOGIN; payload: any }
+  | { type: typeof LOGOUT }
+  | { type: typeof RELOAD_DATA_ON_REFRESH };
 
 const initialState: SessionState = {
   user: null,
@@ -31,14 +35,24 @@ const stateReducer = (state: SessionState, action: SessionAction): SessionState 
       return { ...state, user: action.payload };
     case UPDATE_DRAWER:
       return { ...state, drawerOpened: action.payload };
-    case RELOAD_DATA_ON_REFRESH:
-      return {
-        ...state,
-      };
     case IS_LOADING:
       return {
         ...state,
         isLoading: action.payload,
+      };
+    case LOGIN:
+      return {
+        ...state,
+        user: action.payload.user,
+      };
+    case LOGOUT:
+      return {
+        ...state,
+        user: null,
+      };
+    case RELOAD_DATA_ON_REFRESH:
+      return {
+        ...state,
       };
     default:
       throw new Error();

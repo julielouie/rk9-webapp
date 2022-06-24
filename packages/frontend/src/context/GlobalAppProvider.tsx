@@ -5,19 +5,22 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import theme from '../theme';
 import NotificationProvider from '../components/utils/NotificationProvider';
 import { SessionProvider } from './SessionContext';
-// import AppDataFetcher from '../dataServices/AppDataFetcher';
-// will implement this at a later time once we have users set up
+import ability from '../ability/defineAbility';
+import { AbilityContext } from './AbilityContext';
+import AppDataFetcher from '../dataServices/AppDataFetcher';
 
 const GlobalAppProvider: React.FunctionComponent = ({ children }) => {
   return (
     <MuiThemeProvider theme={theme}>
-      <SessionProvider>
-        {/* <AppDataFetcher> */}
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <NotificationProvider>{children}</NotificationProvider>
-        </LocalizationProvider>
-        {/* </AppDataFetcher> */}
-      </SessionProvider>
+      <AbilityContext.Provider value={ability}>
+        <SessionProvider>
+          <AppDataFetcher>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <NotificationProvider>{children}</NotificationProvider>
+            </LocalizationProvider>
+          </AppDataFetcher>
+        </SessionProvider>
+      </AbilityContext.Provider>
     </MuiThemeProvider>
   );
 };

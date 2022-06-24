@@ -22,6 +22,7 @@ export const logIn = asyncHandler(async (req: Request, res: Response): Promise<v
 
 export const logOut = (req: Request, res: Response): void => {
   res.clearCookie('token');
+  res.clearCookie('userId');
   res.status(StatusCode.success).end();
 };
 

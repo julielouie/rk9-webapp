@@ -1,19 +1,31 @@
 import useSWR from 'swr';
-import { SWRFetcher } from '../dataServices/SWRFetcher';
-
-// placeholder interface, this endpoint still needs to be made
-interface IUser {
-  id: string;
-  name: string;
-}
+import Cookies from 'js-cookie';
+import { User } from '../types/User';
+import Rk9Api from '../dataServices/Rk9Api';
+import { GET } from '../constants/requests';
+import { LEVEL_ERROR, LogError } from '../dataServices/Logger';
 
 export const useCurrentUser = (): {
-  user: IUser;
+  user: User;
   isLoading: boolean;
   isError: boolean;
   mutate: (data?: any, shouldRevalidate?: boolean | undefined) => Promise<any>;
 } => {
-  const { data, error, mutate } = useSWR('/users/me', SWRFetcher, {
+  const token = Cookies.get('token');
+
+  const fetchCurrentUser = async (url: string) => {
+    let data = null;
+
+    if (token) {
+      data = await Rk9Api(GET, url).catch((error: any) =>
+        LogError(LEVEL_ERROR, error, 'Get Current User'),
+      );
+    }
+
+    return data;
+  };
+
+  const { data, error, mutate } = useSWR('/users/me', fetchCurrentUser, {
     shouldRetryOnError: false,
   });
 

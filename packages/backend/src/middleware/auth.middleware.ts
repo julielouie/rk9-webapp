@@ -12,7 +12,8 @@ import * as db from '../db/user.db';
 const AC = new AccessControl(grantsObject);
 
 export const verifyToken = async (req: Request, res: Response) => {
-  const { token, userId } = req.cookies;
+  const token = req.cookies?.token;
+  const userId = req.cookies?.userId;
 
   if (!token) {
     const errorMsg = `Access denied, reason: no token provided`;
@@ -41,7 +42,7 @@ export const verifyToken = async (req: Request, res: Response) => {
 export const grantAccess = (access: string, resource: string) => {
   return async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const tokenStatus = verifyToken(req, res);
+      const tokenStatus = await verifyToken(req, res);
       if (!tokenStatus) return;
 
       const user = await db.getUser(res.locals.user.id);

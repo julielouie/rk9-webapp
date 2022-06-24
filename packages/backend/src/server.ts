@@ -2,6 +2,7 @@ import express from 'express';
 import expressFileUpload from 'express-fileupload';
 import { createServer, Server as HttpServer } from 'http';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 import userRouter from './routes/user';
 import uploadRouter from './routes/upload';
 import testimonialRouter from './routes/testimonial';
@@ -19,6 +20,7 @@ const http: HttpServer = createServer(app);
 app.use(cors());
 app.use(express.json());
 app.use(expressFileUpload());
+app.use(cookieParser());
 
 //
 // ─── ROUTE SETUP ────────────────────────────────────────────────────────────────
