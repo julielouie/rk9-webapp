@@ -6,7 +6,7 @@ import BlogPostModel from '../models/blogPost';
 import PostModel from '../models/post';
 
 const storage = new Storage({ keyFilename: 'google-cloud-key.json' });
-const bucket = storage.bucket('rk9-development');
+const bucket = storage.bucket('rk9-academy');
 
 export const getAllUploads = async (): Promise<{ name: string; url: string }[]> => {
   const [files] = await bucket.getFiles();
