@@ -35,6 +35,41 @@ export const grantsObject = {
         action: 'delete',
         attributes: ['*'],
       },
+      {
+        resource: PermissionResource.CREATE_POST,
+        action: 'create',
+        attributes: ['*'],
+      },
+      {
+        resource: PermissionResource.UPDATE_POST,
+        action: 'update',
+        attributes: ['*'],
+      },
+      {
+        resource: PermissionResource.DELETE_POST,
+        action: 'delete',
+        attributes: ['*'],
+      },
+      {
+        resource: PermissionResource.READ_GROUP,
+        action: 'read',
+        attributes: ['*'],
+      },
+      {
+        resource: PermissionResource.READ_POST,
+        action: 'read',
+        attributes: ['*'],
+      },
+      {
+        resource: PermissionResource.READ_BLOG_POST,
+        action: 'read',
+        attributes: ['*'],
+      },
+      {
+        resource: PermissionResource.READ_TESTIMONIAL,
+        action: 'read',
+        attributes: ['*'],
+      },
     ],
   },
   client: {

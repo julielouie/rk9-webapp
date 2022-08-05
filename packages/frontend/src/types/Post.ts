@@ -9,4 +9,5 @@ export interface Post {
   oneOnOneUserId?: string;
   text?: string;
   media?: string | null;
+  mediaType?: string | null;
 }

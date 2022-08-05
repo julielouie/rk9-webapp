@@ -14,6 +14,7 @@ export class PostMap {
       oneOnOneUserId: post.oneOnOneUserId || '',
       text: post.text || '',
       media: post.media || null,
+      mediaType: post.mediaType || null,
     };
   }
 }

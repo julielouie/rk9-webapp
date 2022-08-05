@@ -10,6 +10,7 @@ export interface IPost extends IBase {
   oneOnOneUserId?: string;
   text?: string;
   media?: string | null;
+  mediaType?: string | null;
 }
 
 export type IPostDocument = IPost & mongoose.Document;
@@ -41,6 +42,10 @@ const postSchema = new mongoose.Schema({
     required: false,
   },
   media: {
+    type: String,
+    required: false,
+  },
+  mediaType: {
     type: String,
     required: false,
   },

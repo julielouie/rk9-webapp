@@ -8,9 +8,9 @@ export const getAllGroups = async (): Promise<IGroup[]> => {
   return groupList;
 };
 
-export const getGroup = async (id: string): Promise<IGroup> => {
-  const group: IGroupDocument | null = await GroupModel.findOne({ id }).select('-__v').exec();
-  if (!group) throw new GroupNotFoundException(id);
+export const getGroup = async (name: string): Promise<IGroup> => {
+  const group: IGroupDocument | null = await GroupModel.findOne({ name }).select('-__v').exec();
+  if (!group) throw new GroupNotFoundException(name);
 
   const result: IGroup = group.toObject();
   delete result._id;

@@ -3,8 +3,8 @@ import * as db from '../db/post.db';
 import { PostMap } from '../mappers/PostMap';
 import { IPost } from '../models/post';
 
-export const getAllPosts = async (): Promise<IPost[]> => {
-  const allPosts = await db.getAllPosts();
+export const getAllPosts = async (groupId?: string, mediaType?: string): Promise<IPost[]> => {
+  const allPosts = await db.getAllPosts(groupId, mediaType);
   return map(allPosts, (post) => PostMap.toSimpleDTO(post));
 };
 

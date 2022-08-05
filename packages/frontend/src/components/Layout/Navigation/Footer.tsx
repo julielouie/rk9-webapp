@@ -92,7 +92,7 @@ const Footer: FC = () => {
                 </Link>
               </Box>
               <Box>
-                <Link href="/clientPortal" color="inherit">
+                <Link href="/clientPortal/discussion/main" color="inherit">
                   CLIENT PORTAL
                 </Link>
               </Box>

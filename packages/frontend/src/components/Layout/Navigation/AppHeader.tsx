@@ -148,7 +148,10 @@ const AppHeader: React.FC = () => {
                   </Box>
                 </Grid>
                 <Grid item xs={12} sm={2} style={{ padding: '0 50px', fontWeight: 'bold' }}>
-                  <Box style={{ cursor: 'pointer' }} onClick={() => history.push('/clientPortal')}>
+                  <Box
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => history.push('/clientPortal/discussion/main')}
+                  >
                     Client Portal
                   </Box>
                 </Grid>

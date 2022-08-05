@@ -1,9 +1,11 @@
 import PostModel, { IPost, IPostDocument } from '../models/post';
 import { PostNotFoundException } from '../exceptions/notFoundExceptions';
 
-export const getAllPosts = async (): Promise<IPost[]> => {
+export const getAllPosts = async (groupId?: string, mediaType?: string): Promise<IPost[]> => {
   const query: any = {};
-  const postList: IPost[] = await PostModel.find(query).select('-__v').exec();
+  if (groupId) query['group.id'] = groupId;
+  if (mediaType) query.mediaType = mediaType;
+  const postList: IPost[] = await PostModel.find(query).sort({ date: -1 }).select('-__v').exec();
   return postList;
 };
 

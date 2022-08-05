@@ -9,8 +9,8 @@ export const getAllGroups = async (): Promise<IGroup[]> => {
   return map(allGroups, (group) => GroupMap.toSimpleDTO(group));
 };
 
-export const getGroup = async (id: string): Promise<IGroup> => {
-  const groupInfo = await db.getGroup(id);
+export const getGroup = async (name: string): Promise<IGroup> => {
+  const groupInfo = await db.getGroup(name);
   return GroupMap.toDTO(groupInfo);
 };
 

@@ -10,7 +10,7 @@ export const getAllGroups = asyncHandler(async (req: Request, res: Response): Pr
 });
 
 export const getGroup = asyncHandler(async (req: Request, res: Response): Promise<void> => {
-  const group: IGroup = await groupService.getGroup(req.params.id);
+  const group: IGroup = await groupService.getGroup(req.params.name);
   res.status(StatusCode.success).send(group);
 });
 

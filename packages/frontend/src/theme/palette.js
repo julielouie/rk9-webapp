@@ -4,7 +4,7 @@ const gray = '#2D2B2B';
 const disabled = '#AAABA6';
 const primary = '#1f1235';
 const secondary = '#1b1425';
-const highlight = '#ff6e6c';
+const highlight = '#9296BC';
 const secondaryHighlight = '#fbdd74';
 
 const palette = {
@@ -32,7 +32,7 @@ const palette = {
     text: primary,
   },
   selected: {
-    primary: '#DE5E48',
+    primary: '#7E0C6D',
     secondary: disabled,
   },
 };

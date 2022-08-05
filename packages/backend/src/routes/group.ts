@@ -10,9 +10,10 @@ router
   .get(groupController.getAllGroups)
   .post(grantAccess('create', PermissionResource.CREATE), groupController.createGroup);
 
+router.route('/:name').get(groupController.getGroup);
+
 router
   .route('/:id')
-  .get(groupController.getGroup)
   .put(grantAccess('update', PermissionResource.UPDATE), groupController.updateGroup)
   .delete(grantAccess('delete', PermissionResource.DELETE), groupController.deleteGroup);
 

@@ -15,6 +15,7 @@ import Training from './components/Training';
 import Testimonials from './components/Testimonials';
 import Blog from './components/Blog';
 import SingleBlogPost from './components/Blog/SingleBlogPost';
+import ClientPortal from './components/ClientPortal';
 
 const App: React.FC = () => {
   return (
@@ -37,6 +38,7 @@ const App: React.FC = () => {
                 <Route exact path="/testimonials" component={Testimonials} />
                 <Route exact path="/blog" component={Blog} />
                 <Route path="/blog/:id" component={SingleBlogPost} />
+                <Route path="/clientPortal" component={ClientPortal} />
                 <Route component={NotFound} />
               </Switch>
             </ErrorBoundary>

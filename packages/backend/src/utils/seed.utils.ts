@@ -16,6 +16,7 @@ export class Seeder {
 
           for (let i = 1; i <= 5; i++) {
             const currentPostId = faker.database.mongodbObjectId();
+            const media = faker.helpers.arrayElement([faker.image.animals(), null]);
             const data: IPost = {
               id: currentPostId,
               user: {
@@ -39,7 +40,8 @@ export class Seeder {
               ]),
               oneOnOneUserId: '',
               text: faker.lorem.sentence(),
-              media: faker.image.animals(),
+              media,
+              mediaType: media ? 'photo' : null,
             };
 
             needle('post', 'localhost:7777/api/posts', data, { json: true });
