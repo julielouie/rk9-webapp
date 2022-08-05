@@ -5,11 +5,11 @@ import dayjs from 'dayjs';
 import palette from '../../theme/palette';
 import { Post } from '../../types/Post';
 
-interface PostProps {
+interface ReadPostProps {
   post: Post;
 }
 
-export const ReadPost: FC<PostProps> = (props) => {
+export const ReadPost: FC<ReadPostProps> = (props) => {
   const { post } = props;
 
   return (

@@ -5,6 +5,7 @@ import { Link, Route, Switch, useLocation, useRouteMatch } from 'react-router-do
 import palette from '../../../theme/palette';
 import Main from './Main';
 import { Group } from '../../../types/Group';
+import Photos from './Photos';
 
 export const Discussion: FC = () => {
   const { pathname } = useLocation();
@@ -58,7 +59,9 @@ export const Discussion: FC = () => {
             <Route path={`${path}/main`}>
               <Main groupInfo={groupInfo} />
             </Route>
-            <Route path={`${path}/photos`} />
+            <Route path={`${path}/photos`}>
+              <Photos groupInfo={groupInfo} />
+            </Route>
             <Route path={`${path}/videos`} />
           </Switch>
         </Grid>
