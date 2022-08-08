@@ -6,6 +6,7 @@ import palette from '../../../theme/palette';
 import Main from './Main';
 import { Group } from '../../../types/Group';
 import Photos from './Photos';
+import Videos from './Videos';
 
 export const Discussion: FC = () => {
   const { pathname } = useLocation();
@@ -62,7 +63,9 @@ export const Discussion: FC = () => {
             <Route path={`${path}/photos`}>
               <Photos groupInfo={groupInfo} />
             </Route>
-            <Route path={`${path}/videos`} />
+            <Route path={`${path}/videos`}>
+              <Videos groupInfo={groupInfo} />
+            </Route>
           </Switch>
         </Grid>
       )}
