@@ -38,7 +38,9 @@ export const Main: FC<MainProps> = (props) => {
           <NewPost groupInfo={groupInfo} updatePath={path} />
           {allGroupPosts &&
             allGroupPosts.length &&
-            allGroupPosts.map((post) => <ReadPost key={post.id} post={post} />)}
+            allGroupPosts.map((post) => (
+              <ReadPost key={post.id} post={post} groupInfo={groupInfo} updatePath={path} />
+            ))}
         </Box>
       </Grid>
     </Grid>

@@ -2,6 +2,7 @@ const white = '#FFFFFF';
 const black = '#000000';
 const gray = '#2D2B2B';
 const disabled = '#AAABA6';
+const error = '#cc0000';
 const primary = '#1f1235';
 const secondary = '#1b1425';
 const highlight = '#9296BC';
@@ -18,6 +19,7 @@ const palette = {
     contrast: '#f4f0fc',
     highlight,
     secondaryHighlight,
+    error,
   },
   paper: {
     primary: white,

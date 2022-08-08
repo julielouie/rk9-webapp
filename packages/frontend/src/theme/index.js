@@ -1,4 +1,4 @@
-import { createTheme } from '@material-ui/core';
+import { unstable_createMuiStrictModeTheme as createTheme } from '@material-ui/core';
 import palette from './palette';
 import overrides from './overrides';
 
