@@ -29,15 +29,16 @@ npm install
 ```
 
 ### Backend 
-To get the RK9 backend stack up, please contact me for the mongo database uri, and token key.
+To get the RK9 backend stack up, please contact me for the mongo database uri, token key, and google cloud key.
 
-1) Add mongodb uri and port to your own `.env` file in `packages/backend`
+1) Add port, mongodb uri, and token key to your own `.env` file in `packages/backend`
 ```
 PORT=7777
 MONGODB_URI=<provided_uri>
 TOKEN_KEY=<provided_key>
 ```
-2) Start backend
+2) Add a file called `googe-cloud-key.json` in `packages/backend`, and paste the provided information.
+3) Start backend
 ```
 npm run start
 ```
