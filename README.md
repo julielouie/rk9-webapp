@@ -29,12 +29,13 @@ npm install
 ```
 
 ### Backend 
-To get the RK9 backend stack up, please contact me for the mongo database uri.
+To get the RK9 backend stack up, please contact me for the mongo database uri, and token key.
 
 1) Add mongodb uri and port to your own `.env` file in `packages/backend`
 ```
-MONGODB_URI=<provided_uri>
 PORT=7777
+MONGODB_URI=<provided_uri>
+TOKEN_KEY=<provided_key>
 ```
 2) Start backend
 ```
