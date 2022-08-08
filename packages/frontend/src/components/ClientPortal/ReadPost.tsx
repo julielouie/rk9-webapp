@@ -16,6 +16,7 @@ import {
   ListItemText,
   ListItemIcon,
   TextField,
+  DialogTitle,
 } from '@material-ui/core';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import CloseIcon from '@mui/icons-material/Close';
@@ -30,7 +31,7 @@ import { mutate } from 'swr';
 import palette from '../../theme/palette';
 import { Post } from '../../types/Post';
 import Rk9Api from '../../dataServices/Rk9Api';
-import { POST, PUT } from '../../constants/requests';
+import { DELETE, POST, PUT } from '../../constants/requests';
 import { LEVEL_ERROR, LogError } from '../../dataServices/Logger';
 import { Group } from '../../types/Group';
 import { SessionContext } from '../../context/SessionContext';
@@ -51,6 +52,7 @@ export const ReadPost: FC<ReadPostProps> = (props) => {
   const [editMode, setEditMode] = useState(false);
   const [showLoadingEditPostSubmit, setShowLoadingEditPostSubmit] = useState<any>(false);
   const [openExpanded, setOpenExpanded] = useState(false);
+  const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const [mediaFile, setMediaFile] = useState<any>(null);
   const [mediaUrl, setMediaUrl] = useState('');
@@ -142,6 +144,41 @@ export const ReadPost: FC<ReadPostProps> = (props) => {
     await mutate(updatePath);
   };
 
+  const deletePost = async () => {
+    setShowLoadingEditPostSubmit(true);
+
+    await Rk9Api(DELETE, `/posts/${post.id}`)
+      .then(() => {
+        enqueueSnackbar('Post was successfully deleted!', {
+          persist: false,
+          variant: 'success',
+        });
+        setEditMode(false);
+        setPostToEdit({
+          user: { id: '', name: '' },
+          date: new Date(),
+          group: { id: '', name: '' },
+          text: '',
+          mediaType: null,
+        });
+        setOpenConfirmDelete(false);
+      })
+      .catch(
+        () =>
+          enqueueSnackbar('There was a problem deleting the post. Please let someone know!', {
+            persist: false,
+            variant: 'error',
+          }),
+        setPostToEdit(post),
+      );
+
+    setMediaFile(null);
+    setMediaUrl('');
+
+    setShowLoadingEditPostSubmit(false);
+    await mutate(updatePath);
+  };
+
   return (
     <>
       <Grid container>
@@ -201,7 +238,11 @@ export const ReadPost: FC<ReadPostProps> = (props) => {
                       </ListItemIcon>
                       <ListItemText primary="Edit Post" />
                     </ListItem>
-                    <ListItem button style={{ color: palette.text.error }}>
+                    <ListItem
+                      button
+                      style={{ color: palette.text.error }}
+                      onClick={() => setOpenConfirmDelete(true)}
+                    >
                       <ListItemIcon style={{ color: palette.text.error }}>
                         <RemoveCircleOutlineIcon />
                       </ListItemIcon>
@@ -400,6 +441,35 @@ export const ReadPost: FC<ReadPostProps> = (props) => {
           )}
         </Dialog>
       )}
+      <Dialog open={openConfirmDelete} onClose={() => setOpenConfirmDelete(false)}>
+        <DialogTitle style={{ textAlign: 'center' }}>
+          <Typography variant="h4">Are You Sure?</Typography>
+          <Typography variant="h5">This post will be permanently deleted.</Typography>
+        </DialogTitle>
+        <Box style={{ display: 'flex', justifyContent: 'space-between', padding: '15px' }}>
+          <Button
+            variant="outlined"
+            style={{
+              marginRight: '15px',
+              borderColor: palette.button.primary,
+              color: palette.button.primary,
+            }}
+            onClick={() => setOpenConfirmDelete(false)}
+          >
+            Cancel
+          </Button>
+          <Button
+            variant="contained"
+            style={{
+              backgroundColor: palette.text.error,
+              color: palette.text.contrast,
+            }}
+            onClick={deletePost}
+          >
+            Delete
+          </Button>
+        </Box>
+      </Dialog>
     </>
   );
 };
