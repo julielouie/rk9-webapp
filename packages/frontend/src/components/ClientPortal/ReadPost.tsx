@@ -219,37 +219,41 @@ export const ReadPost: FC<ReadPostProps> = (props) => {
                     <span>{dayjs(post.date).format('MMM D, YYYY - h:mma')}</span>
                   </Typography>
                 </Box>
-                <IconButton onClick={openMorePostActions}>
-                  <MoreHorizIcon />
-                </IconButton>
-                <Popover
-                  open={openMore}
-                  anchorEl={anchorEl}
-                  onClose={closeMorePostActions}
-                  anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left',
-                  }}
-                >
-                  <List>
-                    <ListItem button onClick={() => setEditMode(true)}>
-                      <ListItemIcon>
-                        <EditIcon />
-                      </ListItemIcon>
-                      <ListItemText primary="Edit Post" />
-                    </ListItem>
-                    <ListItem
-                      button
-                      style={{ color: palette.text.error }}
-                      onClick={() => setOpenConfirmDelete(true)}
+                {(user?.id === post.user.id || user?.role === 'admin') && (
+                  <>
+                    <IconButton onClick={openMorePostActions}>
+                      <MoreHorizIcon />
+                    </IconButton>
+                    <Popover
+                      open={openMore}
+                      anchorEl={anchorEl}
+                      onClose={closeMorePostActions}
+                      anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'left',
+                      }}
                     >
-                      <ListItemIcon style={{ color: palette.text.error }}>
-                        <RemoveCircleOutlineIcon />
-                      </ListItemIcon>
-                      <ListItemText primary="Delete Post" />
-                    </ListItem>
-                  </List>
-                </Popover>
+                      <List>
+                        <ListItem button onClick={() => setEditMode(true)}>
+                          <ListItemIcon>
+                            <EditIcon />
+                          </ListItemIcon>
+                          <ListItemText primary="Edit Post" />
+                        </ListItem>
+                        <ListItem
+                          button
+                          style={{ color: palette.text.error }}
+                          onClick={() => setOpenConfirmDelete(true)}
+                        >
+                          <ListItemIcon style={{ color: palette.text.error }}>
+                            <RemoveCircleOutlineIcon />
+                          </ListItemIcon>
+                          <ListItemText primary="Delete Post" />
+                        </ListItem>
+                      </List>
+                    </Popover>
+                  </>
+                )}
               </Box>
               {!editMode && post.text && <Box style={{ marginTop: '25px' }}>{post.text}</Box>}
               {!editMode && post.media && (
