@@ -13,14 +13,15 @@ interface MainProps {
 export const Main: FC<MainProps> = (props) => {
   const { groupInfo } = props;
 
-  const { data: allGroupPosts } = useSWR<Post[]>(`/posts?group=${groupInfo.id}`, {
+  const path = `/posts?group=${groupInfo.id}`;
+  const { data: allGroupPosts } = useSWR<Post[]>(path, {
     suspense: true,
   });
 
   return (
     <Grid container>
       <Grid item xs={12} style={{ marginBottom: '30px' }}>
-        <NewPost groupInfo={groupInfo} />
+        <NewPost groupInfo={groupInfo} updatePath={path} />
         {allGroupPosts &&
           allGroupPosts.length &&
           allGroupPosts.map((post) => <ReadPost key={post.id} post={post} />)}

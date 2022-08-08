@@ -10,7 +10,15 @@ export const MediaPost: FC<MediaPostProps> = (props) => {
   const { post } = props;
 
   return (
-    <Card variant="outlined" style={{ cursor: 'pointer', margin: '20px 20px 0 0' }}>
+    <Card
+      variant="outlined"
+      style={{
+        display: 'inline-block',
+        verticalAlign: 'top',
+        cursor: 'pointer',
+        margin: '20px 20px 0 0',
+      }}
+    >
       <CardContent style={{ padding: '15px', maxWidth: '350px' }}>
         {post.media && post.mediaType === 'photo' && (
           <img style={{ height: '100%', width: '100%' }} src={post.media} alt="Post Media" />

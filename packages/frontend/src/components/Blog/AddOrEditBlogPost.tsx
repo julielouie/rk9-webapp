@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { FC, Dispatch, useState, useEffect, SetStateAction } from 'react';
 import { Box, Typography, Dialog, TextField } from '@material-ui/core';
-import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import { useSnackbar } from 'notistack';
 import { mutate } from 'swr';
@@ -18,10 +17,6 @@ interface AddOrEditBlogPostProps {
   updatedBlogPost: BlogPost;
   setUpdatedBlogPost: Dispatch<SetStateAction<BlogPost>>;
 }
-
-const Input = styled('input')({
-  display: 'none',
-});
 
 export const AddOrEditBlogPost: FC<AddOrEditBlogPostProps> = (props) => {
   const { open, close, blogPost, updatedBlogPost, setUpdatedBlogPost } = props;
@@ -156,18 +151,25 @@ export const AddOrEditBlogPost: FC<AddOrEditBlogPostProps> = (props) => {
             value={updatedBlogPost?.post}
             onChange={(e) => setUpdatedBlogPost({ ...updatedBlogPost, post: e.target.value })}
           />
-          <label htmlFor="upload-blog-post-image">
-            <Input
+          <Button
+            variant="outlined"
+            component="label"
+            style={{
+              display: 'flex',
+              alignSelf: 'start',
+              borderColor: palette.paper.secondary,
+              color: palette.paper.secondary,
+            }}
+          >
+            Upload Image
+            <input
               accept="image/*"
-              id="upload-blog-post-image"
               type="file"
               onChange={(e) => selectFileToUpload(e)}
               name="media"
+              hidden
             />
-            <Button variant="contained" component="span" color="inherit">
-              Upload Image
-            </Button>
-          </label>
+          </Button>
           {((blogPost && blogPost.id && imgUrl) || imgFile) && (
             <img
               alt="uploadedImage"

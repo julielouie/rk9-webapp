@@ -16,11 +16,9 @@ export const Photos: FC<PhotosProps> = (props) => {
     suspense: true,
   });
 
-  console.log(allGroupPosts);
-
   return (
     <Grid container>
-      <Grid item xs={12} style={{ marginBottom: '30px', display: 'flex', flexDirection: 'row' }}>
+      <Grid item xs={12} style={{ marginBottom: '30px' }}>
         {allGroupPosts &&
           allGroupPosts.length &&
           allGroupPosts.map((post) => <MediaPost key={post.id} post={post} />)}

@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 import React, { FC, useContext, useState } from 'react';
 import {
   Typography,
@@ -7,13 +8,14 @@ import {
   CardContent,
   CardActions,
   TextField,
+  IconButton,
   Box,
 } from '@material-ui/core';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import CloseIcon from '@mui/icons-material/Close';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import { useSnackbar } from 'notistack';
-import { styled } from '@mui/material/styles';
 import { mutate } from 'swr';
 import palette from '../../theme/palette';
 import Rk9Api from '../../dataServices/Rk9Api';
@@ -22,17 +24,16 @@ import { LEVEL_ERROR, LogError } from '../../dataServices/Logger';
 import { Post } from '../../types/Post';
 import { Group } from '../../types/Group';
 import { SessionContext } from '../../context/SessionContext';
-
-const Input = styled('input')({
-  display: 'none',
-});
+import Loading from '../utils/Loading';
 
 interface NewPostProps {
   groupInfo: Group;
+  updatePath: string;
 }
 
 export const NewPost: FC<NewPostProps> = (props) => {
-  const { groupInfo } = props;
+  const { groupInfo, updatePath } = props;
+  const [showLoadingPostSubmit, setShowLoadingPostSubmit] = useState<any>(false);
   const [mediaFile, setMediaFile] = useState<any>(null);
   const [mediaUrl, setMediaUrl] = useState('');
   const [newPost, setNewPost] = useState<Post>({
@@ -46,6 +47,12 @@ export const NewPost: FC<NewPostProps> = (props) => {
     state: { user },
   } = useContext(SessionContext);
   const { enqueueSnackbar } = useSnackbar();
+
+  const clearMedia = () => {
+    setMediaFile(null);
+    setMediaUrl('');
+    setNewPost({ ...newPost, mediaType: null });
+  };
 
   const selectFileToUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files && event.target.files[0] ? event.target.files[0] : null;
@@ -73,6 +80,8 @@ export const NewPost: FC<NewPostProps> = (props) => {
     postToSubmit.user = { id: user?.id, name: user?.name || '' };
     postToSubmit.group = { id: groupInfo.id, name: groupInfo.name };
 
+    setShowLoadingPostSubmit(true);
+
     await Rk9Api(POST, '/posts', postToSubmit)
       .then(async (submittedPost: Post) => {
         enqueueSnackbar('Post was successfully submitted!', {
@@ -84,7 +93,6 @@ export const NewPost: FC<NewPostProps> = (props) => {
             LogError(LEVEL_ERROR, error, 'Upload Post Media'),
           );
         }
-        await mutate('/posts');
         setNewPost({
           user: { id: '', name: '' },
           date: new Date(),
@@ -93,23 +101,31 @@ export const NewPost: FC<NewPostProps> = (props) => {
           mediaType: null,
         });
       })
-      .catch(() =>
-        enqueueSnackbar('There was a problem submitting the post. Please let someone know!', {
-          persist: false,
-          variant: 'error',
-        }),
+      .catch(
+        () =>
+          enqueueSnackbar('There was a problem submitting the post. Please let someone know!', {
+            persist: false,
+            variant: 'error',
+          }),
+        setNewPost({ ...newPost, mediaType: null }),
       );
+
+    clearMedia();
+
+    setShowLoadingPostSubmit(false);
+    await mutate(updatePath);
   };
 
   return (
     <Grid container>
-      <Grid item xs={12}>
+      {showLoadingPostSubmit && <Loading />}
+      <Grid item xs={12} style={{ pointerEvents: showLoadingPostSubmit ? 'none' : 'auto' }}>
         <Card variant="outlined">
           <CardContent
             style={{
               display: 'flex',
               flexDirection: 'row',
-              alignItems: 'center',
+              alignItems: 'start',
               marginTop: '10px',
               padding: '15px',
             }}
@@ -124,53 +140,85 @@ export const NewPost: FC<NewPostProps> = (props) => {
                 style={{ fontSize: '3rem', color: palette.text.primary, marginRight: '15px' }}
               />
             </Typography>
-            <TextField
-              variant="outlined"
-              fullWidth
-              placeholder="Start a post..."
-              value={newPost.text}
-              onChange={(e) => setNewPost({ ...newPost, text: e.target.value })}
-            />
-            {(mediaUrl || mediaFile) && (
-              <img
-                alt="uploadedMedia"
-                src={mediaUrl}
-                style={{ borderRadius: '3px', marginTop: '20px' }}
+            <Box
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'start',
+                width: '100%',
+              }}
+            >
+              <TextField
+                variant="outlined"
+                fullWidth
+                placeholder="Start a post..."
+                value={newPost.text}
+                onChange={(e) => setNewPost({ ...newPost, text: e.target.value })}
               />
-            )}
+              {(mediaUrl || mediaFile) && (
+                <div style={{ marginTop: '15px', maxWidth: '350px' }}>
+                  <IconButton
+                    style={{
+                      height: '15px',
+                      width: '15px',
+                      backgroundColor: palette.paper.secondary,
+                      color: palette.white,
+                      position: 'absolute',
+                      zIndex: 99999,
+                    }}
+                    onClick={clearMedia}
+                  >
+                    <CloseIcon />
+                  </IconButton>
+                  {newPost.mediaType === 'photo' && (
+                    <img
+                      alt="uploaded-media"
+                      src={mediaUrl}
+                      style={{ height: '100%', width: '100%' }}
+                    />
+                  )}
+                  {newPost.mediaType === 'video' && (
+                    <video width="100%" controls>
+                      <source src={mediaUrl} />
+                      <track default kind="captions" srcLang="en" />
+                    </video>
+                  )}
+                </div>
+              )}
+            </Box>
           </CardContent>
           <CardActions style={{ padding: '15px' }}>
             <Box style={{ marginLeft: '70px' }}>
-              <Input
-                accept="image/*"
-                id="upload-new-post-photo"
-                type="file"
-                onChange={(e) => {
-                  setNewPost({ ...newPost, mediaType: 'photo' });
-                  selectFileToUpload(e);
-                }}
-                name="media"
-              />
-              <Button>
+              <Button component="label">
                 <PhotoCameraIcon style={{ color: palette.paper.secondary, marginRight: '10px' }} />{' '}
                 Photo
-              </Button>
-              <label htmlFor="upload-new-post-video">
-                <Input
+                <input
                   accept="image/*"
-                  id="upload-new-post-video"
+                  type="file"
+                  onChange={(e) => {
+                    setNewPost({ ...newPost, mediaType: 'photo' });
+                    selectFileToUpload(e);
+                  }}
+                  onClick={(e: React.BaseSyntheticEvent) => (e.target.value = null)}
+                  name="media"
+                  hidden
+                />
+              </Button>
+              <Button component="label">
+                <YouTubeIcon style={{ color: palette.paper.highlight, marginRight: '10px' }} />{' '}
+                Video
+                <input
+                  accept="video/*"
                   type="file"
                   onChange={(e) => {
                     setNewPost({ ...newPost, mediaType: 'video' });
                     selectFileToUpload(e);
                   }}
+                  onClick={(e: React.BaseSyntheticEvent) => (e.target.value = null)}
                   name="media"
+                  hidden
                 />
-                <Button>
-                  <YouTubeIcon style={{ color: palette.paper.highlight, marginRight: '10px' }} />{' '}
-                  Video
-                </Button>
-              </label>
+              </Button>
             </Box>
             <Button
               variant="contained"

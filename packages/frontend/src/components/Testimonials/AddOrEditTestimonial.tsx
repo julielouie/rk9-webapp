@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { FC, useState, useEffect } from 'react';
 import { Box, Typography, Dialog, TextField } from '@material-ui/core';
-import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import { useSnackbar } from 'notistack';
 import { mutate } from 'swr';
@@ -16,10 +15,6 @@ interface AddOrEditTestimonialProps {
   close: () => void;
   testimonial: Testimonial | null;
 }
-
-const Input = styled('input')({
-  display: 'none',
-});
 
 export const AddOrEditTestimonial: FC<AddOrEditTestimonialProps> = (props) => {
   const { open, close, testimonial } = props;
@@ -171,18 +166,25 @@ export const AddOrEditTestimonial: FC<AddOrEditTestimonialProps> = (props) => {
               setUpdatedTestimonial({ ...updatedTestimonial, review: e.target.value })
             }
           />
-          <label htmlFor="upload-testimonial-image">
-            <Input
+          <Button
+            variant="outlined"
+            component="label"
+            style={{
+              display: 'flex',
+              alignSelf: 'start',
+              borderColor: palette.paper.secondary,
+              color: palette.paper.secondary,
+            }}
+          >
+            Upload Image
+            <input
               accept="image/*"
-              id="upload-testimonial-image"
               type="file"
               onChange={(e) => selectFileToUpload(e)}
               name="media"
+              hidden
             />
-            <Button variant="contained" component="span" color="inherit">
-              Upload Image
-            </Button>
-          </label>
+          </Button>
           {((testimonial && testimonial.id && imgUrl) || imgFile) && (
             <img
               alt="uploadedImage"
