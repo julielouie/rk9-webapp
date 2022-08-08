@@ -37,6 +37,7 @@ module.exports = {
     'max-classes-per-file': 'off',
     'no-return-await': 'warn',
     'no-unsafe-member-access': 'off',
+    'no-nested-ternary': 'off',
     'restrict-template-expressions': 'off',
     'explicit-module-boundary-types': 'off',
     '@typescript-eslint/require-await': 'warn',

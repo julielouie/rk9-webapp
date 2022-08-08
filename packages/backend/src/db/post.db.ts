@@ -1,11 +1,23 @@
 import PostModel, { IPost, IPostDocument } from '../models/post';
 import { PostNotFoundException } from '../exceptions/notFoundExceptions';
 
-export const getAllPosts = async (groupId?: string, mediaType?: string): Promise<IPost[]> => {
+export const getAllPosts = async (
+  page?: number,
+  groupId?: string,
+  mediaType?: string,
+): Promise<IPost[]> => {
   const query: any = {};
   if (groupId) query['group.id'] = groupId;
   if (mediaType) query.mediaType = mediaType;
-  const postList: IPost[] = await PostModel.find(query).sort({ date: -1 }).select('-__v').exec();
+
+  const aggregate: any[] = [{ $match: query }, { $sort: { date: -1 } }];
+  if (!mediaType) {
+    let newPageNumber = 1;
+    if (page) newPageNumber = page;
+    aggregate.push({ $skip: 5 * (newPageNumber - 1) }, { $limit: 5 });
+  }
+
+  const postList: IPost[] = await PostModel.aggregate(aggregate);
   return postList;
 };
 

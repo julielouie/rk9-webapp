@@ -39,10 +39,7 @@ export const Discussion: FC = () => {
           margin: '30px 0',
         }}
       >
-        <Tabs
-          value={pathname}
-          TabIndicatorProps={{ style: { background: palette.selected.primary } }}
-        >
+        <Tabs value={pathname}>
           <Tab label="Main" value={`${url}/main`} to={`${url}/main`} component={Link} />
           <Tab label="Photos" value={`${url}/photos`} to={`${url}/photos`} component={Link} />
           <Tab label="Videos" value={`${url}/videos`} to={`${url}/videos`} component={Link} />

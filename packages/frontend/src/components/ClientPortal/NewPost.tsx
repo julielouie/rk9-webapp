@@ -16,7 +16,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import { useSnackbar } from 'notistack';
-import { mutate } from 'swr';
+import { KeyedMutator } from 'swr/dist/types';
 import palette from '../../theme/palette';
 import Rk9Api from '../../dataServices/Rk9Api';
 import { POST } from '../../constants/requests';
@@ -28,11 +28,11 @@ import Loading from '../utils/Loading';
 
 interface NewPostProps {
   groupInfo: Group;
-  updatePath: string;
+  mutate: KeyedMutator<any[]>;
 }
 
 export const NewPost: FC<NewPostProps> = (props) => {
-  const { groupInfo, updatePath } = props;
+  const { groupInfo, mutate } = props;
   const [showLoadingPostSubmit, setShowLoadingPostSubmit] = useState<any>(false);
   const [mediaFile, setMediaFile] = useState<any>(null);
   const [mediaUrl, setMediaUrl] = useState('');
@@ -113,7 +113,7 @@ export const NewPost: FC<NewPostProps> = (props) => {
     clearMedia();
 
     setShowLoadingPostSubmit(false);
-    await mutate(updatePath);
+    await mutate();
   };
 
   return (

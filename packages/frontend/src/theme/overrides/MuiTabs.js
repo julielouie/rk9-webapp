@@ -19,6 +19,9 @@ const MuiTabs = {
       color: palette.text.primary,
       opacity: 0.6,
     },
+    '& .MuiTabs-indicator': {
+      backgroundColor: palette.selected.primary,
+    },
   },
 };
 

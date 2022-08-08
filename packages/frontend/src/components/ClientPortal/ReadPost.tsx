@@ -27,7 +27,7 @@ import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import dayjs from 'dayjs';
 import { useSnackbar } from 'notistack';
-import { mutate } from 'swr';
+import { KeyedMutator } from 'swr/dist/types';
 import palette from '../../theme/palette';
 import { Post } from '../../types/Post';
 import Rk9Api from '../../dataServices/Rk9Api';
@@ -40,11 +40,11 @@ import Loading from '../utils/Loading';
 interface ReadPostProps {
   post: Post;
   groupInfo: Group;
-  updatePath: string;
+  mutate: KeyedMutator<any[]>;
 }
 
 export const ReadPost: FC<ReadPostProps> = (props) => {
-  const { post, groupInfo, updatePath } = props;
+  const { post, groupInfo, mutate } = props;
   const {
     state: { user },
   } = useContext(SessionContext);
@@ -141,7 +141,7 @@ export const ReadPost: FC<ReadPostProps> = (props) => {
     setMediaUrl('');
 
     setShowLoadingEditPostSubmit(false);
-    await mutate(updatePath);
+    await mutate();
   };
 
   const deletePost = async () => {
@@ -176,7 +176,7 @@ export const ReadPost: FC<ReadPostProps> = (props) => {
     setMediaUrl('');
 
     setShowLoadingEditPostSubmit(false);
-    await mutate(updatePath);
+    await mutate();
   };
 
   return (
@@ -447,8 +447,10 @@ export const ReadPost: FC<ReadPostProps> = (props) => {
       )}
       <Dialog open={openConfirmDelete} onClose={() => setOpenConfirmDelete(false)}>
         <DialogTitle style={{ textAlign: 'center' }}>
-          <Typography variant="h4">Are You Sure?</Typography>
-          <Typography variant="h5">This post will be permanently deleted.</Typography>
+          <Typography style={{ fontSize: '2.2rem', fontWeight: 500 }}>Are You Sure?</Typography>
+          <Typography style={{ fontSize: '1.5rem' }}>
+            This post will be permanently deleted.
+          </Typography>
         </DialogTitle>
         <Box style={{ display: 'flex', justifyContent: 'space-between', padding: '15px' }}>
           <Button

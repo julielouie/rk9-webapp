@@ -1,10 +1,14 @@
-import React, { FC } from 'react';
-import { Grid, Box } from '@material-ui/core';
-import useSWR from 'swr';
+import React, { FC, useState } from 'react';
+import { Grid, Box, Typography, Button } from '@material-ui/core';
+import useSWRInfinite from 'swr/infinite';
+import { useSnackbar } from 'notistack';
 import NewPost from '../NewPost';
 import ReadPost from '../ReadPost';
 import { Post } from '../../../types/Post';
 import { Group } from '../../../types/Group';
+import palette from '../../../theme/palette';
+import Rk9Api from '../../../dataServices/Rk9Api';
+import { GET } from '../../../constants/requests';
 
 interface MainProps {
   groupInfo: Group;
@@ -12,11 +16,43 @@ interface MainProps {
 
 export const Main: FC<MainProps> = (props) => {
   const { groupInfo } = props;
+  const { enqueueSnackbar } = useSnackbar();
+  const [isFetching, setIsFetching] = useState(false);
 
   const path = `/posts?group=${groupInfo.id}`;
-  const { data: allGroupPosts } = useSWR<Post[]>(path, {
+
+  const fetchAllGroupPosts = async (url: string) => {
+    const data = await Rk9Api(GET, url).catch(() =>
+      enqueueSnackbar('There was a problem getting the posts. Please let someone know!', {
+        persist: false,
+        variant: 'error',
+      }),
+    );
+
+    setIsFetching(false);
+    return data;
+  };
+
+  const {
+    data: allGroupPosts,
+    mutate,
+    size,
+    setSize,
+  } = useSWRInfinite((index) => `${path}&page=${index + 1}`, fetchAllGroupPosts, {
     suspense: true,
   });
+
+  const fetchMorePosts = async () => {
+    if (allGroupPosts) {
+      setIsFetching(true);
+      await setSize(size + 1);
+    }
+  };
+
+  const posts = allGroupPosts ? [].concat(...allGroupPosts) : [];
+  const isEmpty = allGroupPosts?.[0]?.length === 0;
+  const isReachingEnd =
+    isEmpty || (allGroupPosts && allGroupPosts[allGroupPosts.length - 1]?.length < 5);
 
   return (
     <Grid container>
@@ -35,12 +71,42 @@ export const Main: FC<MainProps> = (props) => {
             width: '60%',
           }}
         >
-          <NewPost groupInfo={groupInfo} updatePath={path} />
-          {allGroupPosts &&
-            allGroupPosts.length &&
-            allGroupPosts.map((post) => (
-              <ReadPost key={post.id} post={post} groupInfo={groupInfo} updatePath={path} />
+          <NewPost groupInfo={groupInfo} mutate={mutate} />
+          {isEmpty && (
+            <Typography variant="h5" style={{ marginTop: '30px' }}>
+              There are no posts!
+            </Typography>
+          )}
+          {!isEmpty &&
+            posts &&
+            posts.length &&
+            posts.map((post: Post) => (
+              <ReadPost key={post.id} post={post} groupInfo={groupInfo} mutate={mutate} />
             ))}
+        </Box>
+        <Box style={{ width: '60%', marginTop: '30px', display: 'flex', alignItems: 'center' }}>
+          <Button
+            variant="contained"
+            style={{
+              backgroundColor: isReachingEnd ? palette.disabled : palette.button.primary,
+              color: palette.text.contrast,
+              marginRight: '30px',
+            }}
+            disabled={isFetching || isReachingEnd}
+            onClick={fetchMorePosts}
+          >
+            Load More
+          </Button>
+          {isFetching && (
+            <Typography variant="h5" style={{ display: 'inline-block' }}>
+              Loading more posts...
+            </Typography>
+          )}
+          {isReachingEnd && (
+            <Typography variant="h5" style={{ display: 'inline-block' }}>
+              There are no more posts!
+            </Typography>
+          )}
         </Box>
       </Grid>
     </Grid>

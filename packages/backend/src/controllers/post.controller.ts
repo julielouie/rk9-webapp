@@ -5,9 +5,15 @@ import * as postService from '../services/post.service';
 import { StatusCode } from '../types/common';
 
 export const getAllPosts = asyncHandler(async (req: Request, res: Response): Promise<void> => {
+  const page =
+    req.query.page === undefined
+      ? undefined
+      : req.query.page && /^\d+$/.test(req.query.page as string)
+      ? +req.query.page
+      : 0;
   const groupId = req.query.group as string;
   const mediaType = req.query.mediaType as string;
-  const postList: IPost[] = await postService.getAllPosts(groupId, mediaType);
+  const postList: IPost[] = await postService.getAllPosts(page, groupId, mediaType);
   res.status(StatusCode.success).send(postList);
 });
 
