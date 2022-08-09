@@ -311,7 +311,7 @@ export const ReadPost: FC<ReadPostProps> = (props) => {
                       backgroundColor: palette.paper.secondary,
                       color: palette.white,
                       position: 'absolute',
-                      zIndex: 99999,
+                      zIndex: 2,
                     }}
                     onClick={() => {
                       setMediaFile(null);
