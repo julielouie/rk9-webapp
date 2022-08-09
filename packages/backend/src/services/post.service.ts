@@ -7,8 +7,9 @@ export const getAllPosts = async (
   page?: number,
   groupId?: string,
   mediaType?: string,
+  oneOnOneId?: string,
 ): Promise<IPost[]> => {
-  const allPosts = await db.getAllPosts(page, groupId, mediaType);
+  const allPosts = await db.getAllPosts(page, groupId, mediaType, oneOnOneId);
   return map(allPosts, (post) => PostMap.toSimpleDTO(post));
 };
 

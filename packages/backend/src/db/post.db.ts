@@ -5,10 +5,12 @@ export const getAllPosts = async (
   page?: number,
   groupId?: string,
   mediaType?: string,
+  oneOnOneId?: string,
 ): Promise<IPost[]> => {
   const query: any = {};
   if (groupId) query['group.id'] = groupId;
   if (mediaType) query.mediaType = mediaType;
+  if (oneOnOneId) query.oneOnOneUserId = oneOnOneId;
 
   const aggregate: any[] = [{ $match: query }, { $sort: { date: -1 } }];
   if (!mediaType) {

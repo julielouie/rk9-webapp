@@ -32,7 +32,8 @@ export const getSelf = asyncHandler(async (req: Request, res: Response): Promise
 });
 
 export const getUserList = asyncHandler(async (req: Request, res: Response): Promise<void> => {
-  const userList = await userService.getUserList();
+  const groupId = req.query.group as string;
+  const userList = await userService.getUserList(groupId);
   res.status(StatusCode.success).send(userList);
 });
 

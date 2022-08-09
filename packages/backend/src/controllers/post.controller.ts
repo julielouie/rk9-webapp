@@ -13,7 +13,8 @@ export const getAllPosts = asyncHandler(async (req: Request, res: Response): Pro
       : 0;
   const groupId = req.query.group as string;
   const mediaType = req.query.mediaType as string;
-  const postList: IPost[] = await postService.getAllPosts(page, groupId, mediaType);
+  const oneOnOneId = req.query.oneOnOne as string;
+  const postList: IPost[] = await postService.getAllPosts(page, groupId, mediaType, oneOnOneId);
   res.status(StatusCode.success).send(postList);
 });
 

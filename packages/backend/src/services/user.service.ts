@@ -56,8 +56,8 @@ export const logIn = async (
   return { token, user };
 };
 
-export const getUserList = async (): Promise<ReturnUser[]> => {
-  const userList = await db.getUserList();
+export const getUserList = async (groupId?: string): Promise<ReturnUser[]> => {
+  const userList = await db.getUserList(groupId);
   return map(userList, (user) => UserMap.toSimpleDTO(user));
 };
 

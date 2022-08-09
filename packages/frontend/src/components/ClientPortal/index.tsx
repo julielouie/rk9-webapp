@@ -7,6 +7,7 @@ import Discussion from './Discussion';
 import RK9Icon from '../../assets/images/RK9 Icon.png';
 import { AbilityContext } from '../../context/AbilityContext';
 import NotFound from '../Error/NotFound';
+import AdvancedGroup from './AdvancedGroup';
 
 export const ClientPortal: FC = () => {
   const [selectedGroup, setSelectedGroup] = useState('');
@@ -195,7 +196,7 @@ export const ClientPortal: FC = () => {
         <Switch>
           <Route path={`${path}/discussion`} component={Discussion} />
           {canReadPosts && <Route path={`${path}/oneOnOne`} />}
-          {canReadPosts && <Route path={`${path}/advancedGroup`} />}
+          {canReadPosts && <Route path={`${path}/advancedGroup`} component={AdvancedGroup} />}
           {canReadPosts && <Route path={`${path}/biteClub`} />}
           <Route component={NotFound} />
         </Switch>
