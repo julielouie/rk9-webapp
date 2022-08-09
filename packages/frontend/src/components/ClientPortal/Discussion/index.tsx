@@ -68,6 +68,7 @@ export const Discussion: FC = () => {
           display: 'flex',
           padding: '20px',
           color: palette.text.contrast,
+          pointerEvents: !user ? 'none' : 'auto',
         }}
       >
         <Typography variant="h4" style={{ fontWeight: 600 }}>

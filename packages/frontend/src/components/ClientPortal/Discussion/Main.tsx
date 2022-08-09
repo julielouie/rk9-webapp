@@ -2,6 +2,7 @@ import React, { FC, useState } from 'react';
 import { Grid, Box, Typography, Button } from '@material-ui/core';
 import useSWRInfinite from 'swr/infinite';
 import { useSnackbar } from 'notistack';
+import { useAbility } from '@casl/react';
 import NewPost from '../NewPost';
 import ReadPost from '../ReadPost';
 import { Post } from '../../../types/Post';
@@ -9,6 +10,7 @@ import { Group } from '../../../types/Group';
 import palette from '../../../theme/palette';
 import Rk9Api from '../../../dataServices/Rk9Api';
 import { GET } from '../../../constants/requests';
+import { AbilityContext } from '../../../context/AbilityContext';
 
 interface MainProps {
   groupInfo: Group;
@@ -18,6 +20,7 @@ export const Main: FC<MainProps> = (props) => {
   const { groupInfo } = props;
   const { enqueueSnackbar } = useSnackbar();
   const [isFetching, setIsFetching] = useState(false);
+  const ability = useAbility(AbilityContext);
 
   const path = `/posts?group=${groupInfo.id}`;
 
@@ -92,7 +95,7 @@ export const Main: FC<MainProps> = (props) => {
               color: palette.text.contrast,
               marginRight: '30px',
             }}
-            disabled={isFetching || isReachingEnd}
+            disabled={isFetching || isReachingEnd || !ability.can('read', 'Posts')}
             onClick={fetchMorePosts}
           >
             Load More

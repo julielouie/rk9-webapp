@@ -17,6 +17,7 @@ import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import { useSnackbar } from 'notistack';
 import { KeyedMutator } from 'swr/dist/types';
+import { useAbility } from '@casl/react';
 import palette from '../../theme/palette';
 import Rk9Api from '../../dataServices/Rk9Api';
 import { POST } from '../../constants/requests';
@@ -25,6 +26,7 @@ import { Post } from '../../types/Post';
 import { Group } from '../../types/Group';
 import { SessionContext } from '../../context/SessionContext';
 import Loading from '../utils/Loading';
+import { AbilityContext } from '../../context/AbilityContext';
 
 interface NewPostProps {
   groupInfo: Group;
@@ -47,6 +49,7 @@ export const NewPost: FC<NewPostProps> = (props) => {
     state: { user },
   } = useContext(SessionContext);
   const { enqueueSnackbar } = useSnackbar();
+  const ability = useAbility(AbilityContext);
 
   const clearMedia = () => {
     setMediaFile(null);
@@ -228,6 +231,7 @@ export const NewPost: FC<NewPostProps> = (props) => {
                 color: palette.text.contrast,
               }}
               onClick={submitPost}
+              disabled={!ability.can('create', 'Posts')}
             >
               Submit
             </Button>

@@ -28,6 +28,7 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 import dayjs from 'dayjs';
 import { useSnackbar } from 'notistack';
 import { KeyedMutator } from 'swr/dist/types';
+import { useAbility } from '@casl/react';
 import palette from '../../theme/palette';
 import { Post } from '../../types/Post';
 import Rk9Api from '../../dataServices/Rk9Api';
@@ -36,6 +37,7 @@ import { LEVEL_ERROR, LogError } from '../../dataServices/Logger';
 import { Group } from '../../types/Group';
 import { SessionContext } from '../../context/SessionContext';
 import Loading from '../utils/Loading';
+import { AbilityContext } from '../../context/AbilityContext';
 
 interface ReadPostProps {
   post: Post;
@@ -63,6 +65,7 @@ export const ReadPost: FC<ReadPostProps> = (props) => {
     text: '',
     mediaType: null,
   });
+  const ability = useAbility(AbilityContext);
 
   useEffect(() => {
     if (post.id) {
@@ -234,7 +237,11 @@ export const ReadPost: FC<ReadPostProps> = (props) => {
                       }}
                     >
                       <List>
-                        <ListItem button onClick={() => setEditMode(true)}>
+                        <ListItem
+                          button
+                          onClick={() => setEditMode(true)}
+                          disabled={!ability.can('update', 'Posts')}
+                        >
                           <ListItemIcon>
                             <EditIcon />
                           </ListItemIcon>
@@ -244,6 +251,7 @@ export const ReadPost: FC<ReadPostProps> = (props) => {
                           button
                           style={{ color: palette.text.error }}
                           onClick={() => setOpenConfirmDelete(true)}
+                          disabled={!ability.can('delete', 'Posts')}
                         >
                           <ListItemIcon style={{ color: palette.text.error }}>
                             <RemoveCircleOutlineIcon />
