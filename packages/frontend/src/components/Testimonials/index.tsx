@@ -1,20 +1,19 @@
-import React, { FC, useState, useContext } from 'react';
+import React, { FC, useState } from 'react';
 import { Typography, Grid, Button } from '@material-ui/core';
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 import Carousel from 'react-material-ui-carousel';
 import useSWR from 'swr';
+import { useAbility } from '@casl/react';
 import palette from '../../theme/palette';
-import { SessionContext } from '../../context/SessionContext';
 import AddOrEditTestimonial from './AddOrEditTestimonial';
 import TestimonialCard from './TestimonialCard';
 import { Testimonial } from '../../types/Testimonial';
 import { reviewBlurbs } from './constants/reviewBlurbs';
+import { AbilityContext } from '../../context/AbilityContext';
 
 export const Testimonials: FC = () => {
   const [openAddOrEditDialog, setOpenAddOrEditDialog] = useState(false);
-  const {
-    state: { user },
-  } = useContext(SessionContext);
+  const ability = useAbility(AbilityContext);
 
   const { data: testimonials } = useSWR<Testimonial[]>('/testimonials', { suspense: true });
 
@@ -103,18 +102,20 @@ export const Testimonials: FC = () => {
             ))}
           </Carousel>
         </Grid>
-        <Grid
-          item
-          container
-          style={{ padding: '50px 50px 0 50px', display: 'flex', justifyContent: 'end' }}
-        >
-          <Button
-            style={{ backgroundColor: palette.button.primary, color: palette.white }}
-            onClick={() => setOpenAddOrEditDialog(true)}
+        {(ability.can('create', 'All') || ability.can('update', 'All')) && (
+          <Grid
+            item
+            container
+            style={{ padding: '50px 50px 0 50px', display: 'flex', justifyContent: 'end' }}
           >
-            Add Testimonial
-          </Button>
-        </Grid>
+            <Button
+              style={{ backgroundColor: palette.button.primary, color: palette.white }}
+              onClick={() => setOpenAddOrEditDialog(true)}
+            >
+              Add Testimonial
+            </Button>
+          </Grid>
+        )}
       </Grid>
       <Grid item container style={{ paddingBottom: '50px', display: 'flex' }}>
         {testimonials &&
@@ -122,11 +123,13 @@ export const Testimonials: FC = () => {
             <TestimonialCard key={testimonial.id} testimonial={testimonial} />
           ))}
       </Grid>
-      <AddOrEditTestimonial
-        open={openAddOrEditDialog}
-        close={() => setOpenAddOrEditDialog(false)}
-        testimonial={null}
-      />
+      {(ability.can('create', 'All') || ability.can('update', 'All')) && (
+        <AddOrEditTestimonial
+          open={openAddOrEditDialog}
+          close={() => setOpenAddOrEditDialog(false)}
+          testimonial={null}
+        />
+      )}
     </>
   );
 };

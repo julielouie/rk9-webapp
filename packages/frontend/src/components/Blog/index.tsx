@@ -1,4 +1,4 @@
-import React, { FC, useState, useContext } from 'react';
+import React, { FC, useState } from 'react';
 import { Typography, Grid, Button, Box, IconButton } from '@material-ui/core';
 import EditIcon from '@mui/icons-material/Edit';
 import Card from '@mui/material/Card';
@@ -7,11 +7,12 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import useSWR from 'swr';
 import { useHistory } from 'react-router-dom';
+import { useAbility } from '@casl/react';
 import palette from '../../theme/palette';
-import { SessionContext } from '../../context/SessionContext';
 import { BlogPost } from '../../types/BlogPost';
 import AddOrEditBlogPost from './AddOrEditBlogPost';
 import BlogPostCard from './BlogPostCard';
+import { AbilityContext } from '../../context/AbilityContext';
 
 export const Blog: FC = () => {
   const [openAddOrEditDialog, setOpenAddOrEditDialog] = useState(false);
@@ -21,9 +22,7 @@ export const Blog: FC = () => {
     post: '',
     image: '',
   });
-  const {
-    state: { user },
-  } = useContext(SessionContext);
+  const ability = useAbility(AbilityContext);
   const history = useHistory();
 
   const { data: blogPosts } = useSWR<BlogPost[]>('/blogPosts', { suspense: true });
@@ -31,31 +30,33 @@ export const Blog: FC = () => {
   return (
     <>
       <Grid container>
-        <Grid
-          item
-          container
-          style={{
-            marginTop: '30px',
-            padding: '50px 50px 0 50px',
-            display: 'flex',
-            justifyContent: 'end',
-          }}
-        >
-          <Button
-            style={{ backgroundColor: palette.button.primary, color: palette.white }}
-            onClick={() => {
-              setUpdatedBlogPost({
-                title: '',
-                date: new Date(),
-                post: '',
-                image: '',
-              });
-              setOpenAddOrEditDialog(true);
+        {ability.can('create', 'All') && (
+          <Grid
+            item
+            container
+            style={{
+              marginTop: '30px',
+              padding: '50px 50px 0 50px',
+              display: 'flex',
+              justifyContent: 'end',
             }}
           >
-            Add Blog Post
-          </Button>
-        </Grid>
+            <Button
+              style={{ backgroundColor: palette.button.primary, color: palette.white }}
+              onClick={() => {
+                setUpdatedBlogPost({
+                  title: '',
+                  date: new Date(),
+                  post: '',
+                  image: '',
+                });
+                setOpenAddOrEditDialog(true);
+              }}
+            >
+              Add Blog Post
+            </Button>
+          </Grid>
+        )}
         <Grid
           item
           container
@@ -68,19 +69,21 @@ export const Blog: FC = () => {
         >
           {blogPosts && blogPosts.length && blogPosts[0] ? (
             <Grid item>
-              <IconButton
-                style={{
-                  backgroundColor: palette.button.primary,
-                  color: palette.white,
-                  position: 'absolute',
-                }}
-                onClick={() => {
-                  setUpdatedBlogPost(blogPosts[0]);
-                  setOpenAddOrEditDialog(true);
-                }}
-              >
-                <EditIcon />
-              </IconButton>
+              {(ability.can('create', 'All') || ability.can('update', 'All')) && (
+                <IconButton
+                  style={{
+                    backgroundColor: palette.button.primary,
+                    color: palette.white,
+                    position: 'absolute',
+                  }}
+                  onClick={() => {
+                    setUpdatedBlogPost(blogPosts[0]);
+                    setOpenAddOrEditDialog(true);
+                  }}
+                >
+                  <EditIcon />
+                </IconButton>
+              )}
               <Card
                 style={{
                   boxShadow: 'none',
@@ -154,13 +157,15 @@ export const Blog: FC = () => {
             return <BlogPostCard key={blogPost.id} blogPost={blogPost} />;
           })}
       </Grid>
-      <AddOrEditBlogPost
-        open={openAddOrEditDialog}
-        close={() => setOpenAddOrEditDialog(false)}
-        blogPost={updatedBlogPost}
-        updatedBlogPost={updatedBlogPost}
-        setUpdatedBlogPost={setUpdatedBlogPost}
-      />
+      {(ability.can('create', 'All') || ability.can('update', 'All')) && (
+        <AddOrEditBlogPost
+          open={openAddOrEditDialog}
+          close={() => setOpenAddOrEditDialog(false)}
+          blogPost={updatedBlogPost}
+          updatedBlogPost={updatedBlogPost}
+          setUpdatedBlogPost={setUpdatedBlogPost}
+        />
+      )}
     </>
   );
 };

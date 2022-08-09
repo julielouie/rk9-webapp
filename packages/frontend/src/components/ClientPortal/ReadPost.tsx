@@ -50,6 +50,7 @@ export const ReadPost: FC<ReadPostProps> = (props) => {
   const {
     state: { user },
   } = useContext(SessionContext);
+  const ability = useAbility(AbilityContext);
   const { enqueueSnackbar } = useSnackbar();
   const [editMode, setEditMode] = useState(false);
   const [showLoadingEditPostSubmit, setShowLoadingEditPostSubmit] = useState<any>(false);
@@ -65,7 +66,6 @@ export const ReadPost: FC<ReadPostProps> = (props) => {
     text: '',
     mediaType: null,
   });
-  const ability = useAbility(AbilityContext);
 
   useEffect(() => {
     if (post.id) {
@@ -222,7 +222,7 @@ export const ReadPost: FC<ReadPostProps> = (props) => {
                     <span>{dayjs(post.date).format('MMM D, YYYY - h:mma')}</span>
                   </Typography>
                 </Box>
-                {(user?.id === post.user.id || user?.role === 'admin') && (
+                {(user?.id === post.user.id || ability.can('update', 'All')) && (
                   <>
                     <IconButton onClick={openMorePostActions}>
                       <MoreHorizIcon />
@@ -237,7 +237,7 @@ export const ReadPost: FC<ReadPostProps> = (props) => {
                       }}
                     >
                       <List>
-                        {(user?.role === 'admin' || user?.id === post.user.id) && (
+                        {(ability.can('update', 'All') || user?.id === post.user.id) && (
                           <ListItem
                             button
                             onClick={() => setEditMode(true)}
@@ -249,7 +249,7 @@ export const ReadPost: FC<ReadPostProps> = (props) => {
                             <ListItemText primary="Edit Post" />
                           </ListItem>
                         )}
-                        {(user?.role === 'admin' || user?.id === post.user.id) && (
+                        {(ability.can('update', 'All') || user?.id === post.user.id) && (
                           <ListItem
                             button
                             style={{ color: palette.text.error }}

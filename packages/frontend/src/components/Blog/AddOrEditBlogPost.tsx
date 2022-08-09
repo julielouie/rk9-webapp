@@ -4,11 +4,13 @@ import { Box, Typography, Dialog, TextField } from '@material-ui/core';
 import Button from '@mui/material/Button';
 import { useSnackbar } from 'notistack';
 import { mutate } from 'swr';
+import { useAbility } from '@casl/react';
 import palette from '../../theme/palette';
 import { BlogPost } from '../../types/BlogPost';
 import Rk9Api from '../../dataServices/Rk9Api';
 import { DELETE, POST, PUT } from '../../constants/requests';
 import { LEVEL_ERROR, LogError } from '../../dataServices/Logger';
+import { AbilityContext } from '../../context/AbilityContext';
 
 interface AddOrEditBlogPostProps {
   open: boolean;
@@ -22,8 +24,8 @@ export const AddOrEditBlogPost: FC<AddOrEditBlogPostProps> = (props) => {
   const { open, close, blogPost, updatedBlogPost, setUpdatedBlogPost } = props;
   const [imgFile, setImgFile] = useState<any>(null);
   const [imgUrl, setImgUrl] = useState('');
-
   const { enqueueSnackbar } = useSnackbar();
+  const ability = useAbility(AbilityContext);
 
   useEffect(() => {
     if (blogPost) {
@@ -206,6 +208,7 @@ export const AddOrEditBlogPost: FC<AddOrEditBlogPostProps> = (props) => {
                 color: palette.white,
                 marginLeft: '20px',
               }}
+              disabled={!ability.can('create', 'All')}
             >
               Save
             </Button>

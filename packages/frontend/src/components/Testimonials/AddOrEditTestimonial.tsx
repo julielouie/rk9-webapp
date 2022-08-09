@@ -4,11 +4,13 @@ import { Box, Typography, Dialog, TextField } from '@material-ui/core';
 import Button from '@mui/material/Button';
 import { useSnackbar } from 'notistack';
 import { mutate } from 'swr';
+import { useAbility } from '@casl/react';
 import palette from '../../theme/palette';
 import { Testimonial } from '../../types/Testimonial';
 import Rk9Api from '../../dataServices/Rk9Api';
 import { DELETE, POST, PUT } from '../../constants/requests';
 import { LEVEL_ERROR, LogError } from '../../dataServices/Logger';
+import { AbilityContext } from '../../context/AbilityContext';
 
 interface AddOrEditTestimonialProps {
   open: boolean;
@@ -27,6 +29,7 @@ export const AddOrEditTestimonial: FC<AddOrEditTestimonialProps> = (props) => {
     image: '',
   });
   const { enqueueSnackbar } = useSnackbar();
+  const ability = useAbility(AbilityContext);
 
   useEffect(() => {
     if (testimonial) {
@@ -221,6 +224,7 @@ export const AddOrEditTestimonial: FC<AddOrEditTestimonialProps> = (props) => {
                 color: palette.white,
                 marginLeft: '20px',
               }}
+              disabled={!(ability.can('create', 'All') || ability.can('update', 'All'))}
             >
               Save
             </Button>
