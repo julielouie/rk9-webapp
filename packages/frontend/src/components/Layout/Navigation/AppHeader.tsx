@@ -68,7 +68,7 @@ const AppHeader: React.FC = () => {
     <>
       <Route
         render={() => (
-          <Toolbar style={{ padding: 0, background: palette.paper.primary, height: '300px' }}>
+          <Toolbar style={{ padding: 0, background: palette.paper.primary, height: '366px' }}>
             <Grid
               container
               style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}

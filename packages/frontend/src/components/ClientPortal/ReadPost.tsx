@@ -237,27 +237,31 @@ export const ReadPost: FC<ReadPostProps> = (props) => {
                       }}
                     >
                       <List>
-                        <ListItem
-                          button
-                          onClick={() => setEditMode(true)}
-                          disabled={!ability.can('update', 'Posts')}
-                        >
-                          <ListItemIcon>
-                            <EditIcon />
-                          </ListItemIcon>
-                          <ListItemText primary="Edit Post" />
-                        </ListItem>
-                        <ListItem
-                          button
-                          style={{ color: palette.text.error }}
-                          onClick={() => setOpenConfirmDelete(true)}
-                          disabled={!ability.can('delete', 'Posts')}
-                        >
-                          <ListItemIcon style={{ color: palette.text.error }}>
-                            <RemoveCircleOutlineIcon />
-                          </ListItemIcon>
-                          <ListItemText primary="Delete Post" />
-                        </ListItem>
+                        {(user?.role === 'admin' || user?.id === post.user.id) && (
+                          <ListItem
+                            button
+                            onClick={() => setEditMode(true)}
+                            disabled={!ability.can('update', 'Posts')}
+                          >
+                            <ListItemIcon>
+                              <EditIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Edit Post" />
+                          </ListItem>
+                        )}
+                        {(user?.role === 'admin' || user?.id === post.user.id) && (
+                          <ListItem
+                            button
+                            style={{ color: palette.text.error }}
+                            onClick={() => setOpenConfirmDelete(true)}
+                            disabled={!ability.can('delete', 'Posts')}
+                          >
+                            <ListItemIcon style={{ color: palette.text.error }}>
+                              <RemoveCircleOutlineIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Delete Post" />
+                          </ListItem>
+                        )}
                       </List>
                     </Popover>
                   </>
