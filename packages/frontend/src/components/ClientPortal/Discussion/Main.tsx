@@ -95,7 +95,7 @@ export const Main: FC<MainProps> = (props) => {
               color: palette.text.contrast,
               marginRight: '30px',
             }}
-            disabled={isFetching || isReachingEnd || !ability.can('read', 'Posts')}
+            disabled={isFetching || isReachingEnd || !ability.can('read', 'All')}
             onClick={fetchMorePosts}
           >
             Load More

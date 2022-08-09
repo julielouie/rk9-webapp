@@ -14,7 +14,6 @@ export const updateAbility = (ability, userRole) => {
     D: () => can('delete', 'All'),
     RG: () => can('read', 'Groups'),
     CP: () => can('create', 'Posts'),
-    RP: () => can('read', 'Posts'),
     UP: () => can('update', 'Posts'),
     DP: () => can('delete', 'Posts'),
     RBP: () => can('read', 'Blog Posts'),
@@ -33,7 +32,6 @@ export const updateAbility = (ability, userRole) => {
       abilities.DP();
     default:
       abilities.RG();
-      abilities.RP();
       abilities.RBP();
       abilities.RT();
   }

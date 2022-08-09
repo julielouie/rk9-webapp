@@ -1,22 +1,26 @@
-import React, { FC, useContext } from 'react';
+import React, { FC, useEffect } from 'react';
 import { Typography, Grid, Tabs, Tab } from '@material-ui/core';
 import useSWR from 'swr';
 import { Link, Route, Switch, useLocation, useRouteMatch } from 'react-router-dom';
+import { useAbility } from '@casl/react';
 import palette from '../../../theme/palette';
 import Main from './Main';
 import { Group } from '../../../types/Group';
 import Photos from './Photos';
 import Videos from './Videos';
-import { SessionContext } from '../../../context/SessionContext';
+import { AbilityContext } from '../../../context/AbilityContext';
 
 export const Discussion: FC = () => {
   const { pathname } = useLocation();
   const { url, path } = useRouteMatch();
-  const {
-    state: { user },
-  } = useContext(SessionContext);
+  const ability = useAbility(AbilityContext);
+  const canReadPosts = ability.can('read', 'All');
 
   const { data: groupInfo } = useSWR<Group>('/groups/Discussion', { suspense: true });
+
+  useEffect(() => {
+    window.dispatchEvent(new CustomEvent('resize'));
+  }, [pathname]);
 
   return (
     <Grid container>
@@ -28,7 +32,7 @@ export const Discussion: FC = () => {
           display: 'flex',
           padding: '20px',
           color: palette.text.contrast,
-          pointerEvents: !user ? 'none' : 'auto',
+          pointerEvents: canReadPosts ? 'auto' : 'none',
         }}
       >
         <Typography variant="h4" style={{ fontWeight: 600 }}>

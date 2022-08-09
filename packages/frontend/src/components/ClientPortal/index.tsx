@@ -1,31 +1,49 @@
-import React, { FC, useState, useContext } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import { Grid, Button, Typography } from '@material-ui/core';
-import { Link, Route, Switch, useRouteMatch } from 'react-router-dom';
+import { Link, Route, Switch, useRouteMatch, useLocation } from 'react-router-dom';
 import { useAbility } from '@casl/react';
 import palette from '../../theme/palette';
 import Discussion from './Discussion';
 import RK9Icon from '../../assets/images/RK9 Icon.png';
 import { AbilityContext } from '../../context/AbilityContext';
-import { SessionContext } from '../../context/SessionContext';
+import NotFound from '../Error/NotFound';
 
 export const ClientPortal: FC = () => {
-  const [selectedGroup, setSelectedGroup] = useState('discussion');
+  const [selectedGroup, setSelectedGroup] = useState('');
   const { path } = useRouteMatch();
   const ability = useAbility(AbilityContext);
-  const canReadPosts = ability.can('read', 'Posts');
-  const {
-    state: { user },
-  } = useContext(SessionContext);
+  const canReadPosts = ability.can('read', 'All');
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    const currentTab = pathname.split('/')[2];
+    switch (currentTab) {
+      case 'discussion':
+        setSelectedGroup('discussion');
+        break;
+      case 'oneOnOne':
+        setSelectedGroup('oneOnOne');
+        break;
+      case 'advancedGroup':
+        setSelectedGroup('advancedGroup');
+        break;
+      case 'biteClub':
+        setSelectedGroup('biteClub');
+        break;
+      default:
+        break;
+    }
+  }, [pathname]);
 
   return (
     <Grid container style={{ position: 'relative' }}>
-      {!user && (
+      {!canReadPosts && (
         <Grid
           style={{
             display: 'flex',
             flexDirection: 'column',
             boxSizing: 'border-box',
-            paddingTop: '300px',
+            paddingTop: '250px',
             paddingLeft: '100px',
             height: '100%',
             width: '100%',
@@ -176,9 +194,10 @@ export const ClientPortal: FC = () => {
       >
         <Switch>
           <Route path={`${path}/discussion`} component={Discussion} />
-          <Route path={`${path}/oneOnOne`} />
-          <Route path={`${path}/advancedGroup`} />
-          <Route path={`${path}/biteClub`} />
+          {canReadPosts && <Route path={`${path}/oneOnOne`} />}
+          {canReadPosts && <Route path={`${path}/advancedGroup`} />}
+          {canReadPosts && <Route path={`${path}/biteClub`} />}
+          <Route component={NotFound} />
         </Switch>
       </Grid>
     </Grid>
