@@ -25,7 +25,7 @@ export const updateAbility = (ability, userRole) => {
       abilities.C();
       abilities.U();
       abilities.D();
-    case Role.Contributor:
+    case Role.Client:
       abilities.R();
       abilities.CP();
       abilities.UP();

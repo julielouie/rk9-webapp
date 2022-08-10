@@ -6,7 +6,7 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useSnackbar } from 'notistack';
 import { useAbility } from '@casl/react';
-import { mutate } from 'swr';
+import { mutate as mutateLogOut } from 'swr';
 import palette from '../../../theme/palette';
 import RK9Logo from '../../../assets/images/RK9 Logo.png';
 import { SessionContext } from '../../../context/SessionContext';
@@ -18,6 +18,7 @@ import updateAbility from '../../../ability/updateAbility';
 import { Role } from '../../../types/Role';
 import { LEVEL_ERROR, LogError } from '../../../dataServices/Logger';
 import Login from './Login';
+import { useCurrentUser } from '../../../hooks/useCurrentUser';
 
 const AppHeader: React.FC = () => {
   const {
@@ -31,6 +32,7 @@ const AppHeader: React.FC = () => {
   const { enqueueSnackbar } = useSnackbar();
   const ability = useAbility(AbilityContext);
   const history = useHistory();
+  const { mutate } = useCurrentUser();
 
   useEffect(() => {
     setLoggedIn(!!user);
@@ -45,9 +47,10 @@ const AppHeader: React.FC = () => {
   const logout = async () => {
     await Rk9Api(GET, '/users/log-out')
       .then(async () => {
-        await mutate(null, true);
+        await mutateLogOut(null, true);
         dispatch({ type: LOGOUT });
         updateAbility(ability, Role.Guest);
+        mutate();
         enqueueSnackbar('Logged out successfully!', {
           persist: false,
           variant: 'success',

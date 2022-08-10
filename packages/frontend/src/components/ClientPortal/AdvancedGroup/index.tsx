@@ -25,15 +25,15 @@ export const AdvancedGroup: FC = () => {
 
   return (
     <Grid container>
-      <ClientList groupId={groupInfo?.id || ''} />
-      <Grid item container xs={12} md={9}>
+      {ability.can('update', 'All') && <ClientList groupInfo={groupInfo || ({} as Group)} />}
+      <Grid item container xs={12} md={ability.can('update', 'All') ? 9 : 12}>
         <Grid
           item
           container
           style={{
             backgroundColor: palette.paper.secondary,
             display: 'flex',
-            padding: '5px',
+            padding: '5px 5px 5px 10px',
             color: palette.text.contrast,
             pointerEvents: canReadPosts ? 'auto' : 'none',
             height: '50px',

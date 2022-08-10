@@ -65,19 +65,6 @@ export class Seeder {
             const data: IGroup = {
               id: currentGroupId,
               name: `${faker.commerce.productAdjective()} ${faker.commerce.productName()}`,
-              members: [
-                {
-                  id: 'b7672ee9e2df8b994f57d6c8',
-                  name: 'Phillip Fry',
-                  email: 'fry@planetExpress.com',
-                  role: 'dev',
-                  dogName: 'Test',
-                  dogName2: '',
-                  dogName3: '',
-                  dogName4: '',
-                  dogName5: '',
-                },
-              ],
             };
 
             needle('post', 'localhost:7777/api/groups', data, { json: true });
@@ -149,7 +136,7 @@ export class Seeder {
       .then(async (res) => {
         if (!res.body.length) {
           const fryName = 'Phillip Fry';
-          const fryEmail = 'fry@planetExpress.com';
+          const fryEmail = 'Fry';
           const fryPassword = 'fry';
           const fryDogName = 'Doug';
           const fryGroups = [
@@ -170,7 +157,7 @@ export class Seeder {
           await userService.signUp(fryName, fryEmail, fryPassword, fryDogName, fryGroups, fryRole);
 
           const julName = 'Julie Chung';
-          const julEmail = 'juliehchung96@gmail.com';
+          const julEmail = 'Test';
           const julPassword = 'test';
           const julDogName = 'Pepper';
           const julGroups = [
@@ -187,7 +174,7 @@ export class Seeder {
           await userService.signUp(julName, julEmail, julPassword, julDogName, julGroups, julRole);
 
           const zoidName = 'John Zoidberg';
-          const zoidEmail = 'zoidberg@planetExpress.com';
+          const zoidEmail = 'Zoid';
           const zoidPassword = 'zoid';
           const zoidDogName = 'Bella';
           await userService.signUp(zoidName, zoidEmail, zoidPassword, zoidDogName);

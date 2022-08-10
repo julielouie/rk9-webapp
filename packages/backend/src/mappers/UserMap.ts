@@ -13,10 +13,10 @@ export class UserMap {
       groups: user.groups,
       role: user.role,
       dogName: user.dogName,
-      dogName2: user.dogName || '',
-      dogName3: user.dogName || '',
-      dogName4: user.dogName || '',
-      dogName5: user.dogName || '',
+      dogName2: user.dogName2 || '',
+      dogName3: user.dogName3 || '',
+      dogName4: user.dogName4 || '',
+      dogName5: user.dogName5 || '',
     };
   }
 }

@@ -51,9 +51,8 @@ export const logIn = async (
     throw new InvalidCredentialsException(user.id);
   }
 
-  const newUser: any = { ...user };
-  delete newUser.password;
-  return { token, user };
+  const newUser = UserMap.toDTO(user);
+  return { token, user: newUser };
 };
 
 export const getUserList = async (groupId?: string): Promise<ReturnUser[]> => {

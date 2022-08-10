@@ -13,6 +13,7 @@ import { SessionContext } from '../../../../context/SessionContext';
 import { LOGIN } from '../../../../constants/actions';
 import { AbilityContext } from '../../../../context/AbilityContext';
 import updateAbility from '../../../../ability/updateAbility';
+import { useCurrentUser } from '../../../../hooks/useCurrentUser';
 
 interface LoginProps {
   open: boolean;
@@ -28,6 +29,7 @@ const Login: FC<LoginProps> = (props) => {
   const { open, email, password, setEmail, setPassword, setLoggedIn, resetLoginInputs } = props;
   const [showPassword, setShowPassword] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
+  const { mutate } = useCurrentUser();
   const { dispatch } = useContext(SessionContext);
   const ability = useAbility(AbilityContext);
 
@@ -36,6 +38,7 @@ const Login: FC<LoginProps> = (props) => {
       .then((res: any) => {
         dispatch({ type: LOGIN, payload: res });
         updateAbility(ability, res.role);
+        mutate();
         enqueueSnackbar('Logged in successfully!', {
           persist: false,
           variant: 'success',

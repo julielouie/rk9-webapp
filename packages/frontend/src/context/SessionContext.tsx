@@ -43,7 +43,7 @@ const stateReducer = (state: SessionState, action: SessionAction): SessionState 
     case LOGIN:
       return {
         ...state,
-        user: action.payload.user,
+        user: action.payload,
       };
     case LOGOUT:
       return {

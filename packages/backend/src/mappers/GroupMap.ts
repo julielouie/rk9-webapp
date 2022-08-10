@@ -9,7 +9,6 @@ export class GroupMap {
     return {
       id: group.id,
       name: group.name,
-      members: group.members,
     };
   }
 }

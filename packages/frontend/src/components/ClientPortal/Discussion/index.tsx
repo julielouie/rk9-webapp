@@ -30,12 +30,15 @@ export const Discussion: FC = () => {
         style={{
           backgroundColor: palette.paper.secondary,
           display: 'flex',
-          padding: '20px',
+          padding: '5px 5px 5px 10px',
           color: palette.text.contrast,
+          height: '50px',
+          alignItems: 'center',
+          justifyContent: 'space-between',
           pointerEvents: canReadPosts ? 'auto' : 'none',
         }}
       >
-        <Typography variant="h4" style={{ fontWeight: 600 }}>
+        <Typography variant="h5" style={{ fontWeight: 600 }}>
           Discussion Board
         </Typography>
       </Grid>

@@ -104,13 +104,11 @@ export const NewPost: FC<NewPostProps> = (props) => {
           mediaType: null,
         });
       })
-      .catch(
-        () =>
-          enqueueSnackbar('There was a problem submitting the post. Please let someone know!', {
-            persist: false,
-            variant: 'error',
-          }),
-        setNewPost({ ...newPost, mediaType: null }),
+      .catch(() =>
+        enqueueSnackbar('There was a problem submitting the post. Please let someone know!', {
+          persist: false,
+          variant: 'error',
+        }),
       );
 
     clearMedia();

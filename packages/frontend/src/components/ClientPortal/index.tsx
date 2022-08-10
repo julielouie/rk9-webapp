@@ -1,13 +1,24 @@
-import React, { FC, useState, useEffect } from 'react';
-import { Grid, Button, Typography } from '@material-ui/core';
+import React, { FC, useState, useEffect, useContext } from 'react';
+import { Grid, Button } from '@material-ui/core';
 import { Link, Route, Switch, useRouteMatch, useLocation } from 'react-router-dom';
 import { useAbility } from '@casl/react';
 import palette from '../../theme/palette';
 import Discussion from './Discussion';
-import RK9Icon from '../../assets/images/RK9 Icon.png';
 import { AbilityContext } from '../../context/AbilityContext';
-import NotFound from '../Error/NotFound';
 import AdvancedGroup from './AdvancedGroup';
+import { SessionContext } from '../../context/SessionContext';
+import RestrictedPage from './RestrictedPage';
+
+const RestrictedSinglePage = () => (
+  <Grid container style={{ height: '100vh', position: 'relative' }}>
+    <RestrictedPage
+      isAlternate
+      alternateTitle="You must be a group member"
+      alternateTitleLine2="to view this page!"
+      alternateBody="Please try again later."
+    />
+  </Grid>
+);
 
 export const ClientPortal: FC = () => {
   const [selectedGroup, setSelectedGroup] = useState('');
@@ -15,6 +26,9 @@ export const ClientPortal: FC = () => {
   const ability = useAbility(AbilityContext);
   const canReadPosts = ability.can('read', 'All');
   const { pathname } = useLocation();
+  const {
+    state: { user },
+  } = useContext(SessionContext);
 
   useEffect(() => {
     const currentTab = pathname.split('/')[2];
@@ -38,45 +52,7 @@ export const ClientPortal: FC = () => {
 
   return (
     <Grid container style={{ position: 'relative' }}>
-      {!canReadPosts && (
-        <Grid
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            boxSizing: 'border-box',
-            paddingTop: '250px',
-            paddingLeft: '100px',
-            height: '100%',
-            width: '100%',
-            position: 'absolute',
-            background: `linear-gradient(rgba(255, 255, 255, 0.8), ${palette.disabled})`,
-            zIndex: 9,
-          }}
-        >
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-            }}
-          >
-            <img src={RK9Icon} alt="Rogue K9 Logo" style={{ height: '100%', width: '30%' }} />
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-              }}
-            >
-              <Typography variant="h1">Oops...</Typography>
-              <Typography variant="h3">You must be logged in</Typography>
-              <Typography variant="h3">to view these pages!</Typography>
-              <Typography variant="h5" style={{ marginTop: '20px' }}>
-                Please login, and refresh the page to try again.
-              </Typography>
-            </div>
-          </div>
-        </Grid>
-      )}
+      {!canReadPosts && <RestrictedPage />}
       <Grid
         item
         container
@@ -137,7 +113,13 @@ export const ClientPortal: FC = () => {
         </Link>
         <Link
           to={`${path}/advancedGroup/main`}
-          style={{ textDecoration: 'none', pointerEvents: canReadPosts ? 'auto' : 'none' }}
+          style={{
+            textDecoration: 'none',
+            pointerEvents: canReadPosts ? 'auto' : 'none',
+            cursor: user?.groups.find((group) => group.name === 'Advanced Group')
+              ? 'auto'
+              : 'not-allowed',
+          }}
         >
           <Button
             onClick={() => setSelectedGroup('advancedGroup')}
@@ -155,14 +137,22 @@ export const ClientPortal: FC = () => {
                     margin: '0 20px 0 0',
                   }
             }
-            disabled={!canReadPosts}
+            disabled={
+              !canReadPosts || !user?.groups.find((group) => group.name === 'Advanced Group')
+            }
           >
             Advanced Group
           </Button>
         </Link>
         <Link
           to={`${path}/biteClub/main`}
-          style={{ textDecoration: 'none', pointerEvents: canReadPosts ? 'auto' : 'none' }}
+          style={{
+            textDecoration: 'none',
+            pointerEvents: canReadPosts ? 'auto' : 'none',
+            cursor: user?.groups.find((group) => group.name === 'Bite Club')
+              ? 'auto'
+              : 'not-allowed',
+          }}
         >
           <Button
             onClick={() => setSelectedGroup('biteClub')}
@@ -178,7 +168,7 @@ export const ClientPortal: FC = () => {
                     color: canReadPosts ? palette.button.primary : palette.disabled,
                   }
             }
-            disabled={!canReadPosts}
+            disabled={!canReadPosts || !user?.groups.find((group) => group.name === 'Bite Club')}
           >
             Bite Club
           </Button>
@@ -196,9 +186,13 @@ export const ClientPortal: FC = () => {
         <Switch>
           <Route path={`${path}/discussion`} component={Discussion} />
           {canReadPosts && <Route path={`${path}/oneOnOne`} />}
-          {canReadPosts && <Route path={`${path}/advancedGroup`} component={AdvancedGroup} />}
-          {canReadPosts && <Route path={`${path}/biteClub`} />}
-          <Route component={NotFound} />
+          {canReadPosts && user?.groups.find((group) => group.name === 'Advanced Group') && (
+            <Route path={`${path}/advancedGroup`} component={AdvancedGroup} />
+          )}
+          {canReadPosts && user?.groups.find((group) => group.name === 'Bite Club') && (
+            <Route path={`${path}/biteClub`} />
+          )}
+          <Route component={RestrictedSinglePage} />
         </Switch>
       </Grid>
     </Grid>
