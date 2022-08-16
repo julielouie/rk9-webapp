@@ -10,7 +10,8 @@ export class JournalPostMap {
       id: journalPost.id,
       title: journalPost.title,
       date: journalPost.date,
-      notes: journalPost.notes || '',
+      oneOnOneUserId: journalPost.oneOnOneUserId,
+      notes: journalPost.notes,
       workOn: journalPost.workOn || '',
       misc: journalPost.misc || '',
     };

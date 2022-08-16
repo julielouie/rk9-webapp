@@ -113,41 +113,43 @@ export const ReadPost: FC<ReadPostProps> = (props) => {
   };
 
   const submitEditPost = async () => {
-    const editPostToSubmit = { ...postToEdit };
-    editPostToSubmit.user = { id: user?.id, name: user?.name || '' };
-    editPostToSubmit.group = groupInfo ? { id: groupInfo.id, name: groupInfo.name } : null;
-    editPostToSubmit.oneOnOneUserId = oneOnOneId || null;
+    if (user) {
+      const editPostToSubmit = { ...postToEdit };
+      editPostToSubmit.user = { id: user.id, name: user.name };
+      editPostToSubmit.group = groupInfo ? { id: groupInfo.id, name: groupInfo.name } : null;
+      editPostToSubmit.oneOnOneUserId = oneOnOneId || null;
 
-    setShowLoadingEditPostSubmit(true);
+      setShowLoadingEditPostSubmit(true);
 
-    await Rk9Api(PUT, `/posts/${post.id}`, editPostToSubmit)
-      .then(async (submittedPost: Post) => {
-        enqueueSnackbar('Post was successfully edited!', {
-          persist: false,
-          variant: 'success',
-        });
-        if (mediaFile && submittedPost.id) {
-          await uploadFile(submittedPost.id).catch((error) =>
-            LogError(LEVEL_ERROR, error, 'Upload Post Media'),
-          );
-        }
-        setPostToEdit(submittedPost);
-        setEditMode(false);
-      })
-      .catch(
-        () =>
-          enqueueSnackbar('There was a problem editing the post. Please let someone know!', {
+      await Rk9Api(PUT, `/posts/${post.id}`, editPostToSubmit)
+        .then(async (submittedPost: Post) => {
+          enqueueSnackbar('Post was successfully edited!', {
             persist: false,
-            variant: 'error',
-          }),
-        setPostToEdit(post),
-      );
+            variant: 'success',
+          });
+          if (mediaFile && submittedPost.id) {
+            await uploadFile(submittedPost.id).catch((error) =>
+              LogError(LEVEL_ERROR, error, 'Upload Post Media'),
+            );
+          }
+          setPostToEdit(submittedPost);
+          setEditMode(false);
+        })
+        .catch(
+          () =>
+            enqueueSnackbar('There was a problem editing the post. Please let someone know!', {
+              persist: false,
+              variant: 'error',
+            }),
+          setPostToEdit(post),
+        );
 
-    setMediaFile(null);
-    setMediaUrl('');
+      setMediaFile(null);
+      setMediaUrl('');
 
-    setShowLoadingEditPostSubmit(false);
-    await mutate();
+      setShowLoadingEditPostSubmit(false);
+      await mutate();
+    }
   };
 
   const deletePost = async () => {

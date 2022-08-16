@@ -9,6 +9,7 @@ import testimonialRouter from './routes/testimonial';
 import groupRouter from './routes/group';
 import blogPostRouter from './routes/blogPost';
 import postRouter from './routes/post';
+import journalPostRouter from './routes/journalPost';
 
 export const app = express();
 const http: HttpServer = createServer(app);
@@ -32,6 +33,7 @@ app.use('/api/testimonials', testimonialRouter);
 app.use('/api/groups', groupRouter);
 app.use('/api/blogPosts', blogPostRouter);
 app.use('/api/posts', postRouter);
+app.use('/api/journalPosts', journalPostRouter);
 
 //
 // ─── SERVER SETUP ────────────────────────────────────────────────────────────────

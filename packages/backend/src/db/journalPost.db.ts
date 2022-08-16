@@ -2,9 +2,11 @@ import JournalPostModel, { IJournalPost, IJournalPostDocument } from '../models/
 import { JournalPostNotFoundException } from '../exceptions/notFoundExceptions';
 import * as journalPostSchema from '../schemas/journalPost.schema';
 
-export const getAllJournalPosts = async (): Promise<IJournalPost[]> => {
+export const getAllJournalPosts = async (oneOnOneId?: string): Promise<IJournalPost[]> => {
   const query: any = {};
-  const journalPostList: IJournalPost[] = await JournalPostModel.find(query).select('-__v').exec();
+  if (oneOnOneId) query.oneOnOneUserId = oneOnOneId;
+  const aggregate: any[] = [{ $match: query }, { $sort: { date: -1 } }];
+  const journalPostList: IJournalPost[] = await JournalPostModel.aggregate(aggregate);
   return journalPostList;
 };
 

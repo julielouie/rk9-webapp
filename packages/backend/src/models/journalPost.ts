@@ -4,7 +4,8 @@ import { IBase } from '../types/models';
 export interface IJournalPost extends IBase {
   title: string;
   date: Date;
-  notes?: string;
+  oneOnOneUserId: string;
+  notes: string;
   workOn?: string;
   misc?: string;
 }
@@ -27,9 +28,13 @@ const journalPostSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
+  oneOnOneUserId: {
+    type: String,
+    required: true,
+  },
   notes: {
     type: String,
-    required: false,
+    required: true,
   },
   workOn: {
     type: String,

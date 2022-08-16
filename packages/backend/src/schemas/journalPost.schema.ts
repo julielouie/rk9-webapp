@@ -3,9 +3,10 @@ import { z } from 'zod';
 export const postAndPutJournalPost = z.object({
   title: z.string().min(2).max(255),
   date: z.date(),
-  notes: z.string().min(2).max(255).optional(),
-  workOn: z.string().min(2).max(255).optional(),
-  misc: z.string().min(2).max(255).optional(),
+  oneOnOneUserId: z.string().min(2).max(255),
+  notes: z.string(),
+  workOn: z.string().optional(),
+  misc: z.string().optional(),
 });
 
 export type PostAndPutJournalPost = z.infer<typeof postAndPutJournalPost>;

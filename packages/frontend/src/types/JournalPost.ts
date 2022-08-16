@@ -2,7 +2,8 @@ export interface JournalPost {
   id?: string;
   title: string;
   date: Date;
-  notes?: string;
+  oneOnOneUserId: string;
+  notes: string;
   workOn?: string;
   misc?: string;
 }

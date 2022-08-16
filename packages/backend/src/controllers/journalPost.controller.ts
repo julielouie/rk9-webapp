@@ -6,7 +6,8 @@ import { StatusCode } from '../types/common';
 
 export const getAllJournalPosts = asyncHandler(
   async (req: Request, res: Response): Promise<void> => {
-    const journalPostList: IJournalPost[] = await journalPostService.getAllJournalPosts();
+    const oneOnOneId = req.query.oneOnOne as string;
+    const journalPostList: IJournalPost[] = await journalPostService.getAllJournalPosts(oneOnOneId);
     res.status(StatusCode.success).send(journalPostList);
   },
 );

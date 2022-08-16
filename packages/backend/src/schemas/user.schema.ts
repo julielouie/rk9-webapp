@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 export const postAndPutUser = z.object({
-  name: z.string().min(2).max(255),
+  name: z.string(),
   email: z.string().email().optional(),
   password: z.string().min(2).max(255),
   groups: z.array(
@@ -11,11 +11,11 @@ export const postAndPutUser = z.object({
     }),
   ),
   role: z.string().min(2).max(255),
-  dogName: z.string().min(2).max(255),
-  dogName2: z.string().min(2).max(255).optional(),
-  dogName3: z.string().min(2).max(255).optional(),
-  dogName4: z.string().min(2).max(255).optional(),
-  dogName5: z.string().min(2).max(255).optional(),
+  dogName: z.string(),
+  dogName2: z.string().optional(),
+  dogName3: z.string().optional(),
+  dogName4: z.string().optional(),
+  dogName5: z.string().optional(),
 });
 
 export type PostAndPutUser = z.infer<typeof postAndPutUser>;

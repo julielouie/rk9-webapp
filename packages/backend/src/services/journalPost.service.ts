@@ -4,8 +4,8 @@ import { JournalPostMap } from '../mappers/JournalPostMap';
 import { IJournalPost } from '../models/journalPost';
 import * as journalPostSchema from '../schemas/journalPost.schema';
 
-export const getAllJournalPosts = async (): Promise<IJournalPost[]> => {
-  const allJournalPosts = await db.getAllJournalPosts();
+export const getAllJournalPosts = async (oneOnOneId?: string): Promise<IJournalPost[]> => {
+  const allJournalPosts = await db.getAllJournalPosts(oneOnOneId);
   return map(allJournalPosts, (journalPost) => JournalPostMap.toSimpleDTO(journalPost));
 };
 

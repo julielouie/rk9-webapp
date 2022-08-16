@@ -10,6 +10,7 @@ import { AbilityContext } from '../../../context/AbilityContext';
 import ClientList from '../ClientList';
 import { User } from '../../../types/User';
 import { SessionContext } from '../../../context/SessionContext';
+import Journal from './Journal';
 
 export const OneOnOne: FC = () => {
   const { pathname } = useLocation();
@@ -72,6 +73,7 @@ export const OneOnOne: FC = () => {
         >
           <Tabs value={pathname}>
             <Tab label="Main" value={`${url}/main`} to={`${url}/main`} component={Link} />
+            <Tab label="Journal" value={`${url}/journal`} to={`${url}/journal`} component={Link} />
             <Tab label="Photos" value={`${url}/photos`} to={`${url}/photos`} component={Link} />
             <Tab label="Videos" value={`${url}/videos`} to={`${url}/videos`} component={Link} />
           </Tabs>
@@ -87,6 +89,9 @@ export const OneOnOne: FC = () => {
             <Switch>
               <Route path={`${path}/main`}>
                 <Main oneOnOneId={selectedOneOnOneUser.id} />
+              </Route>
+              <Route path={`${path}/journal`}>
+                <Journal oneOnOneId={selectedOneOnOneUser.id} />
               </Route>
               <Route path={`${path}/photos`}>
                 <Photos oneOnOneId={selectedOneOnOneUser.id} />
