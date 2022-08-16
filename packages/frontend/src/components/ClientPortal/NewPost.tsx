@@ -28,12 +28,13 @@ import Loading from '../utils/Loading';
 import { AbilityContext } from '../../context/AbilityContext';
 
 interface NewPostProps {
-  groupInfo: Group;
   mutate: KeyedMutator<any[]>;
+  groupInfo?: Group;
+  oneOnOneId?: string;
 }
 
 export const NewPost: FC<NewPostProps> = (props) => {
-  const { groupInfo, mutate } = props;
+  const { mutate, groupInfo, oneOnOneId } = props;
   const [showLoadingPostSubmit, setShowLoadingPostSubmit] = useState<any>(false);
   const [mediaFile, setMediaFile] = useState<any>(null);
   const [mediaUrl, setMediaUrl] = useState('');
@@ -41,6 +42,7 @@ export const NewPost: FC<NewPostProps> = (props) => {
     user: { id: '', name: '' },
     date: new Date(),
     group: { id: '', name: '' },
+    oneOnOneUserId: '',
     text: '',
     mediaType: null,
   });
@@ -77,48 +79,51 @@ export const NewPost: FC<NewPostProps> = (props) => {
   };
 
   const submitPost = async () => {
-    const postToSubmit = { ...newPost };
-    postToSubmit.date = new Date();
-    postToSubmit.user = { id: user?.id, name: user?.name || '' };
-    postToSubmit.group = { id: groupInfo.id, name: groupInfo.name };
+    if (user) {
+      const postToSubmit = { ...newPost };
+      postToSubmit.date = new Date();
+      postToSubmit.user = { id: user.id, name: user.name };
+      postToSubmit.group = groupInfo ? { id: groupInfo.id, name: groupInfo.name } : null;
+      postToSubmit.oneOnOneUserId = oneOnOneId || null;
 
-    setShowLoadingPostSubmit(true);
+      setShowLoadingPostSubmit(true);
 
-    await Rk9Api(POST, '/posts', postToSubmit)
-      .then(async (submittedPost: Post) => {
-        enqueueSnackbar('Post was successfully submitted!', {
-          persist: false,
-          variant: 'success',
+      await Rk9Api(POST, '/posts', postToSubmit)
+        .then(async (submittedPost: Post) => {
+          enqueueSnackbar('Post was successfully submitted!', {
+            persist: false,
+            variant: 'success',
+          });
+          setNewPost({
+            user: { id: '', name: '' },
+            date: new Date(),
+            group: { id: '', name: '' },
+            text: '',
+            mediaType: null,
+          });
+          setMediaFile(null);
+          setMediaUrl('');
+
+          if (mediaFile && submittedPost.id) {
+            await uploadFile(submittedPost.id).catch(() =>
+              enqueueSnackbar('There was a problem uploading the file. Please let someone know!', {
+                persist: false,
+                variant: 'error',
+              }),
+            );
+          }
+        })
+        .catch(() => {
+          enqueueSnackbar('There was a problem submitting the post. Please let someone know!', {
+            persist: false,
+            variant: 'error',
+          });
+          clearMedia();
         });
-        setNewPost({
-          user: { id: '', name: '' },
-          date: new Date(),
-          group: { id: '', name: '' },
-          text: '',
-          mediaType: null,
-        });
-        setMediaFile(null);
-        setMediaUrl('');
 
-        if (mediaFile && submittedPost.id) {
-          await uploadFile(submittedPost.id).catch(() =>
-            enqueueSnackbar('There was a problem uploading the file. Please let someone know!', {
-              persist: false,
-              variant: 'error',
-            }),
-          );
-        }
-      })
-      .catch(() => {
-        enqueueSnackbar('There was a problem submitting the post. Please let someone know!', {
-          persist: false,
-          variant: 'error',
-        });
-        clearMedia();
-      });
-
-    setShowLoadingPostSubmit(false);
-    await mutate();
+      setShowLoadingPostSubmit(false);
+      await mutate();
+    }
   };
 
   return (

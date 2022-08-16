@@ -2,9 +2,14 @@ import UserModel, { IUser, IUserDocument } from '../models/user';
 import { UserNotFoundException } from '../exceptions/notFoundExceptions';
 import * as userSchema from '../schemas/user.schema';
 
-export const getUserList = async (groupId?: string): Promise<IUser[]> => {
+export const getUserList = async (groupId?: string, isOneOnOne?: boolean): Promise<IUser[]> => {
   const query: any = {};
-  if (groupId) query.groups = { $elemMatch: { id: groupId } };
+  if (groupId) {
+    query.role = { $ne: 'guest' };
+    query.groups = { $elemMatch: { id: groupId } };
+  }
+  if (isOneOnOne) query.role = { $ne: 'guest' };
+
   const userList: IUser[] = await UserModel.find(query).select('-__v').exec();
   return userList;
 };

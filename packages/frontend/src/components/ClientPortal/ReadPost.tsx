@@ -40,13 +40,14 @@ import Loading from '../utils/Loading';
 import { AbilityContext } from '../../context/AbilityContext';
 
 interface ReadPostProps {
-  post: Post;
-  groupInfo: Group;
   mutate: KeyedMutator<any[]>;
+  post: Post;
+  groupInfo?: Group;
+  oneOnOneId?: string;
 }
 
 export const ReadPost: FC<ReadPostProps> = (props) => {
-  const { post, groupInfo, mutate } = props;
+  const { post, mutate, groupInfo, oneOnOneId } = props;
   const {
     state: { user },
   } = useContext(SessionContext);
@@ -63,6 +64,7 @@ export const ReadPost: FC<ReadPostProps> = (props) => {
     user: { id: '', name: '' },
     date: new Date(),
     group: { id: '', name: '' },
+    oneOnOneUserId: '',
     text: '',
     mediaType: null,
   });
@@ -113,13 +115,14 @@ export const ReadPost: FC<ReadPostProps> = (props) => {
   const submitEditPost = async () => {
     const editPostToSubmit = { ...postToEdit };
     editPostToSubmit.user = { id: user?.id, name: user?.name || '' };
-    editPostToSubmit.group = { id: groupInfo.id, name: groupInfo.name };
+    editPostToSubmit.group = groupInfo ? { id: groupInfo.id, name: groupInfo.name } : null;
+    editPostToSubmit.oneOnOneUserId = oneOnOneId || null;
 
     setShowLoadingEditPostSubmit(true);
 
     await Rk9Api(PUT, `/posts/${post.id}`, editPostToSubmit)
       .then(async (submittedPost: Post) => {
-        enqueueSnackbar('Post was successfully editted!', {
+        enqueueSnackbar('Post was successfully edited!', {
           persist: false,
           variant: 'success',
         });
@@ -133,7 +136,7 @@ export const ReadPost: FC<ReadPostProps> = (props) => {
       })
       .catch(
         () =>
-          enqueueSnackbar('There was a problem editting the post. Please let someone know!', {
+          enqueueSnackbar('There was a problem editing the post. Please let someone know!', {
             persist: false,
             variant: 'error',
           }),

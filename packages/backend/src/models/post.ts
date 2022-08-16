@@ -6,8 +6,8 @@ import { IUser } from './user';
 export interface IPost extends IBase {
   user: Pick<IUser, 'id' | 'name'>;
   date: Date;
-  group: Pick<IGroup, 'id' | 'name'>;
-  oneOnOneUserId?: string;
+  group?: Pick<IGroup, 'id' | 'name'> | null;
+  oneOnOneUserId?: string | null;
   text?: string;
   media?: string | null;
   mediaType?: string | null;
@@ -34,7 +34,7 @@ const postSchema = new mongoose.Schema({
     name: String,
   },
   oneOnOneUserId: {
-    type: String,
+    type: String || null,
     required: false,
   },
   text: {

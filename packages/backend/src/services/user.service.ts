@@ -55,8 +55,11 @@ export const logIn = async (
   return { token, user: newUser };
 };
 
-export const getUserList = async (groupId?: string): Promise<ReturnUser[]> => {
-  const userList = await db.getUserList(groupId);
+export const getUserList = async (
+  groupId?: string,
+  isOneOnOne?: boolean,
+): Promise<ReturnUser[]> => {
+  const userList = await db.getUserList(groupId, isOneOnOne);
   return map(userList, (user) => UserMap.toSimpleDTO(user));
 };
 

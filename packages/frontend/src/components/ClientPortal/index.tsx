@@ -9,6 +9,7 @@ import AdvancedGroup from './AdvancedGroup';
 import { SessionContext } from '../../context/SessionContext';
 import RestrictedPage from './RestrictedPage';
 import BiteClub from './BiteClub';
+import OneOnOne from './OneOnOne';
 
 const RestrictedSinglePage = () => (
   <Grid container style={{ height: '100vh', position: 'relative' }}>
@@ -186,7 +187,7 @@ export const ClientPortal: FC = () => {
       >
         <Switch>
           <Route path={`${path}/discussion`} component={Discussion} />
-          {canReadPosts && <Route path={`${path}/oneOnOne`} />}
+          {canReadPosts && <Route path={`${path}/oneOnOne`} component={OneOnOne} />}
           {canReadPosts && user?.groups.find((group) => group.name === 'Advanced Group') && (
             <Route path={`${path}/advancedGroup`} component={AdvancedGroup} />
           )}

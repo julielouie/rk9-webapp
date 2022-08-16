@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 import {
   Typography,
   Grid,
@@ -18,6 +18,7 @@ import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import useSWR, { mutate } from 'swr';
 import { useAbility } from '@casl/react';
 import { useSnackbar } from 'notistack';
+import { useHistory } from 'react-router-dom';
 import palette from '../../theme/palette';
 import { User } from '../../types/User';
 import { Group } from '../../types/Group';
@@ -27,19 +28,27 @@ import { PUT } from '../../constants/requests';
 import AddGroupUsers from './AddGroupUsers';
 
 interface ClientListProps {
-  groupInfo: Group;
+  groupInfo?: Group;
   isOneOnOne?: boolean;
+  setSelectedOneOnOneUser?: Dispatch<SetStateAction<User>>;
 }
 
 export const ClientList: FC<ClientListProps> = (props) => {
-  const { groupInfo, isOneOnOne } = props;
+  const { groupInfo, isOneOnOne, setSelectedOneOnOneUser } = props;
   const [searchClients, setSearchClients] = useState('');
   const [openAddUsers, setOpenAddUsers] = useState(false);
   const ability = useAbility(AbilityContext);
   const { enqueueSnackbar } = useSnackbar();
+  const history = useHistory();
 
-  const path = `/users?group=${groupInfo.id}`;
+  const path = `/users${groupInfo ? `?group=${groupInfo.id}` : isOneOnOne ? `?oneOnOne=true` : ''}`;
   const { data: clients } = useSWR<User[]>(path, { suspense: true });
+
+  useEffect(() => {
+    if (clients && clients.length && setSelectedOneOnOneUser) {
+      setSelectedOneOnOneUser(clients[0]);
+    }
+  }, [clients, setSelectedOneOnOneUser]);
 
   const updateFilterText = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const filterText = e.target.value.toLowerCase();
@@ -47,9 +56,12 @@ export const ClientList: FC<ClientListProps> = (props) => {
   };
 
   const filterClients = (user: User) => {
+    if (user.name.toLowerCase().includes('allie mccain')) return null;
+
     if (searchClients === '') return user;
     if (user.name.toLowerCase().includes(searchClients)) return user;
     if (user.dogName.toLowerCase().includes(searchClients)) return user;
+
     return null;
   };
 
@@ -58,7 +70,7 @@ export const ClientList: FC<ClientListProps> = (props) => {
     if (currentUser) {
       const updatedUserWithRemovedGroup = { ...currentUser };
       const groupIndex = updatedUserWithRemovedGroup.groups.findIndex(
-        (group) => group.id === groupInfo.id,
+        (group) => group.id === groupInfo?.id,
       );
       if (groupIndex > -1) {
         updatedUserWithRemovedGroup.groups.splice(groupIndex, 1);
@@ -114,13 +126,15 @@ export const ClientList: FC<ClientListProps> = (props) => {
           <Typography variant="h5" style={{ fontWeight: 600 }}>
             Clients
           </Typography>
-          <IconButton
-            size="small"
-            onClick={() => setOpenAddUsers(true)}
-            disabled={!ability.can('update', 'All')}
-          >
-            <AddIcon style={{ color: palette.text.contrast }} />
-          </IconButton>
+          {groupInfo && (
+            <IconButton
+              size="small"
+              onClick={() => setOpenAddUsers(true)}
+              disabled={!ability.can('update', 'All')}
+            >
+              <AddIcon style={{ color: palette.text.contrast }} />
+            </IconButton>
+          )}
         </Grid>
         <Grid item container style={{ height: '115px', padding: '30px' }}>
           <TextField
@@ -141,7 +155,15 @@ export const ClientList: FC<ClientListProps> = (props) => {
               .map((client) => {
                 return (
                   <span key={client.id}>
-                    <ListItem>
+                    <ListItem
+                      style={{ cursor: isOneOnOne ? 'pointer' : 'auto' }}
+                      onClick={() => {
+                        if (setSelectedOneOnOneUser) {
+                          setSelectedOneOnOneUser(client);
+                          history.push('/clientPortal/oneOnOne/main');
+                        }
+                      }}
+                    >
                       <ListItemAvatar>
                         <Avatar
                           style={{
@@ -156,14 +178,16 @@ export const ClientList: FC<ClientListProps> = (props) => {
                         primary={client.name}
                         secondary={client.dogName2 ? `${client.dogName} & Friends` : client.dogName}
                       />
-                      <ListItemText style={{ display: 'flex', justifyContent: 'end' }}>
-                        <IconButton
-                          onClick={() => removeUserFromGroup(client.id || '')}
-                          disabled={!ability.can('update', 'All')}
-                        >
-                          <HighlightOffIcon style={{ color: palette.text.error }} />
-                        </IconButton>
-                      </ListItemText>
+                      {groupInfo && (
+                        <ListItemText style={{ display: 'flex', justifyContent: 'end' }}>
+                          <IconButton
+                            onClick={() => removeUserFromGroup(client.id || '')}
+                            disabled={!ability.can('update', 'All')}
+                          >
+                            <HighlightOffIcon style={{ color: palette.text.error }} />
+                          </IconButton>
+                        </ListItemText>
+                      )}
                     </ListItem>
                     <Divider />
                   </span>
@@ -179,11 +203,13 @@ export const ClientList: FC<ClientListProps> = (props) => {
           )}
         </List>
       </Grid>
-      <AddGroupUsers
-        open={openAddUsers}
-        close={() => setOpenAddUsers(false)}
-        groupInfo={groupInfo}
-      />
+      {groupInfo && (
+        <AddGroupUsers
+          open={openAddUsers}
+          close={() => setOpenAddUsers(false)}
+          groupInfo={groupInfo}
+        />
+      )}
     </>
   );
 };

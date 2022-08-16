@@ -33,7 +33,8 @@ export const getSelf = asyncHandler(async (req: Request, res: Response): Promise
 
 export const getUserList = asyncHandler(async (req: Request, res: Response): Promise<void> => {
   const groupId = req.query.group as string;
-  const userList = await userService.getUserList(groupId);
+  const isOneOnOne = !!req.query.oneOnOne;
+  const userList = await userService.getUserList(groupId, isOneOnOne);
   res.status(StatusCode.success).send(userList);
 });
 
