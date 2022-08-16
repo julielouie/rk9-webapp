@@ -21,7 +21,6 @@ import { useAbility } from '@casl/react';
 import palette from '../../theme/palette';
 import Rk9Api from '../../dataServices/Rk9Api';
 import { POST } from '../../constants/requests';
-import { LEVEL_ERROR, LogError } from '../../dataServices/Logger';
 import { Post } from '../../types/Post';
 import { Group } from '../../types/Group';
 import { SessionContext } from '../../context/SessionContext';
@@ -91,11 +90,6 @@ export const NewPost: FC<NewPostProps> = (props) => {
           persist: false,
           variant: 'success',
         });
-        if (mediaFile && submittedPost.id) {
-          await uploadFile(submittedPost.id).catch((error) =>
-            LogError(LEVEL_ERROR, error, 'Upload Post Media'),
-          );
-        }
         setNewPost({
           user: { id: '', name: '' },
           date: new Date(),
@@ -103,15 +97,25 @@ export const NewPost: FC<NewPostProps> = (props) => {
           text: '',
           mediaType: null,
         });
+        setMediaFile(null);
+        setMediaUrl('');
+
+        if (mediaFile && submittedPost.id) {
+          await uploadFile(submittedPost.id).catch(() =>
+            enqueueSnackbar('There was a problem uploading the file. Please let someone know!', {
+              persist: false,
+              variant: 'error',
+            }),
+          );
+        }
       })
-      .catch(() =>
+      .catch(() => {
         enqueueSnackbar('There was a problem submitting the post. Please let someone know!', {
           persist: false,
           variant: 'error',
-        }),
-      );
-
-    clearMedia();
+        });
+        clearMedia();
+      });
 
     setShowLoadingPostSubmit(false);
     await mutate();
