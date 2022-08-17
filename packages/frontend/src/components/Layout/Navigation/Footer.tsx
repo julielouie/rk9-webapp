@@ -27,12 +27,20 @@ const Footer: FC = () => {
       <Container maxWidth="lg">
         <Grid container>
           <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
-            <Typography
-              variant="h5"
-              style={{ fontWeight: 'bold', textAlign: 'center', marginBottom: '30px' }}
-            >
-              Empowering Relationships with Difficult and Aggressive Dogs
-            </Typography>
+            <RouterLink to="/home">
+              <Typography
+                variant="h5"
+                style={{
+                  fontWeight: 'bold',
+                  textAlign: 'center',
+                  marginBottom: '30px',
+                  textDecoration: 'none',
+                  color: palette.text.contrast,
+                }}
+              >
+                Empowering Relationships with Difficult and Aggressive Dogs
+              </Typography>
+            </RouterLink>
           </Grid>
           <Grid
             item
