@@ -1,9 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Route, useHistory } from 'react-router-dom';
-import { IconButton, Grid, Toolbar, Box } from '@material-ui/core';
+import { Link, Route, useHistory } from 'react-router-dom';
+import { IconButton, Grid, Toolbar, Box, makeStyles } from '@material-ui/core';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import SettingsIcon from '@material-ui/icons/Settings';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import SpeedDial from '@material-ui/lab/SpeedDial';
+import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
 import { useSnackbar } from 'notistack';
 import { useAbility } from '@casl/react';
 import { mutate as mutateLogOut } from 'swr';
@@ -20,6 +24,22 @@ import { LEVEL_ERROR, LogError } from '../../../dataServices/Logger';
 import Login from './Login';
 import { useCurrentUser } from '../../../hooks/useCurrentUser';
 
+const useStyles = makeStyles({
+  userDialWrapper: {
+    position: 'relative',
+  },
+  userDial: {
+    position: 'absolute',
+    top: '-25px',
+    left: '-65px',
+    '& .MuiSpeedDial-fab': {
+      height: '48px',
+      width: '48px',
+      backgroundColor: palette.button.primary,
+    },
+  },
+});
+
 const AppHeader: React.FC = () => {
   const {
     state: { user },
@@ -29,10 +49,12 @@ const AppHeader: React.FC = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [openUserDial, setOpenUserDial] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
   const ability = useAbility(AbilityContext);
   const history = useHistory();
   const { mutate } = useCurrentUser();
+  const classes = useStyles();
 
   useEffect(() => {
     setLoggedIn(!!user);
@@ -67,6 +89,11 @@ const AppHeader: React.FC = () => {
       });
   };
 
+  const userDialActions = [
+    { icon: <SettingsIcon />, name: 'Account' },
+    { icon: <ExitToAppIcon />, name: 'Logout' },
+  ];
+
   return (
     <>
       <Route
@@ -78,7 +105,6 @@ const AppHeader: React.FC = () => {
             >
               <Grid
                 item
-                container
                 xs={12}
                 style={{
                   display: 'flex',
@@ -87,27 +113,57 @@ const AppHeader: React.FC = () => {
                   paddingTop: '30px',
                 }}
               >
-                <Grid item>
-                  <IconButton>
-                    <FacebookIcon style={{ color: palette.text.primary }} />
-                  </IconButton>
-                </Grid>
-                <Grid item>
-                  <IconButton>
+                {loggedIn && (
+                  <Link
+                    to={{ pathname: 'https://www.facebook.com/groups/1067124983484762/' }}
+                    target="_blank"
+                  >
+                    <IconButton>
+                      <FacebookIcon style={{ color: palette.text.primary }} />
+                    </IconButton>
+                  </Link>
+                )}
+                <Link
+                  to={{
+                    pathname: loggedIn
+                      ? 'https://www.instagram.com/roguek9academygrouppage/'
+                      : 'https://www.instagram.com/roguek9academy/',
+                  }}
+                  target="_blank"
+                >
+                  <IconButton style={{ marginRight: loggedIn ? '75px' : '' }}>
                     <InstagramIcon style={{ color: palette.text.primary }} />
                   </IconButton>
-                </Grid>
-                <Grid item>
-                  {!loggedIn ? (
-                    <IconButton onClick={() => setOpenLogin(true)}>
-                      <small style={{ color: palette.text.primary }}>Login</small>
-                    </IconButton>
-                  ) : (
-                    <IconButton onClick={logout}>
-                      <AccountCircleIcon style={{ color: palette.text.primary }} />
-                    </IconButton>
-                  )}
-                </Grid>
+                </Link>
+                {!loggedIn ? (
+                  <IconButton onClick={() => setOpenLogin(true)}>
+                    <small style={{ color: palette.text.primary }}>Login</small>
+                  </IconButton>
+                ) : (
+                  <div className={classes.userDialWrapper}>
+                    <SpeedDial
+                      className={classes.userDial}
+                      ariaLabel="User Account Details"
+                      icon={<AccountCircleIcon />}
+                      onClose={() => setOpenUserDial(false)}
+                      onOpen={() => setOpenUserDial(true)}
+                      open={openUserDial}
+                      direction="down"
+                    >
+                      {userDialActions.map((action) => (
+                        <SpeedDialAction
+                          key={action.name}
+                          icon={action.icon}
+                          tooltipTitle={action.name}
+                          onClick={async () => {
+                            if (action.name === 'Logout') await logout();
+                            setOpenUserDial(false);
+                          }}
+                        />
+                      ))}
+                    </SpeedDial>
+                  </div>
+                )}
               </Grid>
               <Grid item container xs={8} sm={5}>
                 <Grid item>

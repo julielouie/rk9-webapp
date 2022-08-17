@@ -1,11 +1,17 @@
-import React, { FC } from 'react';
-import { Box, Container, Grid, Link, Typography } from '@material-ui/core';
+import React, { FC, useContext } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+import { Box, Container, Grid, IconButton, Link, Typography } from '@material-ui/core';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import palette from '../../../theme/palette';
 import PawPrint from '../../../assets/images/paw.png';
+import { SessionContext } from '../../../context/SessionContext';
 
 const Footer: FC = () => {
+  const {
+    state: { user },
+  } = useContext(SessionContext);
+
   return (
     <footer
       style={{
@@ -47,8 +53,28 @@ const Footer: FC = () => {
                 }}
               >
                 Allie McCain
-                <FacebookIcon style={{ marginLeft: '15px' }} />
-                <InstagramIcon style={{ marginLeft: '15px' }} />
+                {user && (
+                  <RouterLink
+                    to={{ pathname: 'https://www.facebook.com/groups/1067124983484762/' }}
+                    target="_blank"
+                  >
+                    <IconButton>
+                      <FacebookIcon style={{ color: palette.text.contrast }} />
+                    </IconButton>
+                  </RouterLink>
+                )}
+                <RouterLink
+                  to={{
+                    pathname: user
+                      ? 'https://www.instagram.com/roguek9academygrouppage/'
+                      : 'https://www.instagram.com/roguek9academy/',
+                  }}
+                  target="_blank"
+                >
+                  <IconButton>
+                    <InstagramIcon style={{ color: palette.text.contrast }} />
+                  </IconButton>
+                </RouterLink>
               </Box>
               <Box>
                 <Link href="mailto: allie@dogtraining.love" color="inherit">
@@ -64,37 +90,55 @@ const Footer: FC = () => {
             <Grid item xs={12} sm={4}>
               <Box style={{ padding: '30px' }}>
                 <Box>
-                  <Link href="/about" color="inherit">
+                  <RouterLink
+                    to="/about"
+                    style={{ textDecoration: 'none', color: palette.text.contrast }}
+                  >
                     ABOUT
-                  </Link>
+                  </RouterLink>
                 </Box>
                 <Box>
-                  <Link href="/philosophy" color="inherit">
+                  <RouterLink
+                    to="/philosophy"
+                    style={{ textDecoration: 'none', color: palette.text.contrast }}
+                  >
                     PHILOSOPHY
-                  </Link>
+                  </RouterLink>
                 </Box>
                 <Box>
-                  <Link href="/training" color="inherit">
+                  <RouterLink
+                    to="/training"
+                    style={{ textDecoration: 'none', color: palette.text.contrast }}
+                  >
                     TRAINING
-                  </Link>
+                  </RouterLink>
                 </Box>
               </Box>
             </Grid>
             <Grid item xs={12} sm={4}>
               <Box>
-                <Link href="/testimonials" color="inherit">
+                <RouterLink
+                  to="/testimonials"
+                  style={{ textDecoration: 'none', color: palette.text.contrast }}
+                >
                   TESTIMONIALS
-                </Link>
+                </RouterLink>
               </Box>
               <Box>
-                <Link href="/blog" color="inherit">
+                <RouterLink
+                  to="/blog"
+                  style={{ textDecoration: 'none', color: palette.text.contrast }}
+                >
                   BLOG
-                </Link>
+                </RouterLink>
               </Box>
               <Box>
-                <Link href="/clientPortal/discussion/main" color="inherit">
+                <RouterLink
+                  to="/clientPortal/discussion/main"
+                  style={{ textDecoration: 'none', color: palette.text.contrast }}
+                >
                   CLIENT PORTAL
-                </Link>
+                </RouterLink>
               </Box>
             </Grid>
           </Grid>
