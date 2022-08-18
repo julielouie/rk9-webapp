@@ -10,6 +10,7 @@ import TestimonialCard from './TestimonialCard';
 import { Testimonial } from '../../types/Testimonial';
 import { reviewBlurbs } from './constants/reviewBlurbs';
 import { AbilityContext } from '../../context/AbilityContext';
+import ScrollToTop from '../utils/ScrollToTop';
 
 export const Testimonials: FC = () => {
   const [openAddOrEditDialog, setOpenAddOrEditDialog] = useState(false);
@@ -19,6 +20,7 @@ export const Testimonials: FC = () => {
 
   return (
     <>
+      <ScrollToTop />
       <Grid container>
         <Grid
           item

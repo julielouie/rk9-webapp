@@ -13,6 +13,7 @@ import { BlogPost } from '../../types/BlogPost';
 import AddOrEditBlogPost from './AddOrEditBlogPost';
 import BlogPostCard from './BlogPostCard';
 import { AbilityContext } from '../../context/AbilityContext';
+import ScrollToTop from '../utils/ScrollToTop';
 
 export const Blog: FC = () => {
   const [openAddOrEditDialog, setOpenAddOrEditDialog] = useState(false);
@@ -29,6 +30,7 @@ export const Blog: FC = () => {
 
   return (
     <>
+      <ScrollToTop />
       <Grid container>
         {ability.can('create', 'All') && (
           <Grid

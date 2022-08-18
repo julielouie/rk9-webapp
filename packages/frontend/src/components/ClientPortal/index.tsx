@@ -10,6 +10,7 @@ import { SessionContext } from '../../context/SessionContext';
 import RestrictedPage from './RestrictedPage';
 import BiteClub from './BiteClub';
 import OneOnOne from './OneOnOne';
+import ScrollToTop from '../utils/ScrollToTop';
 
 const RestrictedSinglePage = () => (
   <Grid container style={{ height: '100vh', position: 'relative' }}>
@@ -53,151 +54,154 @@ export const ClientPortal: FC = () => {
   }, [pathname]);
 
   return (
-    <Grid container style={{ position: 'relative' }}>
-      {!canReadPosts && <RestrictedPage />}
-      <Grid
-        item
-        container
-        style={{
-          marginTop: '30px',
-          padding: '50px 50px 0 50px',
-          display: 'flex',
-          justifyContent: 'center',
-        }}
-      >
-        <Link
-          to={`${path}/discussion/main`}
-          style={{ textDecoration: 'none', pointerEvents: canReadPosts ? 'auto' : 'none' }}
-        >
-          <Button
-            onClick={() => setSelectedGroup('discussion')}
-            variant={selectedGroup === 'discussion' ? 'contained' : 'outlined'}
-            style={
-              selectedGroup === 'discussion'
-                ? {
-                    backgroundColor: canReadPosts ? palette.button.primary : palette.disabled,
-                    color: palette.white,
-                  }
-                : {
-                    borderColor: canReadPosts ? palette.button.primary : palette.disabled,
-                    color: canReadPosts ? palette.button.primary : palette.disabled,
-                  }
-            }
-            disabled={!canReadPosts}
-          >
-            Discussion
-          </Button>
-        </Link>
-        <Link
-          to={`${path}/oneOnOne/main`}
-          style={{ textDecoration: 'none', pointerEvents: canReadPosts ? 'auto' : 'none' }}
-        >
-          <Button
-            onClick={() => setSelectedGroup('oneOnOne')}
-            variant={selectedGroup === 'oneOnOne' ? 'contained' : 'outlined'}
-            style={
-              selectedGroup === 'oneOnOne'
-                ? {
-                    backgroundColor: canReadPosts ? palette.button.primary : palette.disabled,
-                    color: palette.white,
-                    margin: '0 20px',
-                  }
-                : {
-                    borderColor: canReadPosts ? palette.button.primary : palette.disabled,
-                    color: canReadPosts ? palette.button.primary : palette.disabled,
-                    margin: '0 20px',
-                  }
-            }
-            disabled={!canReadPosts}
-          >
-            One-on-One
-          </Button>
-        </Link>
-        <Link
-          to={`${path}/advancedGroup/main`}
+    <>
+      <ScrollToTop />
+      <Grid container style={{ position: 'relative' }}>
+        {!canReadPosts && <RestrictedPage />}
+        <Grid
+          item
+          container
           style={{
-            textDecoration: 'none',
-            pointerEvents: canReadPosts ? 'auto' : 'none',
-            cursor: user?.groups.find((group) => group.name === 'Advanced Group')
-              ? 'auto'
-              : 'not-allowed',
+            marginTop: '30px',
+            padding: '50px 50px 0 50px',
+            display: 'flex',
+            justifyContent: 'center',
           }}
         >
-          <Button
-            onClick={() => setSelectedGroup('advancedGroup')}
-            variant={selectedGroup === 'advancedGroup' ? 'contained' : 'outlined'}
-            style={
-              selectedGroup === 'advancedGroup'
-                ? {
-                    backgroundColor: canReadPosts ? palette.button.primary : palette.disabled,
-                    color: palette.white,
-                    margin: '0 20px 0 0',
-                  }
-                : {
-                    borderColor: canReadPosts ? palette.button.primary : palette.disabled,
-                    color: canReadPosts ? palette.button.primary : palette.disabled,
-                    margin: '0 20px 0 0',
-                  }
-            }
-            disabled={
-              !canReadPosts || !user?.groups.find((group) => group.name === 'Advanced Group')
-            }
+          <Link
+            to={`${path}/discussion/main`}
+            style={{ textDecoration: 'none', pointerEvents: canReadPosts ? 'auto' : 'none' }}
           >
-            Advanced Group
-          </Button>
-        </Link>
-        <Link
-          to={`${path}/biteClub/main`}
+            <Button
+              onClick={() => setSelectedGroup('discussion')}
+              variant={selectedGroup === 'discussion' ? 'contained' : 'outlined'}
+              style={
+                selectedGroup === 'discussion'
+                  ? {
+                      backgroundColor: canReadPosts ? palette.button.primary : palette.disabled,
+                      color: palette.white,
+                    }
+                  : {
+                      borderColor: canReadPosts ? palette.button.primary : palette.disabled,
+                      color: canReadPosts ? palette.button.primary : palette.disabled,
+                    }
+              }
+              disabled={!canReadPosts}
+            >
+              Discussion
+            </Button>
+          </Link>
+          <Link
+            to={`${path}/oneOnOne/main`}
+            style={{ textDecoration: 'none', pointerEvents: canReadPosts ? 'auto' : 'none' }}
+          >
+            <Button
+              onClick={() => setSelectedGroup('oneOnOne')}
+              variant={selectedGroup === 'oneOnOne' ? 'contained' : 'outlined'}
+              style={
+                selectedGroup === 'oneOnOne'
+                  ? {
+                      backgroundColor: canReadPosts ? palette.button.primary : palette.disabled,
+                      color: palette.white,
+                      margin: '0 20px',
+                    }
+                  : {
+                      borderColor: canReadPosts ? palette.button.primary : palette.disabled,
+                      color: canReadPosts ? palette.button.primary : palette.disabled,
+                      margin: '0 20px',
+                    }
+              }
+              disabled={!canReadPosts}
+            >
+              One-on-One
+            </Button>
+          </Link>
+          <Link
+            to={`${path}/advancedGroup/main`}
+            style={{
+              textDecoration: 'none',
+              pointerEvents: canReadPosts ? 'auto' : 'none',
+              cursor: user?.groups.find((group) => group.name === 'Advanced Group')
+                ? 'auto'
+                : 'not-allowed',
+            }}
+          >
+            <Button
+              onClick={() => setSelectedGroup('advancedGroup')}
+              variant={selectedGroup === 'advancedGroup' ? 'contained' : 'outlined'}
+              style={
+                selectedGroup === 'advancedGroup'
+                  ? {
+                      backgroundColor: canReadPosts ? palette.button.primary : palette.disabled,
+                      color: palette.white,
+                      margin: '0 20px 0 0',
+                    }
+                  : {
+                      borderColor: canReadPosts ? palette.button.primary : palette.disabled,
+                      color: canReadPosts ? palette.button.primary : palette.disabled,
+                      margin: '0 20px 0 0',
+                    }
+              }
+              disabled={
+                !canReadPosts || !user?.groups.find((group) => group.name === 'Advanced Group')
+              }
+            >
+              Advanced Group
+            </Button>
+          </Link>
+          <Link
+            to={`${path}/biteClub/main`}
+            style={{
+              textDecoration: 'none',
+              pointerEvents: canReadPosts ? 'auto' : 'none',
+              cursor: user?.groups.find((group) => group.name === 'Bite Club')
+                ? 'auto'
+                : 'not-allowed',
+            }}
+          >
+            <Button
+              onClick={() => setSelectedGroup('biteClub')}
+              variant={selectedGroup === 'biteClub' ? 'contained' : 'outlined'}
+              style={
+                selectedGroup === 'biteClub'
+                  ? {
+                      backgroundColor: canReadPosts ? palette.button.primary : palette.disabled,
+                      color: palette.white,
+                    }
+                  : {
+                      borderColor: canReadPosts ? palette.button.primary : palette.disabled,
+                      color: canReadPosts ? palette.button.primary : palette.disabled,
+                    }
+              }
+              disabled={!canReadPosts || !user?.groups.find((group) => group.name === 'Bite Club')}
+            >
+              Bite Club
+            </Button>
+          </Link>
+        </Grid>
+        <Grid
+          item
+          container
           style={{
-            textDecoration: 'none',
-            pointerEvents: canReadPosts ? 'auto' : 'none',
-            cursor: user?.groups.find((group) => group.name === 'Bite Club')
-              ? 'auto'
-              : 'not-allowed',
+            marginTop: '50px',
+            display: 'flex',
+            justifyContent: 'center',
           }}
         >
-          <Button
-            onClick={() => setSelectedGroup('biteClub')}
-            variant={selectedGroup === 'biteClub' ? 'contained' : 'outlined'}
-            style={
-              selectedGroup === 'biteClub'
-                ? {
-                    backgroundColor: canReadPosts ? palette.button.primary : palette.disabled,
-                    color: palette.white,
-                  }
-                : {
-                    borderColor: canReadPosts ? palette.button.primary : palette.disabled,
-                    color: canReadPosts ? palette.button.primary : palette.disabled,
-                  }
-            }
-            disabled={!canReadPosts || !user?.groups.find((group) => group.name === 'Bite Club')}
-          >
-            Bite Club
-          </Button>
-        </Link>
+          <Switch>
+            <Route path={`${path}/discussion`} component={Discussion} />
+            {canReadPosts && <Route path={`${path}/oneOnOne`} component={OneOnOne} />}
+            {canReadPosts && user?.groups.find((group) => group.name === 'Advanced Group') && (
+              <Route path={`${path}/advancedGroup`} component={AdvancedGroup} />
+            )}
+            {canReadPosts && user?.groups.find((group) => group.name === 'Bite Club') && (
+              <Route path={`${path}/biteClub`} component={BiteClub} />
+            )}
+            <Route component={RestrictedSinglePage} />
+          </Switch>
+        </Grid>
       </Grid>
-      <Grid
-        item
-        container
-        style={{
-          marginTop: '50px',
-          display: 'flex',
-          justifyContent: 'center',
-        }}
-      >
-        <Switch>
-          <Route path={`${path}/discussion`} component={Discussion} />
-          {canReadPosts && <Route path={`${path}/oneOnOne`} component={OneOnOne} />}
-          {canReadPosts && user?.groups.find((group) => group.name === 'Advanced Group') && (
-            <Route path={`${path}/advancedGroup`} component={AdvancedGroup} />
-          )}
-          {canReadPosts && user?.groups.find((group) => group.name === 'Bite Club') && (
-            <Route path={`${path}/biteClub`} component={BiteClub} />
-          )}
-          <Route component={RestrictedSinglePage} />
-        </Switch>
-      </Grid>
-    </Grid>
+    </>
   );
 };
 
