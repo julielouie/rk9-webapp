@@ -3,6 +3,11 @@ import { Grid } from '@material-ui/core';
 import { Typography } from '@mui/material';
 import { useHistory } from 'react-router-dom';
 import palette from '../../theme/palette';
+import HeroImg from '../../assets/images/static/erns-20.jpeg';
+import RespectImg from '../../assets/images/static/four-women-dogs-smiley.jpg';
+import HumanCanineImg from '../../assets/images/static/tilted-head-dogs.jpg';
+import WorkingDogImg from '../../assets/images/static/bite-club-in-action.jpg';
+import AllieImg from '../../assets/images/static/allie-stormy-overlook.jpg';
 
 export const Home: FC = () => {
   const history = useHistory();
@@ -13,17 +18,15 @@ export const Home: FC = () => {
         item
         md={12}
         style={{
-          marginTop: '70px',
-          height: '100vh',
+          marginTop: '50px',
+          height: '85vh',
           width: '100%',
-          backgroundColor: palette.disabled,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
+          backgroundImage: `url(${HeroImg})`,
+          backgroundSize: '150%',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
         }}
-      >
-        Temp Hero Image
-      </Grid>
+      />
       <Grid
         item
         md={12}
@@ -42,14 +45,12 @@ export const Home: FC = () => {
             marginTop: '50px',
             width: '100%',
             height: '300px',
-            backgroundColor: palette.disabled,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
+            backgroundImage: `url(${RespectImg})`,
+            backgroundSize: '100%',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
           }}
-        >
-          Temp Image
-        </Grid>
+        />
         <Grid
           item
           sm={12}
@@ -104,14 +105,13 @@ export const Home: FC = () => {
             marginTop: '50px',
             height: '300px',
             width: '100%',
-            backgroundColor: palette.disabled,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
+            backgroundImage: `url(${HumanCanineImg})`,
+            backgroundSize: '100%',
+            backgroundPosition: 'bottom',
+            backgroundRepeat: 'no-repeat',
+            transform: 'scaleX(-1)',
           }}
-        >
-          Temp Image
-        </Grid>
+        />
       </Grid>
       <Grid
         item
@@ -131,14 +131,12 @@ export const Home: FC = () => {
             marginTop: '50px',
             height: '300px',
             width: '100%',
-            backgroundColor: palette.disabled,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
+            backgroundImage: `url(${WorkingDogImg})`,
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: '100%',
+            backgroundPosition: 'center',
           }}
-        >
-          Temp Image
-        </Grid>
+        />
         <Grid
           item
           md={6}
@@ -192,7 +190,7 @@ export const Home: FC = () => {
           </Typography>
         </Grid>
         <Grid item sm={12} md={6} style={{ display: 'flex', justifyContent: 'center' }}>
-          <div style={{ backgroundColor: palette.disabled }}>Temp Image</div>
+          <img src={AllieImg} style={{ height: '100%', width: '100%' }} alt="Allie" />
         </Grid>
       </Grid>
     </Grid>

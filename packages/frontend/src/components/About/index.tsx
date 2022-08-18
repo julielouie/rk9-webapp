@@ -1,8 +1,10 @@
 import React, { FC } from 'react';
 import { Grid } from '@material-ui/core';
 import { Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 import palette from '../../theme/palette';
-import PawPrint from '../../assets/images/paw.png';
+import AllieImg from '../../assets/images/static/allie.jpg';
+import FamilyImg from '../../assets/images/static/dog-walking-lake.jpg';
 
 export const About: FC = () => {
   return (
@@ -47,7 +49,7 @@ export const About: FC = () => {
           <div
             style={{
               backgroundColor: palette.disabled,
-              backgroundImage: `url(${PawPrint})`,
+              backgroundImage: `url(${AllieImg})`,
               backgroundRepeat: 'no-repeat',
               backgroundSize: 'cover',
               borderRadius: '250px',
@@ -90,15 +92,19 @@ export const About: FC = () => {
             achievable.
           </Typography>
         </Grid>
-        <Grid item sm={12} md={7} style={{ display: 'flex', justifyContent: 'center' }}>
-          <div
-            style={{
-              backgroundColor: palette.disabled,
-            }}
-          >
-            Temp Image
-          </div>
-        </Grid>
+        <Grid
+          item
+          sm={12}
+          md={7}
+          style={{
+            height: '100%',
+            width: '75%',
+            background: `linear-gradient(to top, ${palette.paper.secondaryTransparent}, ${palette.paper.secondaryTransparent}), url(${FamilyImg})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'bottom',
+            backgroundRepeat: 'no-repeat',
+          }}
+        />
       </Grid>
       <Grid item md={12}>
         <Typography variant="h5" style={{ padding: '50px' }}>
@@ -107,6 +113,10 @@ export const About: FC = () => {
           resulting in: you becoming a confident dog-handling-ninja who truly understands their dog,
           and the dog being confident in the expectations set for them, with complete trust that
           their human has their best interests at heart... thereby producing obedience!
+          <span style={{ display: 'block', fontStyle: 'italic' }}>
+            To learn more about FSDT, and my journey with it, see our{' '}
+            <Link to="/philosophy">Philosophy</Link>!
+          </span>
         </Typography>
       </Grid>
       <Grid
@@ -115,7 +125,7 @@ export const About: FC = () => {
         style={{
           display: 'flex',
           justifyContent: 'center',
-          alignItems: 'center',
+          alignItems: 'bottom',
         }}
       >
         <Grid
@@ -158,7 +168,7 @@ export const About: FC = () => {
         </Typography>
       </Grid>
       <Grid item md={12}>
-        <Typography variant="h5" style={{ padding: '50px 50px 0 50px' }}>
+        <Typography variant="h5" style={{ padding: '0 50px' }}>
           I am also part of a group of active trainers who meet weekly to discuss cases, support
           each other, and hold ourselves accountable to a higher standard in this un-standardized
           industry. In addition, I am constantly learning more about how to better help our dogs.
