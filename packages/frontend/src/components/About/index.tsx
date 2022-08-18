@@ -179,7 +179,7 @@ export const About: FC = () => {
           variant="h3"
           style={{ padding: '50px 50px 0 50px', color: palette.paper.secondary, fontWeight: 800 }}
         >
-          Beyond Training, I am Certified in
+          Beyond Training, I am Certified in:
         </Typography>
       </Grid>
       <Grid
@@ -189,7 +189,6 @@ export const About: FC = () => {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          padding: '50px',
         }}
       >
         <Grid
@@ -197,11 +196,9 @@ export const About: FC = () => {
           sm={12}
           md={4}
           style={{
-            backgroundColor: palette.disabled,
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            cursor: 'pointer',
             padding: '30px',
           }}
         >
@@ -222,8 +219,6 @@ export const About: FC = () => {
           <Grid
             item
             style={{
-              cursor: 'pointer',
-              backgroundColor: palette.disabled,
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
@@ -240,11 +235,9 @@ export const About: FC = () => {
           sm={12}
           md={4}
           style={{
-            backgroundColor: palette.disabled,
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            cursor: 'pointer',
             padding: '30px',
           }}
         >
