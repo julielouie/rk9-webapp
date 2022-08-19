@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useContext } from 'react';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import { SWRConfig } from 'swr';
 import { SWRFetcher } from './dataServices/SWRFetcher';
@@ -16,8 +16,14 @@ import Testimonials from './components/Testimonials';
 import Blog from './components/Blog';
 import SingleBlogPost from './components/Blog/SingleBlogPost';
 import ClientPortal from './components/ClientPortal';
+import Settings from './components/Settings';
+import { SessionContext } from './context/SessionContext';
 
 const App: React.FC = () => {
+  const {
+    state: { user },
+  } = useContext(SessionContext);
+
   return (
     <Router basename={`${basename}`}>
       <Suspense fallback={<DelayedSpinner delay={2000} />}>
@@ -37,6 +43,7 @@ const App: React.FC = () => {
                 <Route exact path="/training" component={Training} />
                 <Route exact path="/testimonials" component={Testimonials} />
                 <Route exact path="/blog" component={Blog} />
+                {user && <Route exact path="/settings" component={Settings} />}
                 <Route path="/blog/:id" component={SingleBlogPost} />
                 <Route path="/clientPortal" component={ClientPortal} />
                 <Route component={NotFound} />

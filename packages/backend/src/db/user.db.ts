@@ -1,3 +1,4 @@
+import bcrypt from 'bcryptjs';
 import UserModel, { IUser, IUserDocument } from '../models/user';
 import { UserNotFoundException } from '../exceptions/notFoundExceptions';
 import * as userSchema from '../schemas/user.schema';
@@ -49,7 +50,12 @@ export const updateUser = async (
   id: string,
   payload: userSchema.PostAndPutUser,
 ): Promise<IUser> => {
-  const user = await UserModel.findOneAndUpdate({ id }, payload, { new: true });
+  let encryptedPassword = '';
+  if (payload.password) {
+    encryptedPassword = await bcrypt.hash(payload.password, 10);
+  }
+  const newUserData = { ...payload, password: encryptedPassword };
+  const user = await UserModel.findOneAndUpdate({ id }, newUserData, { new: true });
   if (!user) throw new UserNotFoundException(id);
 
   const result: IUser = user.toObject();

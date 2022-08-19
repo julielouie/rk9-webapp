@@ -90,7 +90,7 @@ const AppHeader: React.FC = () => {
   };
 
   const userDialActions = [
-    { icon: <SettingsIcon />, name: 'Account' },
+    { icon: <SettingsIcon />, name: 'Settings' },
     { icon: <ExitToAppIcon />, name: 'Logout' },
   ];
 
@@ -157,6 +157,7 @@ const AppHeader: React.FC = () => {
                           tooltipTitle={action.name}
                           onClick={async () => {
                             if (action.name === 'Logout') await logout();
+                            if (action.name === 'Settings') history.push('/settings');
                             setOpenUserDial(false);
                           }}
                         />

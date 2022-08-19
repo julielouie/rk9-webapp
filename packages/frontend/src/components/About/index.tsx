@@ -51,7 +51,6 @@ export const About: FC = () => {
           <Grid item sm={12} md={6} style={{ display: 'flex', justifyContent: 'center' }}>
             <div
               style={{
-                backgroundColor: palette.disabled,
                 backgroundImage: `url(${AllieImg})`,
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: 'cover',
