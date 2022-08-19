@@ -6,7 +6,7 @@ export interface IUser extends IBase {
   name: string;
   email: string;
   password: string;
-  groups: Pick<IGroup, 'id' | 'name'>[];
+  groups: IGroup[];
   role: string;
   dogName: string;
   dogName2?: string;

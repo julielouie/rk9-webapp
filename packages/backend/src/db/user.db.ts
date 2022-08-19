@@ -50,11 +50,11 @@ export const updateUser = async (
   id: string,
   payload: userSchema.PostAndPutUser,
 ): Promise<IUser> => {
-  let encryptedPassword = '';
+  const newUserData = { ...payload };
   if (payload.password) {
-    encryptedPassword = await bcrypt.hash(payload.password, 10);
+    const encryptedPassword = await bcrypt.hash(payload.password, 10);
+    newUserData.password = encryptedPassword;
   }
-  const newUserData = { ...payload, password: encryptedPassword };
   const user = await UserModel.findOneAndUpdate({ id }, newUserData, { new: true });
   if (!user) throw new UserNotFoundException(id);
 

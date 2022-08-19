@@ -2,6 +2,7 @@ import { map } from 'p-iteration';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import * as db from '../db/user.db';
+import { getGroup } from './group.service';
 import { UserMap } from '../mappers/UserMap';
 import * as userSchema from '../schemas/user.schema';
 import { ReturnUser } from '../models/user';
@@ -11,24 +12,27 @@ import {
   UnauthorizedPermissionException,
 } from '../exceptions/unauthorizedExceptions';
 import { UserEmailAlreadyExistsException } from '../exceptions/badRequestExceptions';
+import { IGroup } from '../models/group';
 
 export const signUp = async (
   name: string,
   email: string,
   password: string,
   dogName: string,
-  groups?: { id: string; name: string }[],
+  groups?: IGroup[],
   role?: string,
 ): Promise<ReturnUser> => {
   const user = await db.getUserByEmail(email);
   if (user) throw new UserEmailAlreadyExistsException(email);
+
+  const discussionGroup = await getGroup('Discussion');
 
   const encryptedPassword = await bcrypt.hash(password, 10);
   const newUserData = {
     name,
     email,
     password: encryptedPassword,
-    groups: groups || [],
+    groups: groups || [discussionGroup],
     role: role || 'guest',
     dogName,
   };

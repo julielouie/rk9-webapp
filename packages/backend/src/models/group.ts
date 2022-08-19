@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import { IBase } from '../types/models';
 
 export interface IGroup extends IBase {
+  id: string;
   name: string;
 }
 

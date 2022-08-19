@@ -21,7 +21,7 @@ import { LOGOUT } from '../../../constants/actions';
 import updateAbility from '../../../ability/updateAbility';
 import { Role } from '../../../types/Role';
 import { LEVEL_ERROR, LogError } from '../../../dataServices/Logger';
-import Login from './Login';
+import LoginOrSignUp from './LoginOrSignUp';
 import { useCurrentUser } from '../../../hooks/useCurrentUser';
 
 const useStyles = makeStyles({
@@ -47,8 +47,6 @@ const AppHeader: React.FC = () => {
   } = useContext(SessionContext);
   const [openLogin, setOpenLogin] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [openUserDial, setOpenUserDial] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
   const ability = useAbility(AbilityContext);
@@ -59,12 +57,6 @@ const AppHeader: React.FC = () => {
   useEffect(() => {
     setLoggedIn(!!user);
   }, [user]);
-
-  const resetLoginInputs = () => {
-    setOpenLogin(false);
-    setEmail('');
-    setPassword('');
-  };
 
   const logout = async () => {
     await Rk9Api(GET, '/users/log-out')
@@ -78,7 +70,6 @@ const AppHeader: React.FC = () => {
           variant: 'success',
         });
         setLoggedIn(false);
-        resetLoginInputs();
       })
       .catch((error: any) => {
         LogError(LEVEL_ERROR, error, 'User Logout');
@@ -220,15 +211,7 @@ const AppHeader: React.FC = () => {
           </Toolbar>
         )}
       />
-      <Login
-        open={openLogin}
-        email={email}
-        password={password}
-        setEmail={setEmail}
-        setPassword={setPassword}
-        setLoggedIn={setLoggedIn}
-        resetLoginInputs={resetLoginInputs}
-      />
+      <LoginOrSignUp open={openLogin} close={() => setOpenLogin(false)} setLoggedIn={setLoggedIn} />
     </>
   );
 };

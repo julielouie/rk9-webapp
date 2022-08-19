@@ -5,7 +5,7 @@ export interface User {
   name: string;
   email: string;
   password?: string;
-  groups: Pick<Group, 'id' | 'name'>[];
+  groups: Group[];
   role: string;
   dogName: string;
   dogName2?: string;
