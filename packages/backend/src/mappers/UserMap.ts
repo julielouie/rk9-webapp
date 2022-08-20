@@ -9,7 +9,7 @@ export class UserMap {
     return {
       id: user.id,
       name: user.name,
-      email: user.email,
+      username: user.username,
       groups: user.groups,
       role: user.role,
       dogName: user.dogName,

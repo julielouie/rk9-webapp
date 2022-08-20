@@ -4,7 +4,7 @@ import { IGroup } from './group';
 
 export interface IUser extends IBase {
   name: string;
-  email: string;
+  username: string;
   password: string;
   groups: IGroup[];
   role: string;
@@ -19,7 +19,7 @@ export type ReturnUser = Pick<
   IUser,
   | 'id'
   | 'name'
-  | 'email'
+  | 'username'
   | 'groups'
   | 'role'
   | 'dogName'
@@ -42,7 +42,7 @@ const userSchema = new mongoose.Schema({
     minLength: 2,
     maxLength: 255,
   },
-  email: {
+  username: {
     type: String,
     minLength: 2,
     maxLength: 255,

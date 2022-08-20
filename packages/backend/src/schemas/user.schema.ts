@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 export const postAndPutUser = z.object({
   name: z.string(),
-  email: z.string().email().optional(),
+  username: z.string().min(2).max(255),
   password: z.string().min(2).max(255),
   groups: z.array(
     z.object({

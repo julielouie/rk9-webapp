@@ -3,7 +3,7 @@ import { Group } from './Group';
 export interface User {
   id?: string;
   name: string;
-  email: string;
+  username: string;
   password?: string;
   groups: Group[];
   role: string;

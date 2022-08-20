@@ -20,7 +20,7 @@ export const OneOnOne: FC = () => {
   const [selectedOneOnOneUser, setSelectedOneOnOneUser] = useState<User>({
     id: '',
     name: '',
-    email: '',
+    username: '',
     groups: [],
     role: '',
     dogName: '',

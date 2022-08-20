@@ -136,7 +136,7 @@ export class Seeder {
       .then(async (res) => {
         if (!res.body.length) {
           const fryName = 'Phillip Fry';
-          const fryEmail = 'Fry';
+          const fryUsername = 'Fry';
           const fryPassword = 'fry';
           const fryDogName = 'Doug';
           const fryGroups = [
@@ -154,10 +154,17 @@ export class Seeder {
             },
           ];
           const fryRole = 'admin';
-          await userService.signUp(fryName, fryEmail, fryPassword, fryDogName, fryGroups, fryRole);
+          await userService.signUp(
+            fryName,
+            fryUsername,
+            fryPassword,
+            fryDogName,
+            fryGroups,
+            fryRole,
+          );
 
           const julName = 'Julie Chung';
-          const julEmail = 'Test';
+          const julUsername = 'Test';
           const julPassword = 'test';
           const julDogName = 'Pepper';
           const julGroups = [
@@ -171,13 +178,20 @@ export class Seeder {
             },
           ];
           const julRole = 'client';
-          await userService.signUp(julName, julEmail, julPassword, julDogName, julGroups, julRole);
+          await userService.signUp(
+            julName,
+            julUsername,
+            julPassword,
+            julDogName,
+            julGroups,
+            julRole,
+          );
 
           const zoidName = 'John Zoidberg';
-          const zoidEmail = 'Zoid';
+          const zoidUsername = 'Zoid';
           const zoidPassword = 'zoid';
           const zoidDogName = 'Bella';
-          await userService.signUp(zoidName, zoidEmail, zoidPassword, zoidDogName);
+          await userService.signUp(zoidName, zoidUsername, zoidPassword, zoidDogName);
 
           console.log('User seed data generated!');
         }

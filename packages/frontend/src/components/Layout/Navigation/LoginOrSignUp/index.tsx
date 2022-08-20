@@ -33,7 +33,7 @@ interface LoginOrSignUpProps {
 
 const LoginOrSignUp: FC<LoginOrSignUpProps> = (props) => {
   const { open, close, setLoggedIn } = props;
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [dogName, setDogName] = useState('');
@@ -46,14 +46,14 @@ const LoginOrSignUp: FC<LoginOrSignUpProps> = (props) => {
 
   const resetInputs = () => {
     close();
-    setEmail('');
+    setUsername('');
     setPassword('');
     setSignUpMode(false);
   };
 
   const submitLogin = async () => {
-    if (email && password) {
-      await Rk9Api(POST, '/users/log-in', { email, password })
+    if (username && password) {
+      await Rk9Api(POST, '/users/log-in', { username, password })
         .then((res: any) => {
           dispatch({ type: LOGIN, payload: res });
           updateAbility(ability, res.role);
@@ -83,8 +83,8 @@ const LoginOrSignUp: FC<LoginOrSignUpProps> = (props) => {
   };
 
   const submitSignUp = async () => {
-    if (email && password) {
-      await Rk9Api(POST, '/users/sign-up', { name, email, password, dogName })
+    if (username && password) {
+      await Rk9Api(POST, '/users/sign-up', { name, username, password, dogName })
         .then(() => {
           enqueueSnackbar(
             'Sign up was successfull! Allie will review your sign up request, and set you up!',
@@ -145,14 +145,13 @@ const LoginOrSignUp: FC<LoginOrSignUpProps> = (props) => {
         )}
         <Grid item>
           <TextField
-            type="email"
-            placeholder="Email"
+            placeholder="Username"
             required
-            value={email}
+            value={username}
             size="small"
             fullWidth
             variant="outlined"
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setUsername(e.target.value)}
             style={{ marginBottom: '20px ' }}
             onKeyPress={submitOnEnterKey}
           />
@@ -200,9 +199,11 @@ const LoginOrSignUp: FC<LoginOrSignUpProps> = (props) => {
           <Button
             variant="contained"
             onClick={signUpMode ? submitSignUp : submitLogin}
-            disabled={!signUpMode ? !email || !password : !name || !email || !password || !dogName}
+            disabled={
+              !signUpMode ? !username || !password : !name || !username || !password || !dogName
+            }
             style={
-              email && password
+              username && password
                 ? {
                     backgroundColor: palette.paper.secondary,
                     color: palette.text.contrast,

@@ -24,8 +24,8 @@ export const getUser = async (id: string): Promise<IUser> => {
   return result;
 };
 
-export const getUserByEmail = async (email: string): Promise<IUser | null> => {
-  const user: IUserDocument | null = await UserModel.findOne({ email }).select('-__v').exec();
+export const getUserByUsername = async (username: string): Promise<IUser | null> => {
+  const user: IUserDocument | null = await UserModel.findOne({ username }).select('-__v').exec();
 
   if (user) {
     const result: IUser = user.toObject();

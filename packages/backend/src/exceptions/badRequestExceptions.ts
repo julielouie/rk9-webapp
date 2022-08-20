@@ -12,8 +12,8 @@ export class InvalidUploadException extends BadRequestException {
   }
 }
 
-export class UserEmailAlreadyExistsException extends BadRequestException {
-  constructor(email: string) {
-    super(`User with email ${email} already exists`);
+export class UserUsernameAlreadyExistsException extends BadRequestException {
+  constructor(username: string) {
+    super(`User with username ${username} already exists`);
   }
 }

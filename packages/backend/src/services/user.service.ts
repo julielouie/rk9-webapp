@@ -6,31 +6,31 @@ import { getGroup } from './group.service';
 import { UserMap } from '../mappers/UserMap';
 import * as userSchema from '../schemas/user.schema';
 import { ReturnUser } from '../models/user';
-import { UserEmailNotFoundException } from '../exceptions/notFoundExceptions';
+import { UserUsernameNotFoundException } from '../exceptions/notFoundExceptions';
 import {
   InvalidCredentialsException,
   UnauthorizedPermissionException,
 } from '../exceptions/unauthorizedExceptions';
-import { UserEmailAlreadyExistsException } from '../exceptions/badRequestExceptions';
+import { UserUsernameAlreadyExistsException } from '../exceptions/badRequestExceptions';
 import { IGroup } from '../models/group';
 
 export const signUp = async (
   name: string,
-  email: string,
+  username: string,
   password: string,
   dogName: string,
   groups?: IGroup[],
   role?: string,
 ): Promise<ReturnUser> => {
-  const user = await db.getUserByEmail(email);
-  if (user) throw new UserEmailAlreadyExistsException(email);
+  const user = await db.getUserByUsername(username);
+  if (user) throw new UserUsernameAlreadyExistsException(username);
 
   const discussionGroup = await getGroup('Discussion');
 
   const encryptedPassword = await bcrypt.hash(password, 10);
   const newUserData = {
     name,
-    email,
+    username,
     password: encryptedPassword,
     groups: groups || [discussionGroup],
     role: role || 'guest',
@@ -41,16 +41,18 @@ export const signUp = async (
 };
 
 export const logIn = async (
-  email: string,
+  username: string,
   password: string,
 ): Promise<{ token: string; user: ReturnUser }> => {
-  const user = await db.getUserByEmail(email);
-  if (!user) throw new UserEmailNotFoundException(email);
+  const user = await db.getUserByUsername(username);
+  if (!user) throw new UserUsernameNotFoundException(username);
   if (user.role === 'guest') throw new UnauthorizedPermissionException(user.id);
 
   let token;
   if (user && (await bcrypt.compare(password, user.password))) {
-    token = jwt.sign({ userId: user.id, email }, process.env.TOKEN_KEY || '', { expiresIn: '30d' });
+    token = jwt.sign({ userId: user.id, username }, process.env.TOKEN_KEY || '', {
+      expiresIn: '30d',
+    });
   } else {
     throw new InvalidCredentialsException(user.id);
   }

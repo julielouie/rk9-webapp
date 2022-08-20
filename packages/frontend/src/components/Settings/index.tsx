@@ -40,7 +40,7 @@ export const Settings: FC = () => {
   const [userToEdit, setUserToEdit] = useState<User>({
     id: '',
     name: '',
-    email: '',
+    username: '',
     password: '',
     groups: [],
     role: '',
@@ -141,11 +141,11 @@ export const Settings: FC = () => {
             <TextField
               variant="outlined"
               InputLabelProps={{ shrink: true }}
-              label="Email"
-              placeholder="Email"
+              label="Username"
+              placeholder="Username"
               style={{ marginBottom: '20px' }}
-              value={userToEdit.email || ''}
-              onChange={(e) => setUserToEdit({ ...userToEdit, email: e.target.value })}
+              value={userToEdit.username || ''}
+              onChange={(e) => setUserToEdit({ ...userToEdit, username: e.target.value })}
             />
             <FormControl fullWidth>
               <InputLabel shrink style={{ marginLeft: '13px', position: 'absolute', top: '-7px' }}>
