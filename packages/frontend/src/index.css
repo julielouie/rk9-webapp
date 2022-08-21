@@ -25,3 +25,11 @@ body {
 code {
   font-family: 'Open Sans', 'Helvetica', sans-serif;
 }
+
+@media (max-width: 600px) {
+  #header_rk9_logo {
+    height: 100% !important;
+    width: 100% !important;
+  }
+
+}

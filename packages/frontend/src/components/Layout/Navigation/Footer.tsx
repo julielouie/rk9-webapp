@@ -27,14 +27,13 @@ const Footer: FC = () => {
       <Container maxWidth="lg">
         <Grid container>
           <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
-            <RouterLink to="/home">
+            <RouterLink to="/home" style={{ textDecoration: 'none' }}>
               <Typography
                 variant="h5"
                 style={{
                   fontWeight: 'bold',
                   textAlign: 'center',
                   marginBottom: '30px',
-                  textDecoration: 'none',
                   color: palette.text.contrast,
                 }}
               >

@@ -157,16 +157,15 @@ const AppHeader: React.FC = () => {
                   </div>
                 )}
               </Grid>
-              <Grid item container xs={8} sm={5}>
-                <Grid item>
-                  <Box onClick={() => history.push('/home')}>
-                    <img
-                      src={RK9Logo}
-                      alt="Rogue K9 Logo"
-                      style={{ height: '100%', width: '100%', cursor: 'pointer' }}
-                    />
-                  </Box>
-                </Grid>
+              <Grid item>
+                <Box onClick={() => history.push('/home')}>
+                  <img
+                    id="header_rk9_logo"
+                    src={RK9Logo}
+                    alt="Rogue K9 Logo"
+                    style={{ height: '248px', width: '600px', cursor: 'pointer' }}
+                  />
+                </Box>
               </Grid>
               <Grid
                 item
