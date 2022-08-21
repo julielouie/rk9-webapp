@@ -77,7 +77,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:7777",
+  "proxy": "http://localhost:8080",
   "overrides": {
     "@svgr/webpack": "6.2.1"
   }

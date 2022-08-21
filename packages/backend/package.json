@@ -4,7 +4,9 @@
   "description": "rk9 webapp backend service",
   "main": "src/index.ts",
   "scripts": {
-    "start": "npm run clean && npm run compile && nodemon src/index.ts",
+    "start": "node ./dist/index.js",
+    "gcp-build": "tsc -p .",
+    "dev": "npm run clean && npm run compile && nodemon src/index.ts",
     "build": "npm run clean && npm run compile",
     "clean": "rimraf dist && rimraf build",
     "compile": "tsc",

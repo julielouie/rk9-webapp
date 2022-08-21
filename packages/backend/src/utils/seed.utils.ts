@@ -9,7 +9,7 @@ import * as userService from '../services/user.service';
 
 export class Seeder {
   seedPosts() {
-    needle('get', 'localhost:7777/api/posts')
+    needle('get', 'localhost:8080/api/posts')
       .then((res) => {
         if (!res.body.length) {
           const seedPostIds: string[] = [];
@@ -44,7 +44,7 @@ export class Seeder {
               mediaType: media ? 'photo' : null,
             };
 
-            needle('post', 'localhost:7777/api/posts', data, { json: true });
+            needle('post', 'localhost:8080/api/posts', data, { json: true });
             seedPostIds.push(currentPostId);
           }
 
@@ -55,7 +55,7 @@ export class Seeder {
   }
 
   seedGroups() {
-    needle('get', 'localhost:7777/api/groups')
+    needle('get', 'localhost:8080/api/groups')
       .then((res) => {
         if (!res.body.length) {
           const seedGroupIds: string[] = [];
@@ -67,7 +67,7 @@ export class Seeder {
               name: `${faker.commerce.productAdjective()} ${faker.commerce.productName()}`,
             };
 
-            needle('post', 'localhost:7777/api/groups', data, { json: true });
+            needle('post', 'localhost:8080/api/groups', data, { json: true });
             seedGroupIds.push(currentGroupId);
           }
 
@@ -78,7 +78,7 @@ export class Seeder {
   }
 
   seedBlogPosts() {
-    needle('get', 'localhost:7777/api/blogPosts')
+    needle('get', 'localhost:8080/api/blogPosts')
       .then((res) => {
         if (!res.body.length) {
           const seedBlogPostIds: string[] = [];
@@ -93,7 +93,7 @@ export class Seeder {
               image: faker.image.animals(),
             };
 
-            needle('post', 'localhost:7777/api/blogPosts', data, { json: true });
+            needle('post', 'localhost:8080/api/blogPosts', data, { json: true });
             seedBlogPostIds.push(currentBlogPostId);
           }
 
@@ -104,7 +104,7 @@ export class Seeder {
   }
 
   seedTestimonials() {
-    needle('get', 'localhost:7777/api/testimonials')
+    needle('get', 'localhost:8080/api/testimonials')
       .then((res) => {
         if (!res.body.length) {
           const seedTestimonialIds: string[] = [];
@@ -121,7 +121,7 @@ export class Seeder {
               image: faker.image.animals(),
             };
 
-            needle('post', 'localhost:7777/api/testimonials', data, { json: true });
+            needle('post', 'localhost:8080/api/testimonials', data, { json: true });
             seedTestimonialIds.push(currentTestimonialId);
           }
 
@@ -132,7 +132,7 @@ export class Seeder {
   }
 
   seedUsers() {
-    needle('get', 'localhost:7777/api/users')
+    needle('get', 'localhost:8080/api/users')
       .then(async (res) => {
         if (!res.body.length) {
           const fryName = 'Phillip Fry';

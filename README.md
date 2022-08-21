@@ -33,7 +33,7 @@ To get the RK9 backend stack up, please contact me for the mongo database uri, t
 
 1) Add port, mongodb uri, and token key to your own `.env` file in `packages/backend`
 ```
-PORT=7777
+PORT=8080
 MONGODB_URI=<provided_uri>
 TOKEN_KEY=<provided_key>
 ```

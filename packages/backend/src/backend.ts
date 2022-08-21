@@ -3,7 +3,7 @@ import { Database } from './db';
 import { Seeder } from './utils/seed.utils';
 import { parseOrDefault } from './utils/backend.utils';
 
-export const DEFAULT_API_PORT = 7777;
+export const DEFAULT_API_PORT = 8080;
 
 export class Backend {
   private server: Server;

@@ -7,7 +7,7 @@ import { Backend } from './backend';
 
 dotenv.config();
 
-const apiPort = 7777;
+const apiPort = 8080;
 const dbUrl = process.env.MONGODB_URI;
 
 const backend = new Backend(apiPort, dbUrl);
