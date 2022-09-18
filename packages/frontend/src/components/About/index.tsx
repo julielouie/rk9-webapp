@@ -4,8 +4,10 @@ import { Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import palette from '../../theme/palette';
 import AllieImg from '../../assets/images/static/allie.jpg';
-import FamilyImg from '../../assets/images/static/dog-walking-lake.jpg';
+import FamilyImg from '../../assets/images/family.png';
 import ScrollToTop from '../utils/ScrollToTop';
+import NutritionCert from '../../assets/images/Nutrition_Cert.png';
+import Holistic from '../../assets/images/Holistic.png';
 
 export const About: FC = () => {
   return (
@@ -59,6 +61,30 @@ export const About: FC = () => {
                 width: '400px',
               }}
             />
+          </Grid>
+        </Grid>
+        <Grid
+          item
+          container
+          style={{
+            backgroundColor: palette.paper.secondary,
+            display: 'flex',
+            alignItems: 'center',
+            padding: '50px',
+          }}
+        >
+          <Grid
+            item
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              color: palette.text.contrast,
+            }}
+          >
+            <Typography variant="h5" style={{ fontWeight: 600 }}>
+              Certified Foundation Style Dog Training Through K9-1 Specialized Dog Training in New
+              York
+            </Typography>
           </Grid>
         </Grid>
         <Grid item md={12}>
@@ -173,7 +199,7 @@ export const About: FC = () => {
           <Typography variant="h5" style={{ padding: '0 50px' }}>
             I am also part of a group of active trainers who meet weekly to discuss cases, support
             each other, and hold ourselves accountable to a higher standard in this un-standardized
-            industry. In addition, I am constantly learning more about how to better help our dogs.
+            industry. I am constantly learning more about how to better help our dogs.
           </Typography>
         </Grid>
         <Grid item md={12}>
@@ -196,21 +222,34 @@ export const About: FC = () => {
           <Grid
             item
             sm={12}
-            md={4}
+            md={6}
             style={{
               display: 'flex',
+              flexDirection: 'column',
               justifyContent: 'center',
               alignItems: 'center',
               padding: '30px',
             }}
           >
-            <Typography variant="h4">Veterinary Nutrition</Typography>
+            <Typography variant="h5" style={{ fontWeight: 800 }}>
+              Small Animal Nutrition
+            </Typography>
+            <div
+              style={{
+                backgroundImage: `url(${NutritionCert})`,
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: 'cover',
+                height: '580px',
+                width: '600px',
+                margin: '50px 0 50px 50px',
+              }}
+            />
           </Grid>
           <Grid
             item
             container
             sm={12}
-            md={4}
+            md={6}
             style={{
               display: 'flex',
               justifyContent: 'center',
@@ -222,28 +261,36 @@ export const About: FC = () => {
               item
               style={{
                 display: 'flex',
+                flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: 'center',
                 padding: '30px',
               }}
             >
-              <Typography variant="h4" style={{ textAlign: 'center' }}>
-                Myofascial Massage
+              <Typography variant="h5" style={{ textAlign: 'center', fontWeight: 800 }}>
+                Myofascial Massage & Cold Laser Therapy
               </Typography>
+              <div
+                style={{
+                  height: '580px',
+                  width: '600px',
+                  margin: '50px 0 50px 50px',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                <div
+                  style={{
+                    backgroundImage: `url(${Holistic})`,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: 'cover',
+                    height: '400px',
+                    width: '400px',
+                  }}
+                />
+              </div>
             </Grid>
-          </Grid>
-          <Grid
-            item
-            sm={12}
-            md={4}
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              padding: '30px',
-            }}
-          >
-            <Typography variant="h4">Cold Laser Therapy</Typography>
           </Grid>
         </Grid>
       </Grid>

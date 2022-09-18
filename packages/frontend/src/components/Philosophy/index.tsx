@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Box, Card, Grid } from '@material-ui/core';
 import { CardContent, Typography } from '@mui/material';
 import palette from '../../theme/palette';
-import HeroImg from '../../assets/images/static/bed-practice.jpeg';
+import HeroImg from '../../assets/images/philosophy.png';
 import ScrollToTop from '../utils/ScrollToTop';
 
 export const Philosophy: FC = () => {
@@ -847,7 +847,7 @@ export const Philosophy: FC = () => {
         </Grid>
         <Grid item md={12}>
           <Typography variant="h5" style={{ fontWeight: 600, padding: '50px' }}>
-            You deserve better, and your dogs deserve the best.
+            You and your dog deserve better.
           </Typography>
         </Grid>
       </Grid>
