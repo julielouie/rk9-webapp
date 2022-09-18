@@ -52,7 +52,7 @@ const BlogPostCard: FC<BlogPostCardProps> = (props) => {
           >
             {blogPost.image ? (
               <CardMedia
-                style={{ borderRadius: '3px' }}
+                style={{ borderRadius: '3px', objectFit: 'contain' }}
                 component="img"
                 height="250"
                 image={blogPost.image}

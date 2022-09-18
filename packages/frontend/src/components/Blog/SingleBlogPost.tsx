@@ -19,7 +19,7 @@ export const SingleBlogPost: FC = () => {
           md={12}
           style={{
             margin: '120px 0 50px 0',
-            height: '50vh',
+            height: '100%',
             width: '100%',
             display: 'flex',
             justifyContent: 'center',
@@ -32,7 +32,7 @@ export const SingleBlogPost: FC = () => {
       <Grid
         item
         container
-        style={{ padding: '50px', marginTop: blogPost && blogPost.image ? '0' : '50px' }}
+        style={{ margin: '50px', marginTop: blogPost && blogPost.image ? '0' : '50px' }}
       >
         <Grid item md={12}>
           <Typography

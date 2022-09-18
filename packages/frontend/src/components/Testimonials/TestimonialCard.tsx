@@ -44,7 +44,7 @@ const TestimonialCard: FC<TestimonialCardProps> = (props) => {
           >
             {testimonial.image ? (
               <CardMedia
-                style={{ borderRadius: '3px' }}
+                style={{ borderRadius: '3px', objectFit: 'contain' }}
                 component="img"
                 height="250"
                 image={testimonial.image}
