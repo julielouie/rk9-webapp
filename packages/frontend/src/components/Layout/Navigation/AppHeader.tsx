@@ -6,6 +6,7 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SettingsIcon from '@material-ui/icons/Settings';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import SpeedDial from '@material-ui/lab/SpeedDial';
 import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
 import { useSnackbar } from 'notistack';
@@ -81,6 +82,7 @@ const AppHeader: React.FC = () => {
   };
 
   const userDialActions = [
+    { icon: <ShoppingCartIcon />, name: 'Swag' },
     { icon: <SettingsIcon />, name: 'Settings' },
     { icon: <ExitToAppIcon />, name: 'Logout' },
   ];
@@ -149,6 +151,7 @@ const AppHeader: React.FC = () => {
                           onClick={async () => {
                             if (action.name === 'Logout') await logout();
                             if (action.name === 'Settings') history.push('/settings');
+                            if (action.name === 'Swag') history.push('/swag');
                             setOpenUserDial(false);
                           }}
                         />

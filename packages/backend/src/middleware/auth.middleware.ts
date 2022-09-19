@@ -50,7 +50,7 @@ export const grantAccess = (access: string, resource: string) => {
       const { role } = user;
       const permission = await AC.can(role).execute(access).on(resource);
       if (!permission.granted) {
-        throw new UnauthorizedPermissionException(res.locals.user.un);
+        throw new UnauthorizedPermissionException(res.locals.user.id);
       }
 
       next();

@@ -18,6 +18,8 @@ export const updateAbility = (ability, userRole) => {
     DP: () => can('delete', 'Posts'),
     RBP: () => can('read', 'Blog Posts'),
     RT: () => can('read', 'Testimonials'),
+    CO: () => can('create', 'Orders'),
+    RO: () => can('read', 'Orders'),
   };
 
   switch (userRole) {
@@ -25,11 +27,13 @@ export const updateAbility = (ability, userRole) => {
       abilities.C();
       abilities.U();
       abilities.D();
+      abilities.RO();
     case Role.Client:
       abilities.R();
       abilities.CP();
       abilities.UP();
       abilities.DP();
+      abilities.CO();
     default:
       abilities.RG();
       abilities.RBP();

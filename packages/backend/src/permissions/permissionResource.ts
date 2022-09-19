@@ -1,6 +1,7 @@
 export enum PermissionResource {
   CREATE = 'Create All',
   READ = 'Read All',
+  READ_ORDER = 'Read Order',
   UPDATE = 'Update All',
   DELETE = 'Delete All',
   READ_GROUP = 'Read Groups',
@@ -10,6 +11,7 @@ export enum PermissionResource {
   DELETE_POST = 'Delete Posts',
   READ_BLOG_POST = 'Read Blog Posts',
   READ_TESTIMONIAL = 'Read Testimonials',
+  CREATE_ORDER = 'Create Order',
 }
 
 export const grantsObject = {
@@ -70,6 +72,16 @@ export const grantsObject = {
         action: 'read',
         attributes: ['*'],
       },
+      {
+        resource: PermissionResource.READ_ORDER,
+        action: 'read',
+        attributes: ['*'],
+      },
+      {
+        resource: PermissionResource.CREATE_ORDER,
+        action: 'create',
+        attributes: ['*'],
+      },
     ],
   },
   client: {
@@ -92,6 +104,11 @@ export const grantsObject = {
       {
         resource: PermissionResource.DELETE_POST,
         action: 'delete',
+        attributes: ['*'],
+      },
+      {
+        resource: PermissionResource.CREATE_ORDER,
+        action: 'create',
         attributes: ['*'],
       },
     ],

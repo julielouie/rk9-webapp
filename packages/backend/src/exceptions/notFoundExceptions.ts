@@ -30,6 +30,12 @@ export class GroupNotFoundException extends NotFoundException {
   }
 }
 
+export class OrderNotFoundException extends NotFoundException {
+  constructor(id: string) {
+    super(`Order with id ${id} not found`);
+  }
+}
+
 export class BlogPostNotFoundException extends NotFoundException {
   constructor(id: string) {
     super(`Blog post with id ${id} not found`);

@@ -16,6 +16,7 @@ import Testimonials from './components/Testimonials';
 import Blog from './components/Blog';
 import SingleBlogPost from './components/Blog/SingleBlogPost';
 import ClientPortal from './components/ClientPortal';
+import Swag from './components/Swag';
 import Settings from './components/Settings';
 import { SessionContext } from './context/SessionContext';
 
@@ -43,6 +44,7 @@ const App: React.FC = () => {
                 <Route exact path="/training" component={Training} />
                 <Route exact path="/testimonials" component={Testimonials} />
                 <Route exact path="/blog" component={Blog} />
+                {user && <Route exact path="/swag" component={Swag} />}
                 {user && <Route exact path="/settings" component={Settings} />}
                 <Route path="/blog/:id" component={SingleBlogPost} />
                 <Route path="/clientPortal" component={ClientPortal} />

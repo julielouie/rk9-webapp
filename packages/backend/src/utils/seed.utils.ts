@@ -3,6 +3,7 @@ import faker from '@faker-js/faker';
 import needle from 'needle';
 import { IBlogPost } from '../models/blogPost';
 import { IGroup } from '../models/group';
+import { IOrder } from '../models/order';
 import { IPost } from '../models/post';
 import { ITestimonial } from '../models/testimonial';
 import * as userService from '../services/user.service';
@@ -72,6 +73,42 @@ export class Seeder {
           }
 
           console.log('Group seed data generated!');
+        }
+      })
+      .catch((err) => console.log(err));
+  }
+
+  seedOrders() {
+    needle('get', 'localhost:8080/api/orders')
+      .then((res) => {
+        if (!res.body.length) {
+          const seedOrderIds: string[] = [];
+
+          for (let i = 1; i <= 3; i++) {
+            const currentOrderId = faker.database.mongodbObjectId();
+            const data: IOrder = {
+              id: currentOrderId,
+              client: {
+                id: 'b7672ee9e2df8b994f57d6c8',
+                name: 'Phillip Fry',
+              },
+              items: [
+                {
+                  name: 'T-Shirt',
+                  size: 'L',
+                  quantity: 1,
+                  price: 20,
+                },
+              ],
+              fulfilled: faker.datatype.boolean(),
+              total: 20,
+            };
+
+            needle('post', 'localhost:8080/api/orders', data, { json: true });
+            seedOrderIds.push(currentOrderId);
+          }
+
+          console.log('Order seed data generated!');
         }
       })
       .catch((err) => console.log(err));
@@ -204,6 +241,7 @@ export class Seeder {
     this.seedTestimonials();
     this.seedBlogPosts();
     this.seedGroups();
+    this.seedOrders();
     this.seedPosts();
   }
 }
