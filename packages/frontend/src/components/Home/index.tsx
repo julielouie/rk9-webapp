@@ -3,10 +3,10 @@ import { Grid } from '@material-ui/core';
 import { Typography } from '@mui/material';
 import { useHistory } from 'react-router-dom';
 import palette from '../../theme/palette';
-import HeroImg from '../../assets/images/static/erns-20.jpeg';
-import RespectImg from '../../assets/images/static/four-women-dogs-smiley.jpg';
-import HumanCanineImg from '../../assets/images/static/tilted-head-dogs.jpg';
-import WorkingDogImg from '../../assets/images/static/bite-club-in-action.jpg';
+import HeroImg from '../../assets/images/home.jpeg';
+import RespectImg from '../../assets/images/respect.jpeg';
+import HumanCanineImg from '../../assets/images/humanAndCanine.jpeg';
+import WorkingDogImg from '../../assets/images/workingDogs.png';
 import AllieImg from '../../assets/images/static/allie-stormy-overlook.jpg';
 import ScrollToTop from '../utils/ScrollToTop';
 
@@ -47,7 +47,7 @@ export const Home: FC = () => {
             style={{
               marginTop: '50px',
               width: '100%',
-              height: '300px',
+              height: '380px',
               backgroundImage: `url(${RespectImg})`,
               backgroundSize: '100%',
               backgroundPosition: 'center',
@@ -67,8 +67,13 @@ export const Home: FC = () => {
           >
             <Typography variant="h4">A PLACE OF RESPECT</Typography>
             <Typography variant="h5">
-              We believe that working with animals is a gift, and we strive to always remember this.
-              This also means that our training will benefit the whole family.
+              The foundation of all of our curriculum is built on, First: the respect for the animal
+              we have the privilege of working with, and Second: the people who love their animals
+              enough to seek help to do what is best for them. Respect is not self-righteous or
+              judgmental. We seek to compassionately provide truthful and LIMA-forward information
+              to anyone willing to learn. The appropriate attitude, based in respect, towards the
+              dogs is always on the forefront; this is never to be sacrificed for sales, marketing,
+              or to satisfy a quick fix.
             </Typography>
           </Grid>
         </Grid>
@@ -96,8 +101,9 @@ export const Home: FC = () => {
           >
             <Typography variant="h4">HUMAN and CANINE</Typography>
             <Typography variant="h5">
-              Our focus is to work for you and your dog(s), building holistic training plans that
-              address all of your concerns and goals, with everything from:
+              Our focus is to work for you and your dog(s), building realistic and reliable training
+              plans that educate you as the handler, helping you and your dog overcome barriers
+              preventing you from enjoying each other freely.
             </Typography>
           </Grid>
           <Grid
@@ -106,7 +112,7 @@ export const Home: FC = () => {
             md={6}
             style={{
               marginTop: '50px',
-              height: '300px',
+              height: '380px',
               width: '100%',
               backgroundImage: `url(${HumanCanineImg})`,
               backgroundSize: '100%',
@@ -132,7 +138,7 @@ export const Home: FC = () => {
             md={6}
             style={{
               marginTop: '50px',
-              height: '300px',
+              height: '380px',
               width: '100%',
               backgroundImage: `url(${WorkingDogImg})`,
               backgroundRepeat: 'no-repeat',
