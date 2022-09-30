@@ -9,6 +9,7 @@ import AdvancedGroup from './AdvancedGroup';
 import { SessionContext } from '../../context/SessionContext';
 import RestrictedPage from './RestrictedPage';
 import BiteClub from './BiteClub';
+import NoseyCrew from './NoseyCrew';
 import OneOnOne from './OneOnOne';
 import ScrollToTop from '../utils/ScrollToTop';
 
@@ -47,6 +48,9 @@ export const ClientPortal: FC = () => {
         break;
       case 'biteClub':
         setSelectedGroup('biteClub');
+        break;
+      case 'noseyCrew':
+        setSelectedGroup('noseyCrew');
         break;
       default:
         break;
@@ -167,15 +171,46 @@ export const ClientPortal: FC = () => {
                   ? {
                       backgroundColor: canReadPosts ? palette.button.primary : palette.disabled,
                       color: palette.white,
+                      margin: '0 20px 0 0',
+                    }
+                  : {
+                      borderColor: canReadPosts ? palette.button.primary : palette.disabled,
+                      color: canReadPosts ? palette.button.primary : palette.disabled,
+                      margin: '0 20px 0 0',
+                    }
+              }
+              disabled={!canReadPosts || !user?.groups.find((group) => group.name === 'Bite Club')}
+            >
+              Bite Club
+            </Button>
+          </Link>
+          <Link
+            to={`${path}/noseyCrew/main`}
+            style={{
+              textDecoration: 'none',
+              pointerEvents: canReadPosts ? 'auto' : 'none',
+              cursor: user?.groups.find((group) => group.name === 'Nosey Crew')
+                ? 'auto'
+                : 'not-allowed',
+            }}
+          >
+            <Button
+              onClick={() => setSelectedGroup('noseyCrew')}
+              variant={selectedGroup === 'noseyCrew' ? 'contained' : 'outlined'}
+              style={
+                selectedGroup === 'noseyCrew'
+                  ? {
+                      backgroundColor: canReadPosts ? palette.button.primary : palette.disabled,
+                      color: palette.white,
                     }
                   : {
                       borderColor: canReadPosts ? palette.button.primary : palette.disabled,
                       color: canReadPosts ? palette.button.primary : palette.disabled,
                     }
               }
-              disabled={!canReadPosts || !user?.groups.find((group) => group.name === 'Bite Club')}
+              disabled={!canReadPosts}
             >
-              Bite Club
+              Nosey Crew
             </Button>
           </Link>
         </Grid>
@@ -196,6 +231,9 @@ export const ClientPortal: FC = () => {
             )}
             {canReadPosts && user?.groups.find((group) => group.name === 'Bite Club') && (
               <Route path={`${path}/biteClub`} component={BiteClub} />
+            )}
+            {canReadPosts && user?.groups.find((group) => group.name === 'Nosey Crew') && (
+              <Route path={`${path}/noseyCrew`} component={NoseyCrew} />
             )}
             <Route component={RestrictedSinglePage} />
           </Switch>
