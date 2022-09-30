@@ -165,6 +165,7 @@ export const About: FC = () => {
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
+              justifyContent: 'center',
               color: palette.text.contrast,
             }}
           >
@@ -183,8 +184,10 @@ export const About: FC = () => {
               I am fully committed to your success, and offer a hands-on approach. I belong to a
               mentorship program, and believe in always continuing my education to become better,
               not just in relation to dog training, but in canine nutrition and in disease
-              prevention, so that I can continue to offer my very best to each family that trusts me
-              to be a part of their journey.
+              prevention. We meet weekly to discuss cases, support each other, and hold ourselves
+              accountable to a higher standard in this un-standardized industry. I am constantly
+              learning more about how to better help our dogs, so that I can continue to offer my
+              very best to each family that trusts me to be a part of their journey.
             </Typography>
           </Grid>
         </Grid>
@@ -197,11 +200,7 @@ export const About: FC = () => {
           </Typography>
         </Grid>
         <Grid item md={12}>
-          <Typography variant="h5" style={{ padding: '0 50px' }}>
-            I am also part of a group of active trainers who meet weekly to discuss cases, support
-            each other, and hold ourselves accountable to a higher standard in this un-standardized
-            industry. I am constantly learning more about how to better help our dogs.
-          </Typography>
+          <Typography variant="h5" style={{ padding: '0 50px' }} />
         </Grid>
         <Grid item md={12}>
           <Typography
