@@ -1,22 +1,15 @@
 import React, { FC, useEffect } from 'react';
-import { Typography, Grid, Tabs, Tab } from '@material-ui/core';
-import useSWR from 'swr';
-import { Link, Route, Switch, useLocation, useRouteMatch } from 'react-router-dom';
+import { Typography, Grid, IconButton } from '@material-ui/core';
+import AddToDriveIcon from '@mui/icons-material/AddToDrive';
+import { Link, useLocation } from 'react-router-dom';
 import { useAbility } from '@casl/react';
 import palette from '../../../theme/palette';
-import Main from './Main';
-import { Group } from '../../../types/Group';
-import Photos from './Photos';
-import Videos from './Videos';
 import { AbilityContext } from '../../../context/AbilityContext';
 
 export const Discussion: FC = () => {
   const { pathname } = useLocation();
-  const { url, path } = useRouteMatch();
   const ability = useAbility(AbilityContext);
   const canReadPosts = ability.can('read', 'All');
-
-  const { data: groupInfo } = useSWR<Group>('/groups/Discussion', { suspense: true });
 
   useEffect(() => {
     window.dispatchEvent(new CustomEvent('resize'));
@@ -39,7 +32,7 @@ export const Discussion: FC = () => {
         }}
       >
         <Typography variant="h5" style={{ fontWeight: 600 }}>
-          Discussion Board
+          Discussion
         </Typography>
       </Grid>
       <Grid
@@ -49,35 +42,33 @@ export const Discussion: FC = () => {
           width: '100%',
           padding: '0 50px',
           margin: '30px 0',
+          height: 'calc(75vh - 50px)',
+          display: 'flex',
+          justifyContent: 'center',
+          flexDirection: 'column',
         }}
       >
-        <Tabs value={pathname}>
-          <Tab label="Main" value={`${url}/main`} to={`${url}/main`} component={Link} />
-          <Tab label="Photos" value={`${url}/photos`} to={`${url}/photos`} component={Link} />
-          <Tab label="Videos" value={`${url}/videos`} to={`${url}/videos`} component={Link} />
-        </Tabs>
+        <Typography variant="h3">Join our Google Drive, for our general discussions!</Typography>
+        <Typography variant="h6" style={{ marginTop: '20px' }}>
+          You may also join using the buttons located at the top and bottom of the website, if you
+          are logged in.
+        </Typography>
+        {canReadPosts && (
+          <Link
+            to={{
+              pathname:
+                'https://drive.google.com/drive/folders/1aRPAprS_kymKKO7O0xPBmnCQULgSaQ2P?usp=sharing',
+            }}
+            target="_blank"
+            style={{ display: 'inline-flex', alignItems: 'center', textDecoration: 'none' }}
+          >
+            <IconButton>
+              <AddToDriveIcon style={{ color: palette.button.primary }} />
+            </IconButton>
+            Enter Google Drive
+          </Link>
+        )}
       </Grid>
-      {groupInfo && (
-        <Grid
-          item
-          xs={12}
-          style={{
-            padding: '0 50px',
-          }}
-        >
-          <Switch>
-            <Route path={`${path}/main`}>
-              <Main groupInfo={groupInfo} />
-            </Route>
-            <Route path={`${path}/photos`}>
-              <Photos groupInfo={groupInfo} />
-            </Route>
-            <Route path={`${path}/videos`}>
-              <Videos groupInfo={groupInfo} />
-            </Route>
-          </Switch>
-        </Grid>
-      )}
     </Grid>
   );
 };
