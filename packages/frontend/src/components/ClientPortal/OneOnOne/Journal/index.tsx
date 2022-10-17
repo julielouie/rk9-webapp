@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useMemo, useState } from 'react';
 import { Grid, Box, Typography, Button } from '@material-ui/core';
 import useSWRInfinite from 'swr/infinite';
 import { useSnackbar } from 'notistack';
@@ -20,6 +20,8 @@ export const Journal: FC<JournalProps> = (props) => {
   const { oneOnOneId } = props;
   const { enqueueSnackbar } = useSnackbar();
   const [isFetching, setIsFetching] = useState(false);
+  const [usedSessionCount, setUsedSessionCount] = useState(0);
+  const [usedSessionsList, setUsedSessionsList] = useState<string[]>([]);
   const ability = useAbility(AbilityContext);
 
   const path = `/journalPosts?oneOnOne=${oneOnOneId}`;
@@ -52,12 +54,35 @@ export const Journal: FC<JournalProps> = (props) => {
     }
   };
 
-  const journalPosts = allOneOnOneJournalPosts ? [].concat(...allOneOnOneJournalPosts) : [];
+  const journalPosts = useMemo(
+    () => (allOneOnOneJournalPosts ? [].concat(...allOneOnOneJournalPosts) : []),
+    [allOneOnOneJournalPosts],
+  );
   const isEmpty = allOneOnOneJournalPosts?.[0]?.length === 0;
   const isReachingEnd =
     isEmpty ||
     (allOneOnOneJournalPosts &&
       allOneOnOneJournalPosts[allOneOnOneJournalPosts.length - 1]?.length < 5);
+
+  useEffect(() => {
+    if (journalPosts && journalPosts.length) {
+      const journalPostsDateMap: Record<string, number> = {};
+      const filteredJournalPosts = journalPosts.filter((journalPost: JournalPost) => {
+        if (journalPost.title.toLowerCase().includes('journal transfer')) return false;
+        if (journalPost.date) {
+          const readableDate = dayjs(journalPost.date).format('M/D');
+          if (readableDate && !journalPostsDateMap[readableDate]) {
+            journalPostsDateMap[readableDate] = 1;
+            return true;
+          }
+        }
+        return false;
+      });
+
+      setUsedSessionCount(filteredJournalPosts.length);
+      setUsedSessionsList(Object.keys(journalPostsDateMap));
+    }
+  }, [journalPosts]);
 
   return (
     <Grid container>
@@ -94,13 +119,13 @@ export const Journal: FC<JournalProps> = (props) => {
                 }}
               >
                 <Typography style={{ marginRight: '10px' }}>Sessions Used:</Typography>
-                <Typography>{journalPosts.length}</Typography>
+                <Typography>{usedSessionCount}</Typography>
               </Box>
               <Box>
-                {journalPosts.map((journalPost: JournalPost, journalPostIndex: number) => (
+                {usedSessionsList.map((usedSessionDate: string, usedSessionIndex: number) => (
                   <span>
-                    {dayjs(journalPost.date).format('M/D')}
-                    {journalPostIndex !== journalPosts.length - 1 ? ', ' : ''}{' '}
+                    {usedSessionDate}
+                    {usedSessionIndex !== usedSessionsList.length - 1 ? ', ' : ''}{' '}
                   </span>
                 ))}
               </Box>
