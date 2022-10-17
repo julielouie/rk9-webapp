@@ -165,6 +165,8 @@ export const NewPost: FC<NewPostProps> = (props) => {
                 fullWidth
                 placeholder="Start a post..."
                 value={newPost.text}
+                multiline
+                style={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}
                 onChange={(e) => setNewPost({ ...newPost, text: e.target.value })}
               />
               {(mediaUrl || mediaFile) && (

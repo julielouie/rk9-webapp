@@ -272,7 +272,12 @@ export const ReadPost: FC<ReadPostProps> = (props) => {
                   </>
                 )}
               </Box>
-              {!editMode && post.text && <Box style={{ marginTop: '25px' }}>{post.text}</Box>}
+              {!editMode &&
+                (post.text ? (
+                  <Box style={{ marginTop: '25px', wordWrap: 'break-word' }}>{post.text}</Box>
+                ) : (
+                  <Box style={{ marginTop: '40px' }} />
+                ))}
               {!editMode && post.media && (
                 <Card
                   variant="outlined"
@@ -309,14 +314,15 @@ export const ReadPost: FC<ReadPostProps> = (props) => {
                   </CardContent>
                 </Card>
               )}
-              {editMode && postToEdit.text && (
+              {editMode && (
                 <TextField
                   value={postToEdit.text}
                   fullWidth
                   variant="outlined"
                   placeholder="Edit post..."
+                  multiline
+                  style={{ marginTop: '20px', whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}
                   onChange={(e) => setPostToEdit({ ...postToEdit, text: e.target.value })}
-                  style={{ marginTop: '20px' }}
                 />
               )}
               {editMode && (postToEdit.media || mediaUrl) && (
