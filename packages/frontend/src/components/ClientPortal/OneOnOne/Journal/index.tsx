@@ -1,9 +1,8 @@
-import React, { FC, useEffect, useMemo, useState } from 'react';
+import React, { FC, useMemo, useState } from 'react';
 import { Grid, Box, Typography, Button } from '@material-ui/core';
 import useSWRInfinite from 'swr/infinite';
 import { useSnackbar } from 'notistack';
 import { useAbility } from '@casl/react';
-import dayjs from 'dayjs';
 import palette from '../../../../theme/palette';
 import Rk9Api from '../../../../dataServices/Rk9Api';
 import { GET } from '../../../../constants/requests';
@@ -20,8 +19,6 @@ export const Journal: FC<JournalProps> = (props) => {
   const { oneOnOneId } = props;
   const { enqueueSnackbar } = useSnackbar();
   const [isFetching, setIsFetching] = useState(false);
-  const [usedSessionCount, setUsedSessionCount] = useState(0);
-  const [usedSessionsList, setUsedSessionsList] = useState<string[]>([]);
   const ability = useAbility(AbilityContext);
 
   const path = `/journalPosts?oneOnOne=${oneOnOneId}`;
@@ -64,26 +61,6 @@ export const Journal: FC<JournalProps> = (props) => {
     (allOneOnOneJournalPosts &&
       allOneOnOneJournalPosts[allOneOnOneJournalPosts.length - 1]?.length < 5);
 
-  useEffect(() => {
-    if (journalPosts && journalPosts.length) {
-      const journalPostsDateMap: Record<string, number> = {};
-      const filteredJournalPosts = journalPosts.filter((journalPost: JournalPost) => {
-        if (journalPost.title.toLowerCase().includes('journal transfer')) return false;
-        if (journalPost.date) {
-          const readableDate = dayjs(journalPost.date).format('M/D');
-          if (readableDate && !journalPostsDateMap[readableDate]) {
-            journalPostsDateMap[readableDate] = 1;
-            return true;
-          }
-        }
-        return false;
-      });
-
-      setUsedSessionCount(filteredJournalPosts.length);
-      setUsedSessionsList(Object.keys(journalPostsDateMap));
-    }
-  }, [journalPosts]);
-
   return (
     <Grid container>
       <Grid
@@ -101,36 +78,6 @@ export const Journal: FC<JournalProps> = (props) => {
             width: '60%',
           }}
         >
-          {!isEmpty && journalPosts && journalPosts.length && ability.can('create', 'All') ? (
-            <Box
-              style={{
-                display: 'inline-flex',
-                flexDirection: 'column',
-                padding: '20px',
-                border: `1px solid ${palette.disabled}`,
-                borderRadius: '5px',
-                marginBottom: '20px',
-              }}
-            >
-              <Box
-                style={{
-                  display: 'inline-flex',
-                  flexDirection: 'row',
-                }}
-              >
-                <Typography style={{ marginRight: '10px' }}>Sessions Used:</Typography>
-                <Typography>{usedSessionCount}</Typography>
-              </Box>
-              <Box>
-                {usedSessionsList.map((usedSessionDate: string, usedSessionIndex: number) => (
-                  <span>
-                    {usedSessionDate}
-                    {usedSessionIndex !== usedSessionsList.length - 1 ? ', ' : ''}{' '}
-                  </span>
-                ))}
-              </Box>
-            </Box>
-          ) : null}
           {ability.can('create', 'All') && (
             <NewJournalPost oneOnOneId={oneOnOneId} mutate={mutate} />
           )}
