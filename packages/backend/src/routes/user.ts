@@ -18,7 +18,10 @@ router.route('/').get(userController.getUserList);
 router
   .route('/:id')
   .get(userController.getUser)
-  .put(grantAccess('update', PermissionResource.UPDATE), userController.updateUser)
-  .delete(grantAccess('delete', PermissionResource.DELETE), userController.updateUser);
+  .put(grantAccess('update', PermissionResource.UPDATE_USER), userController.updateUser);
+
+router
+  .route('/admin/:id')
+  .delete(grantAccess('delete', PermissionResource.DELETE), userController.deleteUser);
 
 export default router;

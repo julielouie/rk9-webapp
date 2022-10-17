@@ -4,6 +4,7 @@ export enum PermissionResource {
   READ_ORDER = 'Read Order',
   UPDATE = 'Update All',
   DELETE = 'Delete All',
+  UPDATE_USER = 'Update User General Info',
   READ_GROUP = 'Read Groups',
   CREATE_POST = 'Create Posts',
   READ_POST = 'Read Posts',
@@ -35,6 +36,11 @@ export const grantsObject = {
       {
         resource: PermissionResource.DELETE,
         action: 'delete',
+        attributes: ['*'],
+      },
+      {
+        resource: PermissionResource.UPDATE_USER,
+        action: 'update',
         attributes: ['*'],
       },
       {
@@ -109,6 +115,11 @@ export const grantsObject = {
       {
         resource: PermissionResource.CREATE_ORDER,
         action: 'create',
+        attributes: ['*'],
+      },
+      {
+        resource: PermissionResource.UPDATE_USER,
+        action: 'update',
         attributes: ['*'],
       },
     ],
