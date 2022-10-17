@@ -3,6 +3,7 @@ import { Grid, Box, Typography, Button } from '@material-ui/core';
 import useSWRInfinite from 'swr/infinite';
 import { useSnackbar } from 'notistack';
 import { useAbility } from '@casl/react';
+import dayjs from 'dayjs';
 import palette from '../../../../theme/palette';
 import Rk9Api from '../../../../dataServices/Rk9Api';
 import { GET } from '../../../../constants/requests';
@@ -75,6 +76,36 @@ export const Journal: FC<JournalProps> = (props) => {
             width: '60%',
           }}
         >
+          {!isEmpty && journalPosts && journalPosts.length && ability.can('create', 'All') ? (
+            <Box
+              style={{
+                display: 'inline-flex',
+                flexDirection: 'column',
+                padding: '20px',
+                border: `1px solid ${palette.disabled}`,
+                borderRadius: '5px',
+                marginBottom: '20px',
+              }}
+            >
+              <Box
+                style={{
+                  display: 'inline-flex',
+                  flexDirection: 'row',
+                }}
+              >
+                <Typography style={{ marginRight: '10px' }}>Sessions Used:</Typography>
+                <Typography>{journalPosts.length}</Typography>
+              </Box>
+              <Box>
+                {journalPosts.map((journalPost: JournalPost, journalPostIndex: number) => (
+                  <span>
+                    {dayjs(journalPost.date).format('M/D')}
+                    {journalPostIndex !== journalPosts.length - 1 ? ', ' : ''}{' '}
+                  </span>
+                ))}
+              </Box>
+            </Box>
+          ) : null}
           {ability.can('create', 'All') && (
             <NewJournalPost oneOnOneId={oneOnOneId} mutate={mutate} />
           )}
