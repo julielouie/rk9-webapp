@@ -188,8 +188,8 @@ export const Philosophy: FC = () => {
             &quot;style&quot;...
           </Typography>
           <Typography variant="h5" style={{ padding: '50px' }}>
-            Because this is a results based industry, and it often doesn&apos;t matter what is done
-            to achieve those results.
+            Because this is a results based industry, it often doesn&apos;t matter what is done to
+            achieve those results.
           </Typography>
         </Grid>
         <Grid

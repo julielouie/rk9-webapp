@@ -1,6 +1,7 @@
 import React, { FC, useContext } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { Box, Container, Grid, IconButton, Link, Typography } from '@material-ui/core';
+import AddToDriveIcon from '@mui/icons-material/AddToDrive';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import palette from '../../../theme/palette';
@@ -60,6 +61,19 @@ const Footer: FC = () => {
                 }}
               >
                 Allie McCain
+                {user && (
+                  <RouterLink
+                    to={{
+                      pathname:
+                        'https://drive.google.com/drive/folders/1aRPAprS_kymKKO7O0xPBmnCQULgSaQ2P?usp=sharing',
+                    }}
+                    target="_blank"
+                  >
+                    <IconButton>
+                      <AddToDriveIcon style={{ color: palette.text.contrast }} />
+                    </IconButton>
+                  </RouterLink>
+                )}
                 {user && (
                   <RouterLink
                     to={{ pathname: 'https://www.facebook.com/groups/1067124983484762/' }}

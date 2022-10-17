@@ -72,8 +72,8 @@ export const Home: FC = () => {
               enough to seek help to do what is best for them. Respect is not self-righteous or
               judgmental. We seek to compassionately provide truthful and LIMA-forward information
               to anyone willing to learn. The appropriate attitude, based in respect, towards the
-              dogs is always on the forefront; this is never to be sacrificed for sales, marketing,
-              or to satisfy a quick fix.
+              dogs is always on the forefront; never to be sacrificed for sales, marketing, or to
+              satisfy a quick fix.
             </Typography>
           </Grid>
         </Grid>

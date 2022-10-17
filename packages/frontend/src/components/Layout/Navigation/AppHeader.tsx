@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, Route, useHistory } from 'react-router-dom';
 import { IconButton, Grid, Toolbar, Box, makeStyles } from '@material-ui/core';
+import AddToDriveIcon from '@mui/icons-material/AddToDrive';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -106,6 +107,19 @@ const AppHeader: React.FC = () => {
                   paddingTop: '30px',
                 }}
               >
+                {loggedIn && (
+                  <Link
+                    to={{
+                      pathname:
+                        'https://drive.google.com/drive/folders/1aRPAprS_kymKKO7O0xPBmnCQULgSaQ2P?usp=sharing',
+                    }}
+                    target="_blank"
+                  >
+                    <IconButton>
+                      <AddToDriveIcon style={{ color: palette.text.primary }} />
+                    </IconButton>
+                  </Link>
+                )}
                 {loggedIn && (
                   <Link
                     to={{ pathname: 'https://www.facebook.com/groups/1067124983484762/' }}
