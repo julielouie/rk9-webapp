@@ -73,7 +73,7 @@ export const Main: FC<MainProps> = (props) => {
             width: '60%',
           }}
         >
-          <NewPost oneOnOneId={oneOnOneId} mutate={mutate} />
+          <NewPost oneOnOneId={oneOnOneId} mutate={mutate} hidePhotoUpload hideVideoUpload />
           {isEmpty && (
             <Typography variant="h5" style={{ marginTop: '30px' }}>
               There are no posts!

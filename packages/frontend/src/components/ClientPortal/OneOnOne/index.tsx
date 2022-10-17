@@ -4,8 +4,6 @@ import { Link, Route, Switch, useLocation, useRouteMatch } from 'react-router-do
 import { useAbility } from '@casl/react';
 import palette from '../../../theme/palette';
 import Main from './Main';
-import Photos from './Photos';
-import Videos from './Videos';
 import { AbilityContext } from '../../../context/AbilityContext';
 import ClientList from '../ClientList';
 import { User } from '../../../types/User';
@@ -69,13 +67,12 @@ export const OneOnOne: FC = () => {
             width: '100%',
             padding: '0 50px',
             margin: '30px 0',
+            height: '50px',
           }}
         >
           <Tabs value={pathname}>
             <Tab label="Main" value={`${url}/main`} to={`${url}/main`} component={Link} />
             <Tab label="Journal" value={`${url}/journal`} to={`${url}/journal`} component={Link} />
-            <Tab label="Photos" value={`${url}/photos`} to={`${url}/photos`} component={Link} />
-            <Tab label="Videos" value={`${url}/videos`} to={`${url}/videos`} component={Link} />
           </Tabs>
         </Grid>
         {selectedOneOnOneUser.id && (
@@ -84,6 +81,7 @@ export const OneOnOne: FC = () => {
             xs={12}
             style={{
               padding: '0 50px',
+              height: 'calc(100% - 100px)',
             }}
           >
             <Switch>
@@ -92,12 +90,6 @@ export const OneOnOne: FC = () => {
               </Route>
               <Route path={`${path}/journal`}>
                 <Journal oneOnOneId={selectedOneOnOneUser.id} />
-              </Route>
-              <Route path={`${path}/photos`}>
-                <Photos oneOnOneId={selectedOneOnOneUser.id} />
-              </Route>
-              <Route path={`${path}/videos`}>
-                <Videos oneOnOneId={selectedOneOnOneUser.id} />
               </Route>
             </Switch>
           </Grid>

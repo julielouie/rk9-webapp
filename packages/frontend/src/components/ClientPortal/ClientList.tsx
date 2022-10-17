@@ -103,11 +103,13 @@ export const ClientList: FC<ClientListProps> = (props) => {
         xs={12}
         md={3}
         style={{
-          height: '100%',
+          maxHeight: '100vh',
           width: '100%',
           borderRight: `1px solid ${palette.disabled}`,
+          borderBottom: `1px solid ${palette.disabled}`,
           display: 'flex',
           flexDirection: 'column',
+          overflow: 'auto',
         }}
       >
         <Grid

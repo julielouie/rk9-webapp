@@ -51,6 +51,7 @@ export const NoseyCrew: FC = () => {
             width: '100%',
             padding: '0 50px',
             margin: '30px 0',
+            height: '50px',
           }}
         >
           <Tabs value={pathname}>
@@ -65,6 +66,7 @@ export const NoseyCrew: FC = () => {
             xs={12}
             style={{
               padding: '0 50px',
+              height: 'calc(100% - 100px)',
             }}
           >
             <Switch>

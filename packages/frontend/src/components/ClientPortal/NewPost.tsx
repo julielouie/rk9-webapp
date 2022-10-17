@@ -31,10 +31,12 @@ interface NewPostProps {
   mutate: KeyedMutator<any[]>;
   groupInfo?: Group;
   oneOnOneId?: string;
+  hidePhotoUpload?: boolean;
+  hideVideoUpload?: boolean;
 }
 
 export const NewPost: FC<NewPostProps> = (props) => {
-  const { mutate, groupInfo, oneOnOneId } = props;
+  const { mutate, groupInfo, oneOnOneId, hidePhotoUpload, hideVideoUpload } = props;
   const [showLoadingPostSubmit, setShowLoadingPostSubmit] = useState<any>(false);
   const [mediaFile, setMediaFile] = useState<any>(null);
   const [mediaUrl, setMediaUrl] = useState('');
@@ -199,36 +201,42 @@ export const NewPost: FC<NewPostProps> = (props) => {
           </CardContent>
           <CardActions style={{ padding: '15px' }}>
             <Box style={{ marginLeft: '70px' }}>
-              <Button component="label">
-                <PhotoCameraIcon style={{ color: palette.paper.secondary, marginRight: '10px' }} />{' '}
-                Photo
-                <input
-                  accept="image/*"
-                  type="file"
-                  onChange={(e) => {
-                    setNewPost({ ...newPost, mediaType: 'photo' });
-                    selectFileToUpload(e);
-                  }}
-                  onClick={(e: React.BaseSyntheticEvent) => (e.target.value = null)}
-                  name="media"
-                  hidden
-                />
-              </Button>
-              <Button component="label">
-                <YouTubeIcon style={{ color: palette.paper.highlight, marginRight: '10px' }} />{' '}
-                Video
-                <input
-                  accept="video/*"
-                  type="file"
-                  onChange={(e) => {
-                    setNewPost({ ...newPost, mediaType: 'video' });
-                    selectFileToUpload(e);
-                  }}
-                  onClick={(e: React.BaseSyntheticEvent) => (e.target.value = null)}
-                  name="media"
-                  hidden
-                />
-              </Button>
+              {!hidePhotoUpload && (
+                <Button component="label">
+                  <PhotoCameraIcon
+                    style={{ color: palette.paper.secondary, marginRight: '10px' }}
+                  />{' '}
+                  Photo
+                  <input
+                    accept="image/*"
+                    type="file"
+                    onChange={(e) => {
+                      setNewPost({ ...newPost, mediaType: 'photo' });
+                      selectFileToUpload(e);
+                    }}
+                    onClick={(e: React.BaseSyntheticEvent) => (e.target.value = null)}
+                    name="media"
+                    hidden
+                  />
+                </Button>
+              )}
+              {!hideVideoUpload && (
+                <Button component="label">
+                  <YouTubeIcon style={{ color: palette.paper.highlight, marginRight: '10px' }} />{' '}
+                  Video
+                  <input
+                    accept="video/*"
+                    type="file"
+                    onChange={(e) => {
+                      setNewPost({ ...newPost, mediaType: 'video' });
+                      selectFileToUpload(e);
+                    }}
+                    onClick={(e: React.BaseSyntheticEvent) => (e.target.value = null)}
+                    name="media"
+                    hidden
+                  />
+                </Button>
+              )}
             </Box>
             <Button
               variant="contained"
