@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 import React, { FC, useState, useContext, useEffect, useCallback } from 'react';
 import {
   Box,
@@ -56,9 +57,7 @@ export const Settings: FC = () => {
   });
 
   const resetUpdateUserInfo = useCallback(() => {
-    if (user) {
-      setUserToEdit(user);
-    }
+    if (user) setUserToEdit(user);
   }, [user]);
 
   useEffect(() => {
@@ -96,6 +95,7 @@ export const Settings: FC = () => {
         );
 
       await mutate();
+      location.reload();
     }
   };
 

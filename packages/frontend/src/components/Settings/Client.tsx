@@ -31,15 +31,15 @@ export const Client: FC<ClientProps> = (props) => {
   const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
-    if (client && client.role) {
-      setNewRole(client.role);
-    }
+    if (client && client.role) setNewRole(client.role);
   }, [client]);
 
-  const updateClientRole = async () => {
-    if (client && client.id) {
+  const updateClientRole = async (e: any) => {
+    const changedRole = e.target.value;
+    setNewRole(changedRole);
+    if (client && client.id && changedRole) {
       const updatedClient = { ...client };
-      updatedClient.role = newRole;
+      updatedClient.role = changedRole;
 
       await Rk9Api(PUT, `/users/${client.id}`, updatedClient)
         .then(() => {
@@ -51,6 +51,33 @@ export const Client: FC<ClientProps> = (props) => {
         .catch(() =>
           enqueueSnackbar(
             "There was a problem updating the client's information. Please let someone know!",
+            {
+              persist: false,
+              variant: 'error',
+            },
+          ),
+        );
+      await mutate();
+      setEditMode(false);
+    }
+  };
+
+  const resetClientPassword = async () => {
+    const resetPassword = 'password';
+    if (client && client.id && resetPassword) {
+      const updatedClient = { ...client };
+      updatedClient.password = resetPassword;
+
+      await Rk9Api(PUT, `/users/${client.id}`, updatedClient)
+        .then(() => {
+          enqueueSnackbar("Client's password was reset!", {
+            persist: false,
+            variant: 'success',
+          });
+        })
+        .catch(() =>
+          enqueueSnackbar(
+            "There was a problem resetting the client's password. Please let someone know!",
             {
               persist: false,
               variant: 'error',
@@ -74,16 +101,21 @@ export const Client: FC<ClientProps> = (props) => {
         </Avatar>
       </ListItemAvatar>
       <ListItemText
-        style={{ width: '40%' }}
+        style={{ width: '20%' }}
         primary={client.name}
         secondary={client.dogName2 ? `${client.dogName} & Friends` : client.dogName}
       />
-      <ListItemText style={{ width: '50%' }}>
+      <ListItemText style={{ width: '55%' }}>
         {!editMode && `Role: ${client.role.toUpperCase()}`}
         {editMode && (
           <FormControl>
             <InputLabel>Role</InputLabel>
-            <Select value={newRole} onChange={(e) => setNewRole(e.target.value as string)}>
+            <Select
+              value={newRole}
+              onChange={async (role) => {
+                if (role) await updateClientRole(role);
+              }}
+            >
               <MenuItem value="admin">Admin</MenuItem>
               <MenuItem value="client">Client</MenuItem>
               <MenuItem value="guest">Guest</MenuItem>
@@ -91,12 +123,19 @@ export const Client: FC<ClientProps> = (props) => {
           </FormControl>
         )}
       </ListItemText>
-      <ListItemSecondaryAction
-        style={{
-          display: 'flex',
-          width: '10%',
-        }}
-      >
+      <ListItemSecondaryAction style={{ display: 'flex', width: '25%' }}>
+        <Button
+          size="small"
+          variant="outlined"
+          style={{
+            borderColor: palette.button.primary,
+            color: palette.button.primary,
+            marginRight: '10px',
+          }}
+          onClick={resetClientPassword}
+        >
+          Reset Password
+        </Button>
         <Button
           size="small"
           variant="outlined"
@@ -104,14 +143,9 @@ export const Client: FC<ClientProps> = (props) => {
             borderColor: palette.button.primary,
             color: palette.button.primary,
           }}
-          onClick={async () => {
-            if (editMode) {
-              await updateClientRole();
-            }
-            setEditMode(!editMode);
-          }}
+          onClick={() => setEditMode(!editMode)}
         >
-          {editMode ? 'Save' : 'Edit'}
+          {editMode ? 'Cancel' : 'Edit'}
         </Button>
       </ListItemSecondaryAction>
     </ListItem>
