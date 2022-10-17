@@ -67,7 +67,17 @@ export const Settings: FC = () => {
 
   const updateUserAccountInfo = async () => {
     if (user && user.id) {
-      await Rk9Api(PUT, `/users/${user.id}`, userToEdit)
+      const newUserToEdit = {
+        ...userToEdit,
+        name: userToEdit.name?.trim(),
+        username: userToEdit.username?.trim(),
+        dogName: userToEdit.dogName?.trim(),
+        dogName2: userToEdit.dogName2?.trim(),
+        dogName3: userToEdit.dogName3?.trim(),
+        dogName4: userToEdit.dogName4?.trim(),
+        dogName5: userToEdit.dogName5?.trim(),
+      };
+      await Rk9Api(PUT, `/users/${user.id}`, newUserToEdit)
         .then(() => {
           enqueueSnackbar('Your information was updated!', {
             persist: false,

@@ -84,7 +84,13 @@ const LoginOrSignUp: FC<LoginOrSignUpProps> = (props) => {
 
   const submitSignUp = async () => {
     if (username && password) {
-      await Rk9Api(POST, '/users/sign-up', { name, username, password, dogName })
+      const newSignUpBody = {
+        name: name.trim(),
+        username: username.trim(),
+        password: password.trim(),
+        dogName: dogName.trim(),
+      };
+      await Rk9Api(POST, '/users/sign-up', newSignUpBody)
         .then(() => {
           enqueueSnackbar(
             'Sign up was successfull! Allie will review your sign up request, and set you up!',
