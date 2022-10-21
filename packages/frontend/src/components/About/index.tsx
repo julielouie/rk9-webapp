@@ -89,8 +89,8 @@ export const About: FC = () => {
         </Grid>
         <Grid item md={12}>
           <Typography variant="h5" style={{ padding: '50px' }}>
-            My passion is working with strong temperament dogs, and the people who love them enough
-            to help them have the best possible life.
+            My passion is working with strong temperament and aggressive dogs, and the people who
+            love them enough to help them have the best possible life.
           </Typography>
         </Grid>
         <Grid
