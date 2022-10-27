@@ -1,28 +1,29 @@
-import React, { FC, useState, useEffect, useContext } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import { Grid, Button } from '@material-ui/core';
 import { Link, Route, Switch, useRouteMatch, useLocation } from 'react-router-dom';
 import { useAbility } from '@casl/react';
 import palette from '../../theme/palette';
 import Discussion from './Discussion';
 import { AbilityContext } from '../../context/AbilityContext';
-import AdvancedGroup from './AdvancedGroup';
-import { SessionContext } from '../../context/SessionContext';
 import RestrictedPage from './RestrictedPage';
-import BiteClub from './BiteClub';
-import NoseyCrew from './NoseyCrew';
 import OneOnOne from './OneOnOne';
 import ScrollToTop from '../utils/ScrollToTop';
+import NotFound from '../Error/NotFound';
+// import AdvancedGroup from './AdvancedGroup';
+// import BiteClub from './BiteClub';
+// import NoseyCrew from './NoseyCrew';
 
-const RestrictedSinglePage = () => (
-  <Grid container style={{ height: '100vh', position: 'relative' }}>
-    <RestrictedPage
-      isAlternate
-      alternateTitle="You must be a group member"
-      alternateTitleLine2="to view this page!"
-      alternateBody="Please try again later."
-    />
-  </Grid>
-);
+// Below is only necessary for group pages (currently removed)
+// const RestrictedSinglePage = () => (
+//   <Grid container style={{ height: '100vh', position: 'relative' }}>
+//     <RestrictedPage
+//       isAlternate
+//       alternateTitle="You must be a group member"
+//       alternateTitleLine2="to view this page!"
+//       alternateBody="Please try again later."
+//     />
+//   </Grid>
+// );
 
 export const ClientPortal: FC = () => {
   const [selectedGroup, setSelectedGroup] = useState('');
@@ -30,9 +31,10 @@ export const ClientPortal: FC = () => {
   const ability = useAbility(AbilityContext);
   const canReadPosts = ability.can('read', 'All');
   const { pathname } = useLocation();
-  const {
-    state: { user },
-  } = useContext(SessionContext);
+  // Below is only necessary for group pages (currently removed)
+  // const {
+  //   state: { user },
+  // } = useContext(SessionContext);
 
   useEffect(() => {
     const currentTab = pathname.split('/')[2];
@@ -120,7 +122,8 @@ export const ClientPortal: FC = () => {
               One-on-One
             </Button>
           </Link>
-          <Link
+          {/* Below pages removed per Allie's request, but took a while to create, so keeping it just in case */}
+          {/* <Link
             to={`${path}/advancedGroup/main`}
             style={{
               textDecoration: 'none',
@@ -212,7 +215,7 @@ export const ClientPortal: FC = () => {
             >
               Nosey Crew
             </Button>
-          </Link>
+          </Link> */}
         </Grid>
         <Grid
           item
@@ -226,7 +229,9 @@ export const ClientPortal: FC = () => {
           <Switch>
             <Route path={`${path}/discussion`} component={Discussion} />
             {canReadPosts && <Route path={`${path}/oneOnOne`} component={OneOnOne} />}
-            {canReadPosts && user?.groups.find((group) => group.name === 'Advanced Group') && (
+            {/* Below pages removed per Allie's request, but took a while to create, so keeping it just in case */}
+            {/*  */}
+            {/* {canReadPosts && user?.groups.find((group) => group.name === 'Advanced Group') && (
               <Route path={`${path}/advancedGroup`} component={AdvancedGroup} />
             )}
             {canReadPosts && user?.groups.find((group) => group.name === 'Bite Club') && (
@@ -234,8 +239,9 @@ export const ClientPortal: FC = () => {
             )}
             {canReadPosts && user?.groups.find((group) => group.name === 'Nosey Crew') && (
               <Route path={`${path}/noseyCrew`} component={NoseyCrew} />
-            )}
-            <Route component={RestrictedSinglePage} />
+            )} */}
+            {/* Change "NotFound" to "RestrictedSinglePage" if enabling group pages */}
+            <Route component={NotFound} />
           </Switch>
         </Grid>
       </Grid>
