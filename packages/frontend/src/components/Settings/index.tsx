@@ -28,6 +28,7 @@ import Rk9Api from '../../dataServices/Rk9Api';
 import { PUT } from '../../constants/requests';
 import { AbilityContext } from '../../context/AbilityContext';
 import Client from './Client';
+import DeleteUserDialog from './DeleteUserDialog';
 
 export const Settings: FC = () => {
   const {
@@ -36,6 +37,8 @@ export const Settings: FC = () => {
   const { enqueueSnackbar } = useSnackbar();
   const ability = useAbility(AbilityContext);
   const history = useHistory();
+  const [clientToDelete, setClientToDelete] = useState<User | null>(null);
+  const [openDeleteConfirmation, setOpenDeleteConfirmation] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [searchClients, setSearchClients] = useState('');
   const [userToEdit, setUserToEdit] = useState<User>({
@@ -250,35 +253,49 @@ export const Settings: FC = () => {
           </Box>
           {ability.can('update', 'All') && <Divider orientation="vertical" flexItem />}
         </Grid>
-        {ability.can('update', 'All') && (
-          <Grid item md={8} style={{ display: 'flex', flexDirection: 'column', padding: '50px' }}>
-            <Typography variant="h5" style={{ fontWeight: 600, marginBottom: '20px' }}>
-              User Management:
-            </Typography>
-            <Box style={{ display: 'flex', flexDirection: 'row' }}>
-              <TextField
-                fullWidth
-                variant="outlined"
-                placeholder="Search..."
-                style={{ marginBottom: '20px' }}
-                value={searchClients}
-                onChange={(e) => updateFilterText(e)}
-              />
-            </Box>
-            <List>
-              {allClients &&
-                allClients
-                  .filter((client) => filterClients(client))
-                  .map((client) => {
-                    return (
-                      <span key={client.id}>
-                        <Client client={client} mutate={mutate} />
-                        <Divider />
-                      </span>
-                    );
-                  })}
-            </List>
-          </Grid>
+        {ability.can('update', 'All') && ability.can('delete', 'All') && (
+          <>
+            <Grid item md={8} style={{ display: 'flex', flexDirection: 'column', padding: '50px' }}>
+              <Typography variant="h5" style={{ fontWeight: 600, marginBottom: '20px' }}>
+                User Management:
+              </Typography>
+              <Box style={{ display: 'flex', flexDirection: 'row' }}>
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  placeholder="Search..."
+                  style={{ marginBottom: '20px' }}
+                  value={searchClients}
+                  onChange={(e) => updateFilterText(e)}
+                />
+              </Box>
+              <List>
+                {allClients &&
+                  allClients
+                    .filter((client) => filterClients(client))
+                    .map((client) => {
+                      return (
+                        <span key={client.id}>
+                          <Client
+                            client={client}
+                            mutate={mutate}
+                            setClientToDelete={setClientToDelete}
+                            openDeleteConfirmation={() => setOpenDeleteConfirmation(true)}
+                          />
+                          <Divider />
+                        </span>
+                      );
+                    })}
+              </List>
+            </Grid>
+            <DeleteUserDialog
+              open={openDeleteConfirmation}
+              close={() => setOpenDeleteConfirmation(false)}
+              clientToDelete={clientToDelete}
+              setClientToDelete={setClientToDelete}
+              mutate={mutate}
+            />
+          </>
         )}
       </Grid>
     </>

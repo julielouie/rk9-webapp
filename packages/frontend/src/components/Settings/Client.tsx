@@ -10,25 +10,32 @@ import {
   ListItemSecondaryAction,
   Select,
   MenuItem,
+  IconButton,
 } from '@material-ui/core';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import CloseIcon from '@mui/icons-material/Close';
 import { useSnackbar } from 'notistack';
 import { KeyedMutator } from 'swr';
+import { useAbility } from '@casl/react';
 import palette from '../../theme/palette';
 import { User } from '../../types/User';
 import Rk9Api from '../../dataServices/Rk9Api';
 import { PUT } from '../../constants/requests';
+import { AbilityContext } from '../../context/AbilityContext';
 
 interface ClientProps {
   client: User;
   mutate: KeyedMutator<User[]>;
+  openDeleteConfirmation: () => void;
+  setClientToDelete: (client: User | null) => void;
 }
 
 export const Client: FC<ClientProps> = (props) => {
-  const { client, mutate } = props;
+  const { client, mutate, openDeleteConfirmation, setClientToDelete } = props;
   const [editMode, setEditMode] = useState(false);
   const [newRole, setNewRole] = useState('');
   const { enqueueSnackbar } = useSnackbar();
+  const ability = useAbility(AbilityContext);
 
   useEffect(() => {
     if (client && client.role) setNewRole(client.role);
@@ -88,6 +95,13 @@ export const Client: FC<ClientProps> = (props) => {
     }
   };
 
+  const showDeleteConfirmation = () => {
+    if (client) {
+      setClientToDelete(client);
+      openDeleteConfirmation();
+    }
+  };
+
   return (
     <ListItem style={{ display: 'flex', justifyContent: 'space-between' }}>
       <ListItemAvatar>
@@ -101,11 +115,11 @@ export const Client: FC<ClientProps> = (props) => {
         </Avatar>
       </ListItemAvatar>
       <ListItemText
-        style={{ width: '20%' }}
-        primary={client.name}
+        style={{ width: '35%' }}
+        primary={`${client.name} - (${client.username})`}
         secondary={client.dogName2 ? `${client.dogName} & Friends` : client.dogName}
       />
-      <ListItemText style={{ width: '55%' }}>
+      <ListItemText style={{ width: '30%' }}>
         {!editMode && `Role: ${client.role.toUpperCase()}`}
         {editMode && (
           <FormControl>
@@ -123,7 +137,7 @@ export const Client: FC<ClientProps> = (props) => {
           </FormControl>
         )}
       </ListItemText>
-      <ListItemSecondaryAction style={{ display: 'flex', width: '25%' }}>
+      <ListItemText style={{ display: 'flex', width: '30%' }}>
         <Button
           size="small"
           variant="outlined"
@@ -132,6 +146,7 @@ export const Client: FC<ClientProps> = (props) => {
             color: palette.button.primary,
             marginRight: '10px',
           }}
+          disabled={!ability.can('update', 'All')}
           onClick={resetClientPassword}
         >
           Reset Password
@@ -143,10 +158,16 @@ export const Client: FC<ClientProps> = (props) => {
             borderColor: palette.button.primary,
             color: palette.button.primary,
           }}
+          disabled={!ability.can('update', 'All')}
           onClick={() => setEditMode(!editMode)}
         >
           {editMode ? 'Cancel' : 'Edit'}
         </Button>
+      </ListItemText>
+      <ListItemSecondaryAction style={{ display: 'flex', width: '5%' }}>
+        <IconButton disabled={!ability.can('delete', 'All')} onClick={showDeleteConfirmation}>
+          <CloseIcon />
+        </IconButton>
       </ListItemSecondaryAction>
     </ListItem>
   );
