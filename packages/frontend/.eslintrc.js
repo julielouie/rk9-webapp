@@ -64,5 +64,6 @@ module.exports = {
     '@typescript-eslint/no-floating-promises': 'warn',
     '@typescript-eslint/no-misused-promises': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'warn',
+    '@typescript-eslint/restrict-plus-operands': 'off',
   },
 };
