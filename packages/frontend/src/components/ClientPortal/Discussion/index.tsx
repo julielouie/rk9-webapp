@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import { Typography, Grid, IconButton } from '@material-ui/core';
-import AddToDriveIcon from '@mui/icons-material/AddToDrive';
+import FacebookIcon from '@mui/icons-material/Facebook';
 import { Link, useLocation } from 'react-router-dom';
 import { useAbility } from '@casl/react';
 import palette from '../../../theme/palette';
@@ -48,7 +48,7 @@ export const Discussion: FC = () => {
           flexDirection: 'column',
         }}
       >
-        <Typography variant="h3">Join our Google Drive, for our general discussions!</Typography>
+        <Typography variant="h3">Join our Facebook Group, for our general discussions!</Typography>
         <Typography variant="h6" style={{ marginTop: '20px' }}>
           You may also join using the buttons located at the top and bottom of the website, if you
           are logged in.
@@ -56,16 +56,15 @@ export const Discussion: FC = () => {
         {canReadPosts && (
           <Link
             to={{
-              pathname:
-                'https://drive.google.com/drive/folders/1aRPAprS_kymKKO7O0xPBmnCQULgSaQ2P?usp=sharing',
+              pathname: 'https://www.facebook.com/groups/1067124983484762/',
             }}
             target="_blank"
             style={{ display: 'inline-flex', alignItems: 'center', textDecoration: 'none' }}
           >
             <IconButton>
-              <AddToDriveIcon style={{ color: palette.button.primary }} />
+              <FacebookIcon style={{ color: palette.button.primary }} />
             </IconButton>
-            Enter Google Drive
+            Enter Facebook Group
           </Link>
         )}
       </Grid>
