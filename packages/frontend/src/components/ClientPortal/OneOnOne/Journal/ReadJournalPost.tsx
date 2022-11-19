@@ -18,6 +18,7 @@ import {
   TextField,
   DialogTitle,
 } from '@material-ui/core';
+import { List as MuiList, ListItem as MuiListItem } from '@mui/material';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import EditIcon from '@mui/icons-material/Edit';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
@@ -32,6 +33,7 @@ import { DELETE, PUT } from '../../../../constants/requests';
 import Loading from '../../../utils/Loading';
 import { AbilityContext } from '../../../../context/AbilityContext';
 import { JournalPost } from '../../../../types/JournalPost';
+import ManageLinksDialog from './ManageLinksDialog';
 
 interface ReadJournalPostProps {
   mutate: KeyedMutator<any[]>;
@@ -44,6 +46,7 @@ export const ReadJournalPost: FC<ReadJournalPostProps> = (props) => {
   const ability = useAbility(AbilityContext);
   const { enqueueSnackbar } = useSnackbar();
   const [editMode, setEditMode] = useState(false);
+  const [openManageLinks, setOpenManageLinks] = useState(false);
   const [showLoadingEditPostSubmit, setShowLoadingEditPostSubmit] = useState<any>(false);
   const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
@@ -53,6 +56,7 @@ export const ReadJournalPost: FC<ReadJournalPostProps> = (props) => {
     oneOnOneUserId: '',
     notes: '',
     workOn: '',
+    links: [],
     misc: '',
   });
 
@@ -81,6 +85,7 @@ export const ReadJournalPost: FC<ReadJournalPostProps> = (props) => {
     if (oneOnOneId) {
       const editJournalPostToSubmit = { ...journalPostToEdit };
       editJournalPostToSubmit.oneOnOneUserId = oneOnOneId;
+      editJournalPostToSubmit.links = editJournalPostToSubmit.links?.filter((link) => link);
 
       setShowLoadingEditPostSubmit(true);
 
@@ -144,6 +149,13 @@ export const ReadJournalPost: FC<ReadJournalPostProps> = (props) => {
 
     setShowLoadingEditPostSubmit(false);
     await mutate();
+  };
+
+  const saveLinks = (links: string[]) => {
+    if (links && links.length) {
+      const newLinks = links.filter((link) => link);
+      setJournalPostToEdit({ ...journalPostToEdit, links: newLinks });
+    }
   };
 
   return (
@@ -243,6 +255,22 @@ export const ReadJournalPost: FC<ReadJournalPostProps> = (props) => {
                   </Typography>
                 </Box>
               )}
+              {!editMode && journalPost.links && !!journalPost.links.length && (
+                <Box style={{ marginTop: '20px' }}>
+                  <Typography variant="h6" style={{ textDecoration: 'underline' }}>
+                    Links:
+                  </Typography>
+                  <MuiList sx={{ listStyleType: 'disc', pl: 4 }}>
+                    {journalPost.links.map((link: string) => (
+                      <MuiListItem sx={{ display: 'list-item' }}>
+                        <a href={link} target="_blank" rel="noreferrer">
+                          {link}
+                        </a>
+                      </MuiListItem>
+                    ))}
+                  </MuiList>
+                </Box>
+              )}
               {editMode && (
                 <>
                   <Box
@@ -329,7 +357,7 @@ export const ReadJournalPost: FC<ReadJournalPostProps> = (props) => {
                     <TextField
                       variant="outlined"
                       fullWidth
-                      placeholder="Links and/or misc items..."
+                      placeholder="More/misc items..."
                       label="Misc"
                       multiline
                       rows="3"
@@ -343,6 +371,17 @@ export const ReadJournalPost: FC<ReadJournalPostProps> = (props) => {
                       }
                     />
                   </Box>
+                  <Button
+                    variant="outlined"
+                    style={{
+                      borderColor: palette.button.primary,
+                      color: palette.button.primary,
+                      marginTop: '20px',
+                    }}
+                    onClick={() => setOpenManageLinks(true)}
+                  >
+                    Manage Links
+                  </Button>
                 </>
               )}
             </CardContent>
@@ -407,6 +446,12 @@ export const ReadJournalPost: FC<ReadJournalPostProps> = (props) => {
           </Button>
         </Box>
       </Dialog>
+      <ManageLinksDialog
+        allLinks={journalPostToEdit.links || ['']}
+        open={openManageLinks}
+        close={() => setOpenManageLinks(false)}
+        saveLinks={saveLinks}
+      />
     </>
   );
 };

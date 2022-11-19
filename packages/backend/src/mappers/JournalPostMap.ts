@@ -13,6 +13,7 @@ export class JournalPostMap {
       oneOnOneUserId: journalPost.oneOnOneUserId,
       notes: journalPost.notes,
       workOn: journalPost.workOn || '',
+      links: journalPost.links || [],
       misc: journalPost.misc || '',
     };
   }

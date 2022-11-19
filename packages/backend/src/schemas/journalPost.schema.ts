@@ -6,6 +6,7 @@ export const postAndPutJournalPost = z.object({
   oneOnOneUserId: z.string().min(2).max(255),
   notes: z.string(),
   workOn: z.string().optional(),
+  links: z.array(z.string()).optional(),
   misc: z.string().optional(),
 });
 

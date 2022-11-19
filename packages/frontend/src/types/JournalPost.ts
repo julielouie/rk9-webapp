@@ -5,5 +5,6 @@ export interface JournalPost {
   oneOnOneUserId: string;
   notes: string;
   workOn?: string;
+  links?: string[];
   misc?: string;
 }

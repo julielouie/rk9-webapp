@@ -7,6 +7,7 @@ export interface IJournalPost extends IBase {
   oneOnOneUserId: string;
   notes: string;
   workOn?: string;
+  links?: string[];
   misc?: string;
 }
 
@@ -38,6 +39,10 @@ const journalPostSchema = new mongoose.Schema({
   },
   workOn: {
     type: String,
+    required: false,
+  },
+  links: {
+    type: Array,
     required: false,
   },
   misc: {

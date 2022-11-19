@@ -11,6 +11,7 @@ import { POST } from '../../../../constants/requests';
 import Loading from '../../../utils/Loading';
 import { AbilityContext } from '../../../../context/AbilityContext';
 import { JournalPost } from '../../../../types/JournalPost';
+import ManageLinksDialog from './ManageLinksDialog';
 
 interface NewJournalPostProps {
   mutate: KeyedMutator<any[]>;
@@ -20,12 +21,14 @@ interface NewJournalPostProps {
 export const NewJournalPost: FC<NewJournalPostProps> = (props) => {
   const { mutate, oneOnOneId } = props;
   const [showLoadingPostSubmit, setShowLoadingPostSubmit] = useState<any>(false);
+  const [openManageLinks, setOpenManageLinks] = useState(false);
   const [newJournalPost, setNewJournalPost] = useState<JournalPost>({
     title: '',
     date: new Date(),
     oneOnOneUserId: '',
     notes: '',
     workOn: '',
+    links: [],
     misc: '',
   });
   const { enqueueSnackbar } = useSnackbar();
@@ -35,6 +38,7 @@ export const NewJournalPost: FC<NewJournalPostProps> = (props) => {
     if (oneOnOneId) {
       const journalPostToSubmit = { ...newJournalPost };
       journalPostToSubmit.oneOnOneUserId = oneOnOneId;
+      journalPostToSubmit.links = journalPostToSubmit.links?.filter((link) => link);
 
       setShowLoadingPostSubmit(true);
 
@@ -65,6 +69,13 @@ export const NewJournalPost: FC<NewJournalPostProps> = (props) => {
 
       setShowLoadingPostSubmit(false);
       await mutate();
+    }
+  };
+
+  const saveLinks = (links: string[]) => {
+    if (links && links.length) {
+      const newLinks = links.filter((link) => link);
+      setNewJournalPost({ ...newJournalPost, links: newLinks });
     }
   };
 
@@ -152,7 +163,7 @@ export const NewJournalPost: FC<NewJournalPostProps> = (props) => {
               <TextField
                 variant="outlined"
                 fullWidth
-                placeholder="Links and/or misc items..."
+                placeholder="More/misc items..."
                 label="Misc"
                 multiline
                 rows="3"
@@ -164,6 +175,17 @@ export const NewJournalPost: FC<NewJournalPostProps> = (props) => {
                 onChange={(e) => setNewJournalPost({ ...newJournalPost, misc: e.target.value })}
               />
             </Box>
+            <Button
+              variant="outlined"
+              style={{
+                borderColor: palette.button.primary,
+                color: palette.button.primary,
+                marginTop: '20px',
+              }}
+              onClick={() => setOpenManageLinks(true)}
+            >
+              Manage Links
+            </Button>
           </CardContent>
           <CardActions style={{ padding: '15px' }}>
             <Button
@@ -181,6 +203,12 @@ export const NewJournalPost: FC<NewJournalPostProps> = (props) => {
           </CardActions>
         </Card>
       </Grid>
+      <ManageLinksDialog
+        allLinks={newJournalPost.links || ['']}
+        open={openManageLinks}
+        close={() => setOpenManageLinks(false)}
+        saveLinks={saveLinks}
+      />
     </Grid>
   );
 };
