@@ -109,6 +109,7 @@ export const Settings: FC = () => {
 
   const filterClients = (client: User) => {
     if (client.name.toLowerCase().includes('allie mccain')) return null;
+    if (client.name.toLowerCase().includes('allie dellosa')) return null;
 
     if (searchClients === '') return client;
     if (client.name.toLowerCase().includes(searchClients)) return client;

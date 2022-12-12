@@ -59,7 +59,7 @@ const Footer: FC = () => {
                   alignItems: 'center',
                 }}
               >
-                Allie McCain
+                Allie Dellosa
                 {user && (
                   <RouterLink
                     to={{ pathname: 'https://www.facebook.com/groups/1067124983484762/' }}

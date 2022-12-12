@@ -57,6 +57,7 @@ export const ClientList: FC<ClientListProps> = (props) => {
 
   const filterClients = (user: User) => {
     if (user.name.toLowerCase().includes('allie mccain')) return null;
+    if (user.name.toLowerCase().includes('allie dellosa')) return null;
 
     if (searchClients === '') return user;
     if (user.name.toLowerCase().includes(searchClients)) return user;

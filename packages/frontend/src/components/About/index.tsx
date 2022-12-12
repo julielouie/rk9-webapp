@@ -36,7 +36,7 @@ export const About: FC = () => {
             }}
           >
             <Typography variant="h4" style={{ fontWeight: 'bold', padding: '50px 50px 0 50px' }}>
-              Hi! My name is Allie McCain.
+              Hi! My name is Allie Dellosa.
             </Typography>
             <Typography variant="h6" style={{ padding: '50px' }}>
               I am the owner and head trainer at Rogue K9 Academy, and I am a{' '}
