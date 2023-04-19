@@ -201,7 +201,7 @@ export const Training: FC = () => {
             Virtual Training Package
           </Typography>
           <Typography variant="h4" style={{ display: 'flex', alignSelf: 'end', fontWeight: 600 }}>
-            $425
+            $500
           </Typography>
         </Grid>
         <Grid item md={12} style={{ padding: '50px' }}>
@@ -369,6 +369,43 @@ export const Training: FC = () => {
             <span style={{ fontWeight: 600 }}>Foundation Style Dog Training</span> can help any dog
             and handler team achieve any goal, because it is based on understanding animal behavior
             and how to train animals. It is not a hack, or “quick fix”!
+          </Typography>
+        </Grid>
+        <Grid
+          item
+          container
+          style={{
+            backgroundColor: palette.paper.secondary,
+            padding: '20px',
+            color: palette.text.contrast,
+          }}
+        >
+          <Typography variant="h4" style={{ fontWeight: 600 }}>
+            Advanced Training Options
+          </Typography>
+        </Grid>
+        <Grid item md={12} style={{ padding: '50px' }}>
+          <Typography variant="h5" style={{ fontWeight: 600, paddingBottom: '25px' }}>
+            The sky is the limit, when it comes to training your pup!
+          </Typography>
+          <Typography variant="h5" style={{ paddingBottom: '25px' }}>
+            We also offer the following extracurricular activities, for those who have completed
+            their advanced obedience:
+          </Typography>
+          <Typography variant="h5" style={{ paddingBottom: '15px' }}>
+            - Personal Protection
+          </Typography>
+          <Typography variant="h5" style={{ paddingBottom: '15px' }}>
+            - Scent Detection
+          </Typography>
+          <Typography variant="h5" style={{ paddingBottom: '15px' }}>
+            - Dock Diving
+          </Typography>
+          <Typography variant="h5" style={{ paddingBottom: '15px' }}>
+            - Cart Pulling
+          </Typography>
+          <Typography variant="h5" style={{ paddingBottom: '15px' }}>
+            - Retrieving
           </Typography>
         </Grid>
       </Grid>
