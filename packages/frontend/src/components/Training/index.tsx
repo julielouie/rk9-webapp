@@ -17,6 +17,8 @@ export const Training: FC = () => {
   const [showVirtualWellnessCoaching, setShowVirtualWellnessCoaching] = useState(false);
   const [showPersonalShopping, setShowPersonalShopping] = useState(false);
   const [showVirtualPersonalShopping, setShowVirtualPersonalShopping] = useState(false);
+  const [showOwnerParticipation, setShowOwnerParticipation] = useState(false);
+  const [showAttitude, setShowAttitude] = useState(false);
 
   return (
     <>
@@ -35,6 +37,102 @@ export const Training: FC = () => {
             backgroundRepeat: 'no-repeat',
           }}
         />
+        <Grid
+          item
+          container
+          style={{
+            backgroundColor: palette.paper.secondary,
+            padding: '20px',
+            color: palette.text.contrast,
+          }}
+        >
+          <Typography variant="h4" style={{ fontWeight: 600 }}>
+            Setting Expectations
+          </Typography>
+        </Grid>
+        <Grid item md={12} style={{ padding: '50px' }}>
+          <Typography variant="h5" style={{ fontWeight: 600, paddingBottom: '25px' }}>
+            Rogue K9 Academy’s primary purpose is to educate dog owners so that they no longer have
+            to rely on, or be subject to an unstandardized industry, helping you and your dog
+            overcome barriers preventing you from enjoying each other freely. Please read through
+            this and consider what your expectations are through this process.
+          </Typography>
+          <Typography variant="h5" style={{ paddingBottom: '25px' }}>
+            This will be an educational journey. You will be the student, and I will be the teacher.
+            The curriculum will make you a competent dog handler. You will receive a journal with
+            homework including video instructionals, lectures, and personalized directions for you
+            and your dog. Including instructions for protocols in the home. In order for behavioral
+            modification to be effective we need to work from the ground up. While obedience
+            training is a vital part of the program, to be successful and lasting it must be based
+            on a good understanding of how to communicate with and be a good leader for your dog. I
+            treat each client as though they were my only client and am all in, working with you
+            toward your goals.
+          </Typography>
+          <Box style={{ display: 'flex', flexDirection: 'column' }}>
+            <List>
+              <ListItemButton onClick={() => setShowOwnerParticipation(!showOwnerParticipation)}>
+                <ListItemText primary="Owner Participation" />
+                {showOwnerParticipation ? <ExpandLess /> : <ExpandMore />}
+              </ListItemButton>
+              <Collapse in={showOwnerParticipation} timeout="auto" unmountOnExit>
+                <Typography style={{ padding: '20px 10px 20px 50px' }}>
+                  Owner participation is the heart of the success of this program. Dog’s can only be
+                  as proficient as their handlers. We can’t teach our dogs things we don’t
+                  understand. Though you and your dogs will be learning and progressing together,
+                  you ultimately are responsible for your dog’s behavior. This process will
+                  essentially teach you how to do so and failure to adhere to the curriculum will
+                  result in compromised results. Do you have time to daily and intentionally work
+                  with your dogs?
+                </Typography>
+              </Collapse>
+              <ListItemButton onClick={() => setShowAttitude(!showAttitude)}>
+                <ListItemText primary="Attitude in Dog Training" />
+                {showAttitude ? <ExpandLess /> : <ExpandMore />}
+              </ListItemButton>
+              <Collapse in={showAttitude} timeout="auto" unmountOnExit>
+                <Typography style={{ padding: '10px 10px 10px 50px' }}>
+                  Although it’s normal to feel frustrated, worried, afraid, even jaded, in order to
+                  succeed at training your dog you have to be willing to learn new ideas, change old
+                  attitudes and develop a realistic, empathetic, respectful understanding of your
+                  dog.
+                </Typography>
+                <Typography style={{ padding: '10px 10px 10px 50px' }}>
+                  Attitude is not just as simple as having a good attitude or a bad attitude.
+                  Attitude has to do with the structure of our thought processes and how they relate
+                  to our interactions and our decision making. It is important to remember that we
+                  are teaching our dogs new things, and oftentimes attempting to make changes to or
+                  “undo” behaviors that have been in practice for some time. Our dogs are not
+                  robots. Our dogs deserve the same patience and respect during their learning
+                  process that we would want shown to us. A confused dog is not a bad or disobedient
+                  dog.
+                </Typography>
+              </Collapse>
+            </List>
+          </Box>
+          <Typography variant="h5" style={{ padding: '25px 0' }}>
+            It is also worth noting that while you will be learning, you will also be also teaching
+            your dog. Therefore his behavior will reflect you and your progress directly.
+            Maintaining poise and compassionate respect is required. We will approach training our
+            dogs in a composed, calm, and patient manner. Losing our tempers, intimidating, or
+            taking out frustrations on our dog is not a part of this program. If our dogs are not
+            reaching their goals we need to take an inventory of ourselves and our practice to find
+            where the loose ends are.{' '}
+            <span style={{ fontWeight: 550, color: palette.paper.secondary }}>
+              Dogs will not be held responsible for human error.
+            </span>
+          </Typography>
+          <Typography variant="h5" style={{ paddingBottom: '25px' }}>
+            The dog will not be expected to obey a handler who does not have a properly established
+            relationship with the dog.{' '}
+            <span style={{ fontWeight: 550, color: palette.paper.secondary }}>
+              Relationships are a two way street and your dogs will happily reflect your efforts.
+            </span>
+          </Typography>
+          <Typography variant="h5" style={{ fontWeight: 600, paddingBottom: '25px' }}>
+            Please take this opportunity to consider the above and whether this is a modality that
+            feels right for you and your dog(s).
+          </Typography>
+        </Grid>
         <Grid
           item
           container
@@ -338,7 +436,7 @@ export const Training: FC = () => {
           </Typography>
         </Grid>
         <Grid item md={12} style={{ padding: '50px' }}>
-          <Typography variant="h5" style={{ fontWeight: 600, paddingBottom: '25px' }}>
+          <Typography variant="h5" style={{ fontWeight: 600 }}>
             To set up your consultation, contact us at{' '}
             <a
               href="mailto: allie@dogtraining.love"
@@ -353,17 +451,15 @@ export const Training: FC = () => {
             .
           </Typography>
           <Typography variant="h5" style={{ paddingBottom: '25px' }}>
-            Consultations are held via zoom and last about 1.5 to 2 hours.
+            Consultations are held via zoom and last about 1.5 to 2 hours. The purpose of the
+            consultation is for us to go over the reasons your dog is exhibiting the behaviors that
+            brought you here, the curriculum and how it applies to you and your dog, and the
+            expectations of this program.
           </Typography>
           <Typography variant="h5" style={{ paddingBottom: '15px' }}>
             Prior to your consultation, you will receive a welcome packet with a bunch of
             complimentary information that will help you right away, and help you decide if you want
             to invest further.
-          </Typography>
-          <Typography variant="h5" style={{ paddingBottom: '15px' }}>
-            Your consultation will give you tools to start your dog on the right path, regardless of
-            whether or not you decide to move forward with training. We will also be able to answer
-            any questions that you have.
           </Typography>
           <Typography variant="h5" style={{ paddingBottom: '25px' }}>
             <span style={{ fontWeight: 600 }}>Foundation Style Dog Training</span> can help any dog
