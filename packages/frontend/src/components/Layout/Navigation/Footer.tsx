@@ -19,9 +19,10 @@ const Footer: FC = () => {
         alignItems: 'center',
         backgroundColor: palette.paper.quaternary,
         color: palette.text.contrast,
-        height: '400px',
+        height: 'max-content',
         backgroundImage: `url(${PawPrint})`,
         backgroundRepeat: 'no-repeat',
+        padding: '50px 0',
       }}
     >
       <Container maxWidth="lg">
@@ -148,6 +149,18 @@ const Footer: FC = () => {
                 </RouterLink>
               </Box>
             </Grid>
+          </Grid>
+          <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
+            <Typography
+              variant="h6"
+              style={{
+                textAlign: 'center',
+                marginTop: '50px',
+                color: palette.text.contrast,
+              }}
+            >
+              <span style={{ fontStyle: 'italic' }}>2 Corinthians 12:9</span>
+            </Typography>
           </Grid>
         </Grid>
       </Container>
