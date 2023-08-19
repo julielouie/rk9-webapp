@@ -7,6 +7,9 @@ import HeroImg from '../../assets/images/training.png';
 import ScrollToTop from '../utils/ScrollToTop';
 
 export const Training: FC = () => {
+  const [showRelationshipBuilding, setShowRelationshipBuilding] = useState(false);
+  const [showInHouseGroupClasses, setShowInHouseGroupClasses] = useState(false);
+  const [showContinuedExercise, setShowContinuedExercise] = useState(false);
   const [showPrivateSessions, setShowPrivateSessions] = useState(false);
   const [showVirtualPrivateSessions, setShowVirtualPrivateSessions] = useState(false);
   const [showGroupClasses, setShowGroupClasses] = useState(false);
@@ -131,6 +134,56 @@ export const Training: FC = () => {
           <Typography variant="h5" style={{ fontWeight: 600, paddingBottom: '25px' }}>
             Please take this opportunity to consider the above and whether this is a modality that
             feels right for you and your dog(s).
+          </Typography>
+        </Grid>
+        <Grid
+          item
+          container
+          style={{
+            backgroundColor: palette.paper.secondary,
+            display: 'flex',
+            justifyContent: 'space-between',
+            padding: '20px',
+            color: palette.text.contrast,
+          }}
+        >
+          <Typography variant="h4" style={{ fontWeight: 600 }}>
+            Consultation
+          </Typography>
+          <Typography variant="h4" style={{ display: 'flex', alignSelf: 'end', fontWeight: 600 }}>
+            $75
+          </Typography>
+        </Grid>
+        <Grid item md={12} style={{ padding: '50px' }}>
+          <Typography variant="h5" style={{ fontWeight: 600 }}>
+            To set up your consultation, contact us at{' '}
+            <a
+              href="mailto: allie@dogtraining.love"
+              style={{ fontStyle: 'italic', color: palette.black }}
+            >
+              allie@dogtraining.love
+            </a>{' '}
+            or{' '}
+            <a href="tel: 909-964-1382" style={{ fontStyle: 'italic', color: palette.black }}>
+              (909) 964-1382
+            </a>
+            .
+          </Typography>
+          <Typography variant="h5" style={{ paddingBottom: '25px' }}>
+            Consultations are held via zoom and last about 1.5 to 2 hours. The purpose of the
+            consultation is for us to go over the reasons your dog is exhibiting the behaviors that
+            brought you here, the curriculum and how it applies to you and your dog, and the
+            expectations of this program.
+          </Typography>
+          <Typography variant="h5" style={{ paddingBottom: '15px' }}>
+            Prior to your consultation, you will receive a welcome packet with a bunch of
+            complimentary information that will help you right away, and help you decide if you want
+            to invest further.
+          </Typography>
+          <Typography variant="h5" style={{ paddingBottom: '25px' }}>
+            <span style={{ fontWeight: 600 }}>Foundation Style Dog Training</span> can help any dog
+            and handler team achieve any goal, because it is based on understanding animal behavior
+            and how to train animals. It is not a hack, or “quick fix”!
           </Typography>
         </Grid>
         <Grid
@@ -429,43 +482,93 @@ export const Training: FC = () => {
           }}
         >
           <Typography variant="h4" style={{ fontWeight: 600 }}>
-            Consultation
+            In-house Training Package
           </Typography>
           <Typography variant="h4" style={{ display: 'flex', alignSelf: 'end', fontWeight: 600 }}>
-            $75
+            Let&apos;s Talk!
           </Typography>
         </Grid>
         <Grid item md={12} style={{ padding: '50px' }}>
-          <Typography variant="h5" style={{ fontWeight: 600 }}>
-            To set up your consultation, contact us at{' '}
-            <a
-              href="mailto: allie@dogtraining.love"
-              style={{ fontStyle: 'italic', color: palette.black }}
-            >
-              allie@dogtraining.love
-            </a>{' '}
-            or{' '}
-            <a href="tel: 909-964-1382" style={{ fontStyle: 'italic', color: palette.black }}>
-              (909) 964-1382
-            </a>
-            .
+          <Typography variant="h5" style={{ fontWeight: 600, paddingBottom: '25px' }}>
+            This is often utilized by people with mobility issues and families with special
+            circumstances, who want the transparency of being able to see exactly what their dog is
+            learning and how they are being handled. I will do the hands-on teaching of the commands
+            you want your dog to know.
           </Typography>
           <Typography variant="h5" style={{ paddingBottom: '25px' }}>
-            Consultations are held via zoom and last about 1.5 to 2 hours. The purpose of the
-            consultation is for us to go over the reasons your dog is exhibiting the behaviors that
-            brought you here, the curriculum and how it applies to you and your dog, and the
-            expectations of this program.
+            Training will reflect the needs and requirements you may have for example: dogs learning
+            to walk with a motorized scooter, pick up and retrieve dropped objects, off leash
+            control etc. I will take your dogs into environments and on field trips as they progress
+            so they can have a well rounded education, and be ready for variable environments. You
+            will practice leadership and relationship building in the home. You will still
+            participate, but won&apos;t have to do the repetitive drills the dogs need to learn. As
+            the dog builds momentum you will attend benchmark sessions to learn how to handle your
+            dog.
           </Typography>
-          <Typography variant="h5" style={{ paddingBottom: '15px' }}>
-            Prior to your consultation, you will receive a welcome packet with a bunch of
-            complimentary information that will help you right away, and help you decide if you want
-            to invest further.
+          <Typography variant="h5" style={{ fontWeight: 600, paddingBottom: '25px' }}>
+            Our dogs can only be as proficient as their handlers and I want YOU to be the
+            predictable handler your dog deserves, while helping you achieve these goals without
+            sacrificing your relationship with your dog.
           </Typography>
-          <Typography variant="h5" style={{ paddingBottom: '25px' }}>
-            <span style={{ fontWeight: 600 }}>Foundation Style Dog Training</span> can help any dog
-            and handler team achieve any goal, because it is based on understanding animal behavior
-            and how to train animals. It is not a hack, or “quick fix”!
-          </Typography>
+          <Box style={{ display: 'flex', flexDirection: 'column' }}>
+            <List>
+              <ListItemButton
+                onClick={() => setShowRelationshipBuilding(!showRelationshipBuilding)}
+              >
+                <ListItemText primary="Relationship building support and home life troubleshooting" />
+                {showRelationshipBuilding ? <ExpandLess /> : <ExpandMore />}
+              </ListItemButton>
+              <Collapse in={showRelationshipBuilding} timeout="auto" unmountOnExit>
+                <List>
+                  <ListItem style={{ paddingLeft: '50px' }}>
+                    - Relationship building is built on interactions that develop trust, I will give
+                    you the tools to achieve your relationship goals.
+                  </ListItem>
+                  <ListItem style={{ paddingLeft: '50px' }}>
+                    - I will keep in touch and respond to questions via text, emails or phone calls,
+                    and communicate solutions as they arise. I will also send instructional videos
+                    to help, when needed.
+                  </ListItem>
+                  <ListItem style={{ paddingLeft: '50px' }}>
+                    - You will also have access to our group forum where there will be training
+                    tips, videos and a community of other Rogue K9 Academy members, like yourself,
+                    who are working to achieve their goals.
+                  </ListItem>
+                </List>
+              </Collapse>
+              <ListItemButton onClick={() => setShowInHouseGroupClasses(!showInHouseGroupClasses)}>
+                <ListItemText primary="Group Classes" />
+                {showInHouseGroupClasses ? <ExpandLess /> : <ExpandMore />}
+              </ListItemButton>
+              <Collapse in={showInHouseGroupClasses} timeout="auto" unmountOnExit>
+                <List>
+                  <ListItem style={{ paddingLeft: '50px' }}>
+                    - As part of this package I will take your dog to group classes and pack walks
+                    with other clients&apos; dogs. This will help them develop real social
+                    confidence and composure they need to be steady in variable environments.
+                  </ListItem>
+                  <ListItem style={{ paddingLeft: '50px' }}>
+                    - When you are ready you will be able to attend uplifting and fun classes that
+                    will make you a more confident dog handler, who your dog can trust, in any
+                    situation.
+                  </ListItem>
+                </List>
+              </Collapse>
+              <ListItemButton onClick={() => setShowContinuedExercise(!showContinuedExercise)}>
+                <ListItemText primary="Continued Exercise" />
+                {showContinuedExercise ? <ExpandLess /> : <ExpandMore />}
+              </ListItemButton>
+              <Collapse in={showContinuedExercise} timeout="auto" unmountOnExit>
+                <List>
+                  <ListItem style={{ paddingLeft: '50px' }}>
+                    - Some people need ongoing help with exercising their dogs after training is
+                    complete. We have various solutions for this need, and are happy to help you
+                    give your dog a full life that respects and honors your relationship with him.
+                  </ListItem>
+                </List>
+              </Collapse>
+            </List>
+          </Box>
         </Grid>
         <Grid
           item
