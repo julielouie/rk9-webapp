@@ -492,8 +492,8 @@ export const Training: FC = () => {
           <Typography variant="h5" style={{ fontWeight: 600, paddingBottom: '25px' }}>
             This is often utilized by people with mobility issues and families with special
             circumstances, who want the transparency of being able to see exactly what their dog is
-            learning and how they are being handled. I will do the hands-on teaching of the commands
-            you want your dog to know.
+            learning and how they are being handled, but aren&apos;t able to do the training
+            themselves. I will do the hands-on teaching of the commands you want your dog to know.
           </Typography>
           <Typography variant="h5" style={{ paddingBottom: '25px' }}>
             Training will reflect the needs and requirements you may have for example: dogs learning
