@@ -115,18 +115,18 @@ const Footer: FC = () => {
                 </Box>
                 <Box>
                   <RouterLink
-                    to="/training"
+                    to="/services"
                     style={{ textDecoration: 'none', color: palette.text.contrast }}
                   >
-                    TRAINING
+                    SERVICES
                   </RouterLink>
                 </Box>
                 <Box>
                   <RouterLink
-                    to="/thenAndNow"
+                    to="/training"
                     style={{ textDecoration: 'none', color: palette.text.contrast }}
                   >
-                    THEN / NOW
+                    TRAINING
                   </RouterLink>
                 </Box>
               </Box>

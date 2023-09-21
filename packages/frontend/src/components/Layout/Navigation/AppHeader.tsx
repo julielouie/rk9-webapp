@@ -186,13 +186,13 @@ const AppHeader: React.FC = () => {
                   </Box>
                 </Grid>
                 <Grid item xs={12} sm={1} style={{ fontWeight: 'bold' }}>
-                  <Box style={{ cursor: 'pointer' }} onClick={() => history.push('/training')}>
-                    Training
+                  <Box style={{ cursor: 'pointer' }} onClick={() => history.push('/services')}>
+                    Services
                   </Box>
                 </Grid>
                 <Grid item xs={12} sm={2} style={{ fontWeight: 'bold' }}>
-                  <Box style={{ cursor: 'pointer' }} onClick={() => history.push('/thenAndNow')}>
-                    Then / Now
+                  <Box style={{ cursor: 'pointer' }} onClick={() => history.push('/training')}>
+                    Training
                   </Box>
                 </Grid>
                 <Grid item xs={12} sm={2} style={{ fontWeight: 'bold' }}>

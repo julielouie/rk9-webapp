@@ -11,7 +11,7 @@ import DelayedSpinner from './components/utils/DelayedSpinner';
 import Home from './components/Home';
 import About from './components/About';
 import Philosophy from './components/Philosophy';
-import Training from './components/Training';
+import Services from './components/Services';
 import Testimonials from './components/Testimonials';
 import Blog from './components/Blog';
 import SingleBlogPost from './components/Blog/SingleBlogPost';
@@ -19,7 +19,7 @@ import ClientPortal from './components/ClientPortal';
 import Swag from './components/Swag';
 import Settings from './components/Settings';
 import { SessionContext } from './context/SessionContext';
-import ThenAndNow from './components/ThenAndNow';
+import Training from './components/Training';
 
 const App: React.FC = () => {
   const {
@@ -42,8 +42,8 @@ const App: React.FC = () => {
                 <Route exact path="/home" component={Home} />
                 <Route exact path="/about" component={About} />
                 <Route exact path="/philosophy" component={Philosophy} />
+                <Route exact path="/services" component={Services} />
                 <Route exact path="/training" component={Training} />
-                <Route exact path="/thenAndNow" component={ThenAndNow} />
                 <Route exact path="/testimonials" component={Testimonials} />
                 <Route exact path="/blog" component={Blog} />
                 {user && <Route exact path="/swag" component={Swag} />}

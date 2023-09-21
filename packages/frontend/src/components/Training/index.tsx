@@ -1,614 +1,584 @@
-import React, { FC, useState } from 'react';
-import { Typography, Box, Grid, List, ListItem, ListItemText, Collapse } from '@material-ui/core';
-import { ListItemButton } from '@mui/material';
-import { ExpandLess, ExpandMore } from '@material-ui/icons';
+import React, { FC } from 'react';
+import { Grid } from '@material-ui/core';
+import { List, ListItem, Typography } from '@mui/material';
 import palette from '../../theme/palette';
-import HeroImg from '../../assets/images/training.png';
-import ScrollToTop from '../utils/ScrollToTop';
+import BugImg from '../../assets/images/thenAndNow/Bug_Then_Now.jpeg';
+import FiggyImg from '../../assets/images/thenAndNow/Figgy_Then_Now.png';
 
 export const Training: FC = () => {
-  const [showRelationshipBuilding, setShowRelationshipBuilding] = useState(false);
-  const [showInHouseGroupClasses, setShowInHouseGroupClasses] = useState(false);
-  const [showContinuedExercise, setShowContinuedExercise] = useState(false);
-  const [showPrivateSessions, setShowPrivateSessions] = useState(false);
-  const [showVirtualPrivateSessions, setShowVirtualPrivateSessions] = useState(false);
-  const [showGroupClasses, setShowGroupClasses] = useState(false);
-  const [showBiothaneLeash, setShowBiothaneLeash] = useState(false);
-  const [showSessionSupport, setShowSessionSupport] = useState(false);
-  const [showVirtualSessionSupport, setShowVirtualSessionSupport] = useState(false);
-  const [showWellnessCoaching, setShowWellnessCoaching] = useState(false);
-  const [showVirtualWellnessCoaching, setShowVirtualWellnessCoaching] = useState(false);
-  const [showPersonalShopping, setShowPersonalShopping] = useState(false);
-  const [showVirtualPersonalShopping, setShowVirtualPersonalShopping] = useState(false);
-  const [showOwnerParticipation, setShowOwnerParticipation] = useState(false);
-  const [showAttitude, setShowAttitude] = useState(false);
-
   return (
-    <>
-      <ScrollToTop />
-      <Grid container>
-        <Grid
-          item
-          md={12}
-          style={{
-            margin: '70px 0 50px 0',
-            height: '85vh',
-            width: '100%',
-            backgroundImage: `url(${HeroImg})`,
-            backgroundSize: '100%',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-          }}
-        />
-        <Grid
-          item
-          container
-          style={{
-            backgroundColor: palette.paper.secondary,
-            padding: '20px',
-            color: palette.text.contrast,
-          }}
-        >
-          <Typography variant="h4" style={{ fontWeight: 600 }}>
-            Setting Expectations
-          </Typography>
-        </Grid>
-        <Grid item md={12} style={{ padding: '50px' }}>
-          <Typography variant="h5" style={{ fontWeight: 600, paddingBottom: '25px' }}>
-            Rogue K9 Academy’s primary purpose is to educate dog owners so that they no longer have
-            to rely on, or be subject to an unstandardized industry, helping you and your dog
-            overcome barriers preventing you from enjoying each other freely. Please read through
-            this and consider what your expectations are through this process.
-          </Typography>
-          <Typography variant="h5" style={{ paddingBottom: '25px' }}>
-            This will be an educational journey. You will be the student, and I will be the teacher.
-            The curriculum will make you a competent dog handler. You will receive a journal with
-            homework including video instructionals, lectures, and personalized directions for you
-            and your dog. Including instructions for protocols in the home. In order for behavioral
-            modification to be effective we need to work from the ground up. While obedience
-            training is a vital part of the program, to be successful and lasting it must be based
-            on a good understanding of how to communicate with and be a good leader for your dog. I
-            treat each client as though they were my only client and am all in, working with you
-            toward your goals.
-          </Typography>
-          <Box style={{ display: 'flex', flexDirection: 'column' }}>
-            <List>
-              <ListItemButton onClick={() => setShowOwnerParticipation(!showOwnerParticipation)}>
-                <ListItemText primary="Owner Participation" />
-                {showOwnerParticipation ? <ExpandLess /> : <ExpandMore />}
-              </ListItemButton>
-              <Collapse in={showOwnerParticipation} timeout="auto" unmountOnExit>
-                <Typography style={{ padding: '20px 10px 20px 50px' }}>
-                  Owner participation is the heart of the success of this program. Dog’s can only be
-                  as proficient as their handlers. We can’t teach our dogs things we don’t
-                  understand. Though you and your dogs will be learning and progressing together,
-                  you ultimately are responsible for your dog’s behavior. This process will
-                  essentially teach you how to do so and failure to adhere to the curriculum will
-                  result in compromised results. Do you have time to daily and intentionally work
-                  with your dogs?
-                </Typography>
-              </Collapse>
-              <ListItemButton onClick={() => setShowAttitude(!showAttitude)}>
-                <ListItemText primary="Attitude in Dog Training" />
-                {showAttitude ? <ExpandLess /> : <ExpandMore />}
-              </ListItemButton>
-              <Collapse in={showAttitude} timeout="auto" unmountOnExit>
-                <Typography style={{ padding: '10px 10px 10px 50px' }}>
-                  Although it’s normal to feel frustrated, worried, afraid, even jaded, in order to
-                  succeed at training your dog you have to be willing to learn new ideas, change old
-                  attitudes and develop a realistic, empathetic, respectful understanding of your
-                  dog.
-                </Typography>
-                <Typography style={{ padding: '10px 10px 10px 50px' }}>
-                  Attitude is not just as simple as having a good attitude or a bad attitude.
-                  Attitude has to do with the structure of our thought processes and how they relate
-                  to our interactions and our decision making. It is important to remember that we
-                  are teaching our dogs new things, and oftentimes attempting to make changes to or
-                  “undo” behaviors that have been in practice for some time. Our dogs are not
-                  robots. Our dogs deserve the same patience and respect during their learning
-                  process that we would want shown to us. A confused dog is not a bad or disobedient
-                  dog.
-                </Typography>
-              </Collapse>
-            </List>
-          </Box>
-          <Typography variant="h5" style={{ padding: '25px 0' }}>
-            It is also worth noting that while you will be learning, you will also be also teaching
-            your dog. Therefore his behavior will reflect you and your progress directly.
-            Maintaining poise and compassionate respect is required. We will approach training our
-            dogs in a composed, calm, and patient manner. Losing our tempers, intimidating, or
-            taking out frustrations on our dog is not a part of this program. If our dogs are not
-            reaching their goals we need to take an inventory of ourselves and our practice to find
-            where the loose ends are.{' '}
-            <span style={{ fontWeight: 550, color: palette.paper.secondary }}>
-              Dogs will not be held responsible for human error.
-            </span>
-          </Typography>
-          <Typography variant="h5" style={{ paddingBottom: '25px' }}>
-            The dog will not be expected to obey a handler who does not have a properly established
-            relationship with the dog.{' '}
-            <span style={{ fontWeight: 550, color: palette.paper.secondary }}>
-              Relationships are a two way street and your dogs will happily reflect your efforts.
-            </span>
-          </Typography>
-          <Typography variant="h5" style={{ fontWeight: 600, paddingBottom: '25px' }}>
-            Please take this opportunity to consider the above and whether this is a modality that
-            feels right for you and your dog(s).
-          </Typography>
-        </Grid>
+    <Grid container>
+      <Grid
+        item
+        container
+        style={{
+          marginTop: '60px',
+          backgroundColor: palette.paper.secondary,
+          display: 'flex',
+          padding: '20px',
+          color: palette.text.contrast,
+        }}
+      >
+        <Typography variant="h4" style={{ fontWeight: 600 }}>
+          Training
+        </Typography>
+      </Grid>
+      <Grid
+        item
+        container
+        md={12}
+        style={{ padding: '50px', marginBottom: '20px' }}
+        direction="column"
+      >
         <Grid
           item
           container
-          style={{
-            backgroundColor: palette.paper.secondary,
-            display: 'flex',
-            justifyContent: 'space-between',
-            padding: '20px',
-            color: palette.text.contrast,
-          }}
+          direction="column"
+          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
         >
-          <Typography variant="h4" style={{ fontWeight: 600 }}>
-            Consultation
-          </Typography>
-          <Typography variant="h4" style={{ display: 'flex', alignSelf: 'end', fontWeight: 600 }}>
-            $75
-          </Typography>
-        </Grid>
-        <Grid item md={12} style={{ padding: '50px' }}>
-          <Typography variant="h5" style={{ fontWeight: 600 }}>
-            To set up your consultation, contact us at{' '}
-            <a
-              href="mailto: allie@dogtraining.love"
-              style={{ fontStyle: 'italic', color: palette.black }}
-            >
-              allie@dogtraining.love
-            </a>{' '}
-            or{' '}
-            <a href="tel: 909-964-1382" style={{ fontStyle: 'italic', color: palette.black }}>
-              (909) 964-1382
-            </a>
-            .
-          </Typography>
-          <Typography variant="h5" style={{ paddingBottom: '25px' }}>
-            Consultations are held via zoom and last about 1.5 to 2 hours. The purpose of the
-            consultation is for us to go over the reasons your dog is exhibiting the behaviors that
-            brought you here, the curriculum and how it applies to you and your dog, and the
-            expectations of this program.
-          </Typography>
-          <Typography variant="h5" style={{ paddingBottom: '15px' }}>
-            Prior to your consultation, you will receive a welcome packet with a bunch of
-            complimentary information that will help you right away, and help you decide if you want
-            to invest further.
-          </Typography>
-          <Typography variant="h5" style={{ paddingBottom: '25px' }}>
-            <span style={{ fontWeight: 600 }}>Foundation Style Dog Training</span> can help any dog
-            and handler team achieve any goal, because it is based on understanding animal behavior
-            and how to train animals. It is not a hack, or “quick fix”!
-          </Typography>
-        </Grid>
-        <Grid
-          item
-          container
-          style={{
-            backgroundColor: palette.paper.secondary,
-            display: 'flex',
-            justifyContent: 'space-between',
-            padding: '20px',
-            color: palette.text.contrast,
-          }}
-        >
-          <Typography variant="h4" style={{ fontWeight: 600 }}>
-            In-Person Training Package
-          </Typography>
-          <Typography variant="h4" style={{ display: 'flex', alignSelf: 'end', fontWeight: 600 }}>
-            $655
-          </Typography>
-        </Grid>
-        <Grid item md={12} style={{ padding: '50px' }}>
-          <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-            <Typography variant="h5" style={{ fontWeight: 600, paddingBottom: '25px' }}>
-              Your Initial Dog Training Purchase of $655 includes all the good stuff listed below:
+          <Grid item>
+            <Typography variant="h4" sx={{ fontWeight: 800, mb: 1 }}>
+              Shadow
             </Typography>
-            <Typography variant="h5" style={{ paddingBottom: '25px', fontStyle: 'italic' }}>
-              *click on each to learn more
-            </Typography>
-          </Box>
-          <Box style={{ display: 'flex', flexDirection: 'column' }}>
-            <List>
-              <ListItemButton onClick={() => setShowPrivateSessions(!showPrivateSessions)}>
-                <ListItemText primary="Five, 60 minute Private Sessions" />
-                {showPrivateSessions ? <ExpandLess /> : <ExpandMore />}
-              </ListItemButton>
-              <Collapse in={showPrivateSessions} timeout="auto" unmountOnExit>
-                <List>
-                  <ListItem style={{ paddingLeft: '50px' }}>
-                    - One on one, in person coaching. Here you will learn how to teach your dog and
-                    practice new behaviors. This is where the rubber meets the road.
-                  </ListItem>
-                  <ListItem style={{ paddingLeft: '50px' }}>
-                    - Full access to myself and the RK9 community between sessions to troubleshoot
-                    issues and maintain momentum.
-                  </ListItem>
-                  <ListItem style={{ paddingLeft: '50px' }}>
-                    - An interactive training journal where you can upload videos of you practicing
-                    your homework, between sessions, and receive feedback in real time.
-                  </ListItem>
-                  <ListItem style={{ paddingLeft: '50px' }}>
-                    - You and your dog will learn how to communicate predictably, tackling
-                    housebreaking, management, leadership and obedience that will progress at you
-                    and your dog’s pace.
-                  </ListItem>
-                  <ListItem style={{ paddingLeft: '50px' }}>
-                    - Once you complete your initial 5 pack, continuing sessions will be discounted
-                    and designed to reach your goals and needs.
-                  </ListItem>
-                  <ListItem style={{ paddingLeft: '50px', fontWeight: 600 }}>
-                    - The possibilities are endless. You and your dog deserve the freedom of a
-                    mutual relationship and the loving bond that comes with fair and advanced
-                    training.
-                  </ListItem>
-                </List>
-              </Collapse>
-              <ListItemButton onClick={() => setShowGroupClasses(!showGroupClasses)}>
-                <ListItemText primary="Group Classes" />
-                {showGroupClasses ? <ExpandLess /> : <ExpandMore />}
-              </ListItemButton>
-              <Collapse in={showGroupClasses} timeout="auto" unmountOnExit>
-                <List>
-                  <ListItem style={{ paddingLeft: '50px' }}>
-                    - Group classes and social events are scheduled monthly for you to practice
-                    training and proper social skills in a safe and controlled environment.
-                  </ListItem>
-                  <ListItem style={{ paddingLeft: '50px' }}>
-                    - We do everything from obedience classes, to aggression support groups, to
-                    swimming lessons and fitness with Fido.
-                  </ListItem>
-                  <ListItem style={{ paddingLeft: '50px' }}>
-                    - These classes are uplifting, fun, and will make you a more confident dog
-                    handler, who your dog can trust, in any situation.
-                  </ListItem>
-                </List>
-              </Collapse>
-              <ListItemButton onClick={() => setShowBiothaneLeash(!showBiothaneLeash)}>
-                <ListItemText primary="One 6ft Biothane Leash in your color of choice" />
-                {showBiothaneLeash ? <ExpandLess /> : <ExpandMore />}
-              </ListItemButton>
-              <Collapse in={showBiothaneLeash} timeout="auto" unmountOnExit>
-                <List>
-                  <ListItem style={{ paddingLeft: '50px' }}>
-                    - Super comfy, easy to handle and clean, and perfect for the dedicated handler!
-                  </ListItem>
-                </List>
-              </Collapse>
-              <ListItemButton onClick={() => setShowSessionSupport(!showSessionSupport)}>
-                <ListItemText
-                  primary="Between session support, video instruction, troubleshooting, and homelife problem
-            solving"
-                />
-                {showSessionSupport ? <ExpandLess /> : <ExpandMore />}
-              </ListItemButton>
-              <Collapse in={showSessionSupport} timeout="auto" unmountOnExit>
-                <List>
-                  <ListItem style={{ paddingLeft: '50px' }}>
-                    - Relationship building and keeping momentum takes more than one practice per
-                    week, and, as you will be doing homework between sessions and committed to your
-                    dogs, so will I.
-                  </ListItem>
-                  <ListItem style={{ paddingLeft: '50px' }}>
-                    - I will keep in touch and respond to questions via text, emails or phone calls,
-                    and communicate solutions as they arise. I will also send instructional videos
-                    to help, when needed.
-                  </ListItem>
-                  <ListItem style={{ paddingLeft: '50px' }}>
-                    - You will also have access to our group forum where there will be training
-                    tips, videos and a community of other Rogue K9 Academy members, like yourself,
-                    who are working to achieve their goals.
-                  </ListItem>
-                </List>
-              </Collapse>
-              <ListItemButton onClick={() => setShowWellnessCoaching(!showWellnessCoaching)}>
-                <ListItemText primary="Wellness Coaching" />
-                {showWellnessCoaching ? <ExpandLess /> : <ExpandMore />}
-              </ListItemButton>
-              <Collapse in={showWellnessCoaching} timeout="auto" unmountOnExit>
-                <List>
-                  <ListItem style={{ paddingLeft: '50px' }}>
-                    - There is more to dog ownership than obedience. A healthy dog is a happy dog. I
-                    will help you make educated decisions about health care and nutrition.
-                  </ListItem>
-                </List>
-              </Collapse>
-              <ListItemButton onClick={() => setShowPersonalShopping(!showPersonalShopping)}>
-                <ListItemText primary="“Personal Shopping”" />
-                {showPersonalShopping ? <ExpandLess /> : <ExpandMore />}
-              </ListItemButton>
-              <Collapse in={showPersonalShopping} timeout="auto" unmountOnExit>
-                <List>
-                  <ListItem style={{ paddingLeft: '50px' }}>
-                    - I will help you pick out any additional gear you and your dog may need,
-                    including training collars, and the very best training treats.
-                  </ListItem>
-                  <ListItem style={{ paddingLeft: '50px' }}>
-                    - Consider me your dog’s concierge service (these items will be charged
-                    separately)!
-                  </ListItem>
-                </List>
-              </Collapse>
-            </List>
-          </Box>
+          </Grid>
+          <Grid item>
+            <iframe
+              width="700px"
+              height="500px"
+              src="https://www.youtube.com/embed/ObzK6-7YSPY?si=3LupjqEwOxsu6Mpn"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              title="Shadow, Then and Now"
+              style={{ borderRadius: '10px', marginBottom: '20px' }}
+            />
+          </Grid>
         </Grid>
-        <Grid
-          item
-          container
-          style={{
-            backgroundColor: palette.paper.secondary,
-            display: 'flex',
-            justifyContent: 'space-between',
-            padding: '20px',
-            color: palette.text.contrast,
-          }}
-        >
-          <Typography variant="h4" style={{ fontWeight: 600 }}>
-            Virtual Training Package
+        <Grid item>
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            I am so grateful to be able to share this before and after video! This is Amanda and her
+            incredibly high drive, powerful, pit bull mix, Shadow. Shadow and his momma weigh about
+            the same amount. Shadow out muscles and out torques her. Shadow had successfully dragged
+            Amanda on leash multiple times; now she can handle him and have control, without
+            muscling him, without being rough, and without “showing him who&apos;s boss”.
           </Typography>
-          <Typography variant="h4" style={{ display: 'flex', alignSelf: 'end', fontWeight: 600 }}>
-            $500
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            Like so many of the amazing handlers in this crew Amanda is a beautiful example of
+            tenacious love for her dog, poise, and hope! Shadow has not been punished for his
+            aggression, he has not been told that his pit bullness is &quot;wrong&quot;. He has not
+            been roughed up or intimidated. He and his momma have learned predictable command
+            structure, advanced obedience, advanced leadership and Amanda provides positive outlets
+            for his incredible drive to bite something....IE TUUUGGGGG and now dock diving. I am
+            quite sure Shadow would jump through a tornado to retrieve his tug!
           </Typography>
-        </Grid>
-        <Grid item md={12} style={{ padding: '50px' }}>
-          <Typography variant="h5" style={{ fontWeight: 600, paddingBottom: '25px' }}>
-            This is a great modality for aggression cases out of the area, or for people on a
-            budget. I currently have clients internationally who are reaping the benefits of
-            learning how to become the handler their dog needs.
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            Notes about the video: The conditioned punisher is one of my personal favorite things
+            about Foundation Style Dogtraining and the proper use of command structure. It is
+            utilized to actually help the dog avoid aversives and have a deeper, more meaningful,
+            and predictable line of communication with their handler. There is no punishment applied
+            to the word “no” it is a conditioned response, “installed” during phase 2. This allows
+            the dog the confidence that if he makes an honest or benign mistake that his handler
+            will help him. This allows more control with less positive punishment when used
+            properly. AKA: LIMA. This is so beautiful because our dogs don&apos;t have to worry,
+            they don&apos;t have to walk on eggshells.
           </Typography>
-          <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-            <Typography variant="h5" style={{ fontWeight: 600, paddingBottom: '25px' }}>
-              Your Initial Dog Training Purchase of $425 includes all the good stuff listed below:
-            </Typography>
-            <Typography variant="h5" style={{ paddingBottom: '25px', fontStyle: 'italic' }}>
-              *click on each to learn more
-            </Typography>
-          </Box>
-          <Box style={{ display: 'flex', flexDirection: 'column' }}>
-            <List>
-              <ListItemButton
-                onClick={() => setShowVirtualPrivateSessions(!showVirtualPrivateSessions)}
-              >
-                <ListItemText primary="Five, 60 minute Private Sessions" />
-                {showVirtualPrivateSessions ? <ExpandLess /> : <ExpandMore />}
-              </ListItemButton>
-              <Collapse in={showVirtualPrivateSessions} timeout="auto" unmountOnExit>
-                <List>
-                  <ListItem style={{ paddingLeft: '50px' }}>
-                    - Here you will learn how to teach your dog and practice new behaviors. This is
-                    where the rubber meets the road.
-                  </ListItem>
-                  <ListItem style={{ paddingLeft: '50px' }}>
-                    - Full access to myself and the RK9 community between sessions to troubleshoot
-                    issues and maintain momentum.
-                  </ListItem>
-                  <ListItem style={{ paddingLeft: '50px' }}>
-                    - An interactive training journal where you can upload videos of you practicing
-                    your homework, between sessions, and receive feedback in real time.
-                  </ListItem>
-                  <ListItem style={{ paddingLeft: '50px' }}>
-                    - You and your dog will learn how to communicate predictably, tackling
-                    housebreaking, management, leadership and obedience that will progress at you
-                    and your dog’s pace.
-                  </ListItem>
-                  <ListItem style={{ paddingLeft: '50px' }}>
-                    - Once you complete your initial 5 pack, continuing sessions will be discounted
-                    and designed to reach your goals and needs.
-                  </ListItem>
-                  <ListItem style={{ paddingLeft: '50px', fontWeight: 600 }}>
-                    - The possibilities are endless. You and your dog deserve the freedom of a
-                    mutual relationship and the loving bond that comes with fair and advanced
-                    training.
-                  </ListItem>
-                </List>
-              </Collapse>
-              <ListItemButton
-                onClick={() => setShowVirtualSessionSupport(!showVirtualSessionSupport)}
-              >
-                <ListItemText
-                  primary="Between session support, video instruction, troubleshooting, and homelife problem
-            solving"
-                />
-                {showVirtualSessionSupport ? <ExpandLess /> : <ExpandMore />}
-              </ListItemButton>
-              <Collapse in={showVirtualSessionSupport} timeout="auto" unmountOnExit>
-                <List>
-                  <ListItem style={{ paddingLeft: '50px' }}>
-                    - Relationship building and keeping momentum takes more than one practice per
-                    week, and, as you will be doing homework between sessions and committed to your
-                    dogs, so will I.
-                  </ListItem>
-                  <ListItem style={{ paddingLeft: '50px' }}>
-                    - I will keep in touch and respond to questions via text, emails or phone calls,
-                    and communicate solutions as they arise. I will also send instructional videos
-                    to help, when needed.
-                  </ListItem>
-                  <ListItem style={{ paddingLeft: '50px' }}>
-                    - You will also have access to our group forum where there will be training
-                    tips, videos and a community of other Rogue K9 Academy members, like yourself,
-                    who are working to achieve their goals.
-                  </ListItem>
-                </List>
-              </Collapse>
-              <ListItemButton
-                onClick={() => setShowVirtualWellnessCoaching(!showVirtualWellnessCoaching)}
-              >
-                <ListItemText primary="Wellness Coaching" />
-                {showVirtualWellnessCoaching ? <ExpandLess /> : <ExpandMore />}
-              </ListItemButton>
-              <Collapse in={showVirtualWellnessCoaching} timeout="auto" unmountOnExit>
-                <List>
-                  <ListItem style={{ paddingLeft: '50px' }}>
-                    - There is more to dog ownership than obedience. A healthy dog is a happy dog. I
-                    will help you make educated decisions about health care and nutrition.
-                  </ListItem>
-                </List>
-              </Collapse>
-              <ListItemButton
-                onClick={() => setShowVirtualPersonalShopping(!showVirtualPersonalShopping)}
-              >
-                <ListItemText primary="“Personal Shopping”" />
-                {showVirtualPersonalShopping ? <ExpandLess /> : <ExpandMore />}
-              </ListItemButton>
-              <Collapse in={showVirtualPersonalShopping} timeout="auto" unmountOnExit>
-                <List>
-                  <ListItem style={{ paddingLeft: '50px' }}>
-                    - I will help you pick out any additional gear you and your dog may need,
-                    including training collars, and the very best training treats.
-                  </ListItem>
-                  <ListItem style={{ paddingLeft: '50px' }}>
-                    - Consider me your dog’s concierge service (these items will be charged
-                    separately)!
-                  </ListItem>
-                </List>
-              </Collapse>
-            </List>
-          </Box>
-        </Grid>
-        <Grid
-          item
-          container
-          style={{
-            backgroundColor: palette.paper.secondary,
-            display: 'flex',
-            justifyContent: 'space-between',
-            padding: '20px',
-            color: palette.text.contrast,
-          }}
-        >
-          <Typography variant="h4" style={{ fontWeight: 600 }}>
-            In-house Training Package
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            What is Premack? Well, per Applied Behavior Analysis: Premack&apos;s Principle suggests
+            that if a person (or dog)wants to perform a given activity, the person (or dog) will
+            perform a less desirable activity to get at the more desirable activity; that is,
+            activities may themselves be reinforcers. An individual will be more motivated to
+            perform a particular activity if he knows that he will partake in a more desirable
+            activity as a consequence. For example if you eat your veggie&apos;s you get to eat ice
+            cream...or in Shadow&apos;s case: if you give me a gorgeous phase 3 heel, you get to go
+            back and bite the tug!!!
           </Typography>
-          <Typography variant="h4" style={{ display: 'flex', alignSelf: 'end', fontWeight: 600 }}>
-            Let&apos;s Talk!
-          </Typography>
-        </Grid>
-        <Grid item md={12} style={{ padding: '50px' }}>
-          <Typography variant="h5" style={{ fontWeight: 600, paddingBottom: '25px' }}>
-            This is often utilized by people with mobility issues and families with special
-            circumstances, who want the transparency of being able to see exactly what their dog is
-            learning and how they are being handled, but aren&apos;t able to do the training
-            themselves. I will do the hands-on teaching of the commands you want your dog to know.
-          </Typography>
-          <Typography variant="h5" style={{ paddingBottom: '25px' }}>
-            Training will reflect the needs and requirements you may have for example: dogs learning
-            to walk with a motorized scooter, pick up and retrieve dropped objects, off leash
-            control etc. I will take your dogs into environments and on field trips as they progress
-            so they can have a well rounded education, and be ready for variable environments. You
-            will practice leadership and relationship building in the home. You will still
-            participate, but won&apos;t have to do the repetitive drills the dogs need to learn. As
-            the dog builds momentum you will attend benchmark sessions to learn how to handle your
-            dog.
-          </Typography>
-          <Typography variant="h5" style={{ fontWeight: 600, paddingBottom: '25px' }}>
-            Our dogs can only be as proficient as their handlers and I want YOU to be the
-            predictable handler your dog deserves, while helping you achieve these goals without
-            sacrificing your relationship with your dog.
-          </Typography>
-          <Box style={{ display: 'flex', flexDirection: 'column' }}>
-            <List>
-              <ListItemButton
-                onClick={() => setShowRelationshipBuilding(!showRelationshipBuilding)}
-              >
-                <ListItemText primary="Relationship building support and home life troubleshooting" />
-                {showRelationshipBuilding ? <ExpandLess /> : <ExpandMore />}
-              </ListItemButton>
-              <Collapse in={showRelationshipBuilding} timeout="auto" unmountOnExit>
-                <List>
-                  <ListItem style={{ paddingLeft: '50px' }}>
-                    - Relationship building is built on interactions that develop trust, I will give
-                    you the tools to achieve your relationship goals.
-                  </ListItem>
-                  <ListItem style={{ paddingLeft: '50px' }}>
-                    - I will keep in touch and respond to questions via text, emails or phone calls,
-                    and communicate solutions as they arise. I will also send instructional videos
-                    to help, when needed.
-                  </ListItem>
-                  <ListItem style={{ paddingLeft: '50px' }}>
-                    - You will also have access to our group forum where there will be training
-                    tips, videos and a community of other Rogue K9 Academy members, like yourself,
-                    who are working to achieve their goals.
-                  </ListItem>
-                </List>
-              </Collapse>
-              <ListItemButton onClick={() => setShowInHouseGroupClasses(!showInHouseGroupClasses)}>
-                <ListItemText primary="Group Classes" />
-                {showInHouseGroupClasses ? <ExpandLess /> : <ExpandMore />}
-              </ListItemButton>
-              <Collapse in={showInHouseGroupClasses} timeout="auto" unmountOnExit>
-                <List>
-                  <ListItem style={{ paddingLeft: '50px' }}>
-                    - As part of this package I will take your dog to group classes and pack walks
-                    with other clients&apos; dogs. This will help them develop real social
-                    confidence and composure they need to be steady in variable environments.
-                  </ListItem>
-                  <ListItem style={{ paddingLeft: '50px' }}>
-                    - When you are ready you will be able to attend uplifting and fun classes that
-                    will make you a more confident dog handler, who your dog can trust, in any
-                    situation.
-                  </ListItem>
-                </List>
-              </Collapse>
-              <ListItemButton onClick={() => setShowContinuedExercise(!showContinuedExercise)}>
-                <ListItemText primary="Continued Exercise" />
-                {showContinuedExercise ? <ExpandLess /> : <ExpandMore />}
-              </ListItemButton>
-              <Collapse in={showContinuedExercise} timeout="auto" unmountOnExit>
-                <List>
-                  <ListItem style={{ paddingLeft: '50px' }}>
-                    - Some people need ongoing help with exercising their dogs after training is
-                    complete. We have various solutions for this need, and are happy to help you
-                    give your dog a full life that respects and honors your relationship with him.
-                  </ListItem>
-                </List>
-              </Collapse>
-            </List>
-          </Box>
-        </Grid>
-        <Grid
-          item
-          container
-          style={{
-            backgroundColor: palette.paper.secondary,
-            padding: '20px',
-            color: palette.text.contrast,
-          }}
-        >
-          <Typography variant="h4" style={{ fontWeight: 600 }}>
-            Advanced Training Options
-          </Typography>
-        </Grid>
-        <Grid item md={12} style={{ padding: '50px' }}>
-          <Typography variant="h5" style={{ fontWeight: 600, paddingBottom: '25px' }}>
-            The sky is the limit, when it comes to training your pup!
-          </Typography>
-          <Typography variant="h5" style={{ paddingBottom: '25px' }}>
-            We also offer the following extracurricular activities, for those who have completed
-            their advanced obedience:
-          </Typography>
-          <Typography variant="h5" style={{ paddingBottom: '15px' }}>
-            - Personal Protection
-          </Typography>
-          <Typography variant="h5" style={{ paddingBottom: '15px' }}>
-            - Scent Detection
-          </Typography>
-          <Typography variant="h5" style={{ paddingBottom: '15px' }}>
-            - Dock Diving
-          </Typography>
-          <Typography variant="h5" style={{ paddingBottom: '15px' }}>
-            - Cart Pulling
-          </Typography>
-          <Typography variant="h5" style={{ paddingBottom: '15px' }}>
-            - Retrieving
+          <Typography variant="h5">
+            The best part of this video is Shadow&apos;s body language. He is pumped, full of drive,
+            and giving his best effort. He is not afraid and he is giving true obedience. He is also
+            receiving an outlet for his absolute need to bite something (I&apos;m so glad we are
+            friends buddy).
           </Typography>
         </Grid>
       </Grid>
-    </>
+      <Grid
+        item
+        container
+        md={12}
+        style={{ padding: '50px', marginBottom: '20px' }}
+        direction="column"
+      >
+        <Grid
+          item
+          container
+          direction="column"
+          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+        >
+          <Grid item>
+            <Typography variant="h4" sx={{ fontWeight: 800, mb: 1 }}>
+              Mav
+            </Typography>
+          </Grid>
+          <Grid item>
+            <iframe
+              width="700px"
+              height="500px"
+              src="https://www.youtube.com/embed/YpaRA1G2rZI?si=3ZQXF9IzM561qfpf"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              title="Mav, Then and Now"
+              style={{ borderRadius: '10px', marginBottom: '20px' }}
+            />
+          </Grid>
+        </Grid>
+        <Grid item>
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            Today I went to a dock diving event to see Mav and his momma do their thing. What I saw
+            was an abrupt reminder of how important our attitudes are towards our dogs. It reminded
+            me of how I learned to train before FSDT and how miserable it was.
+          </Typography>
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            Some things that I saw:
+            <List>
+              <ListItem> - Choking dogs out to get them to drop toys</ListItem>
+              <ListItem> - Slapping them in the face</ListItem>
+              <ListItem> - Prying their mouths open</ListItem>
+              <ListItem> - Hanging dogs</ListItem>
+              <ListItem> - Hanging dogs upside down</ListItem>
+              <ListItem> - Yelling at dogs</ListItem>
+              <ListItem> - Cranking on leashes</ListItem>
+              <ListItem> - Dragging dogs with their feet off the ground</ListItem>
+              <ListItem> - Punched in the abdomen for not jumping</ListItem>
+              <ListItem> - Dogs straining at the end of their leashes</ListItem>
+              <ListItem> - Dogs afraid of their handlers</ListItem>
+              <ListItem>
+                {' '}
+                - Dogs being teased up with toys then yelled at, slapped and cranked for jumping at
+                the teasing toys
+              </ListItem>
+              <ListItem>
+                {' '}
+                - Dogs being yelled at, slapped and cranked on for barking at the pool between jumps
+              </ListItem>
+              <ListItem>
+                {' '}
+                - Dogs being yelled at and dragged for not getting out of the pool
+              </ListItem>
+              <ListItem> - Dogs being punished for not wanting to be pet by passers by</ListItem>
+            </List>
+          </Typography>
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            Most people had their dogs in harnesses, flat collars, or martingales. All tools touted
+            as being force free and gentle. Training collars are not allowed on the dock, and
+            “inhumane handling” is listed as unacceptable on the event website. All of this
+            volatility around getting a dog to jump in a pool after a toy. Something that should be
+            enjoyable. Everyone acting like this is a normal and a fun bonding experience.
+          </Typography>
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            I felt so sad for the people there and the dogs because they couldn&apos;t see that
+            treating dogs that way is not an effective training method, even though the dogs
+            didn&apos;t obey or listen after being treated this way. I know what it&apos;s like to
+            be stuck in a cycle of cognitive dissonance. Cognitive Dissonance: the discomfort we
+            have when components of attitude contradict. Therefore we adjust. The tendency of
+            Confirmation Bias: the tendency to only seek out and remember information that aligns
+            with their pre-existing views and ideas.
+          </Typography>
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            The silver lining was that Mav&apos;s momma has worked hard to teach impulse control
+            through obedience instead of just punishing emotions and getting frustrated. Mav
+            didn&apos;t need to be held back by a second handler, he practiced exquisite impulse
+            control, he charged out of the pool to return to his momma who was praising him from the
+            dock, he dropped the tug for his momma, knowing she would be fair.
+          </Typography>
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            He worked hard all day, and was calm and collected, walking around and waiting his turn.
+            He held a command when a guy tried to pet him and gave his mom a hard time for saying
+            “no” and stood in front of him and made eye contact and talked at him. He out jumped
+            himself, advancing into the next group and took 2nd place in his class. Mav looked at
+            his mom adoringly and did his best. There was no conflict between them. When things got
+            hectic she practiced FSDT management, and had a very comfy kennel set up in the shade.
+          </Typography>
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            Mav looked like he genuinely enjoyed himself and his momma was proud of him and loved
+            him. They did an amazing job representing LIMA and how cross training is extremely
+            beneficial for a dog&apos;s well being. Not one time did she yell, crank on, kick, or
+            express frustration toward him.
+          </Typography>
+          <Typography variant="h5">
+            This team put in the work, the time, and Mali momma has absolutely stood her ground and
+            advocated for her dog. I am so honored and grateful for them and even for the reminder
+            of how important it is to not cut corners, and not settle for hacks. There is never a
+            traffic jam on the extra mile.
+          </Typography>
+        </Grid>
+      </Grid>
+      <Grid
+        item
+        container
+        md={12}
+        style={{ padding: '50px', marginBottom: '20px' }}
+        direction="column"
+      >
+        <Grid
+          item
+          container
+          direction="column"
+          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+        >
+          <Grid item>
+            <Typography variant="h4" sx={{ fontWeight: 800, mb: 1 }}>
+              Snapshots from our “Aggression” Support” Crew!
+            </Typography>
+          </Grid>
+          <Grid item>
+            <iframe
+              width="700px"
+              height="500px"
+              src="https://www.youtube.com/embed/WiGR60zpqF4?si=O26MO2ZiSC81kgMX"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              title="Aggression Support Crew"
+              style={{ borderRadius: '10px', marginBottom: '20px' }}
+            />
+          </Grid>
+        </Grid>
+        <Grid item>
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            Aggressive dogs are my absolute favorite. I love seeing handlers build relationships
+            with their dogs, appreciating them for who they are and helping them learn impulse
+            control, advanced obedience, and have freedom! This class was designed to give advanced
+            and “finished” dogs an opportunity to face high pressure triggers with the safety of a
+            bite suit, so that their handlers could practice cool, calm, handling without worrying.
+          </Typography>
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            You will see a class full of aggressive and reactive dogs working in close proximity
+            with each other. This is the result of applying a KNOWLEDGE of NATURAL canine behavior,
+            different types of aggression, and RESPECTING the dog for who they are.
+          </Typography>
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            I am very passionate about not punishing dogs for their natural behaviors. We instead
+            teach them to practice impulse control (emotional control) through advanced obedience
+            and relationship building. We NEVER correct an emotional response, including unwanted
+            aggression, rather we teach the dogs positional commands and they receive a correction
+            for breaking or ignoring the command, whether it is to lunge at someone, or eat
+            bubblegum off the sidewalk. They will learn overtime that the things that used to
+            trigger them aren&apos;t such a big deal (just like we do… with experience and
+            guidance). The dogs have a perception change and gain freedom!!!!!!!!!!
+          </Typography>
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            We asked the dogs to move towards the trigger in order to complete the task at hand.
+            While this isn&apos;t necessarily something we would do in “real life” this is an
+            excellent drill, with safety in place, to help the dogs practice very high levels of
+            emotional (aggression) control. It also give their mommas the opportunity to practice
+            being confident and disciplined handlers . By practicing emotional control our dogs are
+            able to experience more “life”. They begin to experience fun and they begin to enjoy
+            their work. They experience a perception change, and the things that used to trigger
+            them are no longer a big deal, so we raise the stakes!
+          </Typography>
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            As you can see, a dog that is not afraid of his handler, and understands the
+            expectations set for him, always sails over the bar, no matter how high it is! This is
+            impulse control and this is ABA. Correcting an emotional response teaches the dog
+            absolutely nothing positive, rather that the handler is unpredictable and untrustworthy
+            in that situation. It can cause a subdued fearful dog, or a more reactive dog with
+            handler redirection. We always put the relationship first. Always. Ladies. You and your
+            dogs are bad ass. Beautiful work. What a privilege for me to be apart of this.
+          </Typography>
+          <Typography variant="h5" sx={{ fontWeight: 600, my: 5 }}>
+            A word about &quot;Aggression Rehabilitation&quot; from Dog Training World by K9-1:
+          </Typography>
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            Since many people reading this are concerned about &quot;rehabilitating&quot; a
+            dog&apos;s aggressive behavior, we should be clear about what this word means.
+            &quot;Rehabilitation&quot; is the act of restoring something to its original state. It
+            is derived from the Latin prefix &quot;re-,&quot; meaning &quot;again&quot; and
+            &quot;habitare,&quot; meaning &quot;make fit.&quot; Aggression is a natural behavior and
+            its presentation primarily depends on a canine&apos;s genetics and age. Both these
+            factors determine why and how, if uninterrupted, a dog is likely to be aggressive in
+            certain situations.
+          </Typography>
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            Aggressive behavior can be interrupted by various forms of human intervention,
+            particularly training and management, but neither of these is
+            &quot;rehabilitation.&quot; Both fall under the same category as any other learned
+            behavior and the constraints of maintaining this behavior. The recent surge in
+            &quot;rehabilitated dogs&quot; being adopted out from rescue organizations and then
+            causing significant injury or death underscores the importance of understanding just
+            what &quot;rehabilitation&quot; means.
+          </Typography>
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            For example, if a greyhound has predatory aggression toward cats and a trainer uses an
+            E-collar to shock the dog for trying to chase a cat, that dog has not been
+            rehabilitated. Cat aggression is a natural behavior and the E-collar has been used to
+            stop it. In other words, the dog has not been &quot;rehabilitated,&quot; because chasing
+            cats and other moving animals is a natural behavior.
+          </Typography>
+          <Typography variant="h5">
+            It&apos;s also worth bearing in mind that unless a trainer knows how to generalize,
+            maintain, and prevent spontaneous recovery of a natural behavior, it&apos;s likely that,
+            after a while, the dog will revert to that behavior.
+          </Typography>
+        </Grid>
+      </Grid>
+      <Grid
+        item
+        container
+        md={12}
+        style={{ padding: '50px', marginBottom: '20px' }}
+        direction="column"
+      >
+        <Grid
+          item
+          container
+          direction="column"
+          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+        >
+          <Grid item>
+            <Typography variant="h4" sx={{ fontWeight: 800, mb: 1 }}>
+              Pepper
+            </Typography>
+          </Grid>
+          <Grid item>
+            <iframe
+              width="700px"
+              height="500px"
+              src="https://www.youtube.com/embed/BKPJ_4MpPpg?si=OuiQ84MmXglTexTy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              title="Pepper, Then and Now"
+              style={{ borderRadius: '10px', marginBottom: '20px' }}
+            />
+          </Grid>
+        </Grid>
+        <Grid item>
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            Julie rescued Pepper physically by getting her out of an abusive home, she rescued her a
+            second time by practicing FSDT and freeing her from the darkness of living in constant
+            fear, and having conflict with her handlers, and the outside world.
+          </Typography>
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            Here is a little video of Pepper&apos;s journey. She came in with successful bites under
+            her belt, failed attempts with other training systems, and a VERY dedicated momma and
+            auntie who were committed to helping her.
+          </Typography>
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            Pepper wore her muzzle during our first few sessions and (as you will see) I was wearing
+            bite suit pants during a drill designed to help her handlers practice leash handling and
+            calm corrections during stressful encounters. Pepper is NOT being corrected for lunging
+            at me. She is being corrected for breaking the sit. This is very different in the
+            dog&apos;s mind because they can understand being corrected for disobedience, but not
+            for their natural responses to the environment. I have never handled Pepper, but I do
+            cheer her on during our sessions.
+          </Typography>
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            The second part of the video you will see her with a totally different idea about
+            meeting strangers and holding commands. This is because she associated training with fun
+            activities and confidence building, not with being told she sucks. Pepper knows that the
+            command is her safety net and that when her mom gives her an order, she not only has to
+            follow it, but that it is good for her to follow it.
+          </Typography>
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            This is the result of applying a KNOWLEDGE of NATURAL canine behavior, different types
+            of aggression, and RESPECTING the dog for who they are. Julie, you are exactly who
+            Pepper needs; your compassion and determination to find answers and treat her with
+            respect are inspiring!
+          </Typography>
+          <Typography variant="h5" sx={{ fontWeight: 600, my: 5 }}>
+            A description of Protective Aggression/Fear Aggression from Dog Training World by K9-1:
+          </Typography>
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            These two are grouped together because there&apos;s just one key difference is relevant
+            to developing a training plan. Protective aggression is triggered by the instinct of a
+            dog to defend him/herself and other pack mates from a threat. This is a clearly
+            observable behavior in all studies of wild and feral dogs and an instinct that humans
+            have taken advantage of in many working dogs.
+          </Typography>
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            &quot;Fear aggression&quot; is a variant of this behavior which is best used as a
+            classifying term instead of protective aggression when the triggers seem to be
+            irrational or inappropriate for a protective response. There may be some gray area as to
+            what constitutes a rational protective response and what would be considered irrational.
+            A handler’s expectations of her/his dog further complicate the matter.
+          </Typography>
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            For example, a rottweiler that acts aggressively when a stranger walks within close
+            range on a walk, is more likely to be called &quot;protective&quot; while a Labrador is
+            more likely to be called &quot;fearful&quot; for the same behavior. Therefore, it is
+            somewhat subjective.
+          </Typography>
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            Protective Aggression Examples:
+            <List>
+              <ListItem> - Aggression when a stranger hugs the owner</ListItem>
+              <ListItem> - Aggression from a bitch when a stranger handles her puppies</ListItem>
+              <ListItem>
+                {' '}
+                - Aggression when a stranger approaches in a &quot;threatening&quot; posture
+              </ListItem>
+              <ListItem>
+                {' '}
+                - Aggression toward a dog that approaches with threatening posture
+              </ListItem>
+            </List>
+          </Typography>
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            Fear aggression Examples:
+            <List>
+              <ListItem>
+                {' '}
+                - Aggression toward most approaching dogs regardless of the posture
+              </ListItem>
+              <ListItem>
+                {' '}
+                - Aggression toward most approaching people regardless of the posture
+              </ListItem>
+            </List>
+          </Typography>
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            Fear Biter: The term &quot;fear biter&quot; should not be confused with &quot;fear
+            aggression.&quot; Fear aggression is a preemptive and proactive -- &quot;I&apos;m going
+            to get you before you get me or us&quot; -- behavior, while &quot;fear biter&quot;
+            applies to a dog that bites only in defense, and only if flight is not an option. A
+            typical fear biter may &quot;fear bite&quot; when cornered by a perceived threat, when
+            getting nails clipped, or when he/she cannot escape various other types of
+            fear-eliciting stimuli. Dogs who are not fear biters, may bite in the identical
+            circumstances. However, whether the bite is the result of protective/fear aggression or
+            dominance aggression, will need to be determined by analyzing their behaviors and body
+            language, preceding the bite. The true fear biter will have fearful body language and
+            will prefer flight if there is an option.
+          </Typography>
+        </Grid>
+      </Grid>
+      <Grid
+        item
+        container
+        md={12}
+        style={{ padding: '50px', marginBottom: '20px' }}
+        direction="column"
+      >
+        <Grid
+          item
+          container
+          direction="column"
+          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+        >
+          <Grid item>
+            <Typography variant="h4" sx={{ fontWeight: 800, mb: 1 }}>
+              Bug
+            </Typography>
+          </Grid>
+          <Grid
+            item
+            style={{
+              height: '500px',
+              width: '500px',
+              backgroundImage: `url(${BugImg})`,
+              backgroundSize: '100%',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              marginBottom: '20px',
+            }}
+          />
+        </Grid>
+        <Grid item>
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            Nutrition!!!!!!! When I tell people that Allie changed Bugs life I really, really,
+            really mean it! You can see the changes in his physical appearance because of the food
+            and supplement changes we have implemented since meeting with her.
+          </Typography>
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            From a bald belly to a nice shiny coat. The pictures aren&apos;t the best but certainly
+            show what a change he has undergone. He&apos;s a happy man loving the raw fed life, and
+            we&apos;re happy mamas knowing how much healthier he is. He has suffered with gut
+            related issues for years. Sick with a heart problem, he had heart surgery at just 12
+            weeks to save his life. We have fought medical issues for years.
+          </Typography>
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            About 6 months ago, we were introduced to Allie and after swearing for years we
+            wouldn&apos;t feed raw, she took the time to educate us on why a diet change would be
+            good for Bug. She didn&apos;t just say you have to change..she taught us the benefits of
+            trying. So we did.
+          </Typography>
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            Slowly…a lot slower than we needed to but after years of rear end blowouts this mama was
+            going slow! I appreciate how respectful Allie was of my feelings, always there to help
+            answer questions. Bug is finicky and more than once we had to adjust, but we did and
+            today we received the BEST vet report ever!!! Bug&apos;s internist said his stomach
+            walls have healed so much they look normal!!
+          </Typography>
+          <Typography variant="h5">
+            For a dog with high level irritable bowl syndrome those words brought tears to my eyes!
+            Thank you Allie for all your advice and education!!!!! Me and my handsome little man
+            won&apos;t ever be able to thank you enough!!!
+          </Typography>
+        </Grid>
+      </Grid>
+      <Grid
+        item
+        container
+        md={12}
+        style={{ padding: '50px', marginBottom: '20px' }}
+        direction="column"
+      >
+        <Grid
+          item
+          container
+          direction="column"
+          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+        >
+          <Grid item>
+            <Typography variant="h4" sx={{ fontWeight: 800, mb: 1 }}>
+              Figgy
+            </Typography>
+          </Grid>
+          <Grid
+            item
+            style={{
+              height: '500px',
+              width: '500px',
+              backgroundImage: `url(${FiggyImg})`,
+              backgroundSize: '100%',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              marginBottom: '20px',
+              borderRadius: '10px',
+            }}
+          />
+        </Grid>
+        <Grid item>
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            Shout out to this little guy and our amazing Allie! Backstory… before Lucy we had Noe
+            who was a mini schnauzer. After we bought Noe, we rescued Figgy! That was 15 years ago.
+          </Typography>
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            Noe passed away suddenly and we did not want the same to happen with Figgy. We switched
+            his food to a dehydrated whole food and he did well on it until we started noticing he
+            was having pretty frequent pee accidents. We decided to get his blood work done this
+            past August. Results showed early signs of kidney dysfunction.
+          </Typography>
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            After talking to Allie, we decided to change Figgy&apos;s diet. We switched to a raw
+            diet that was lower in protein and fat along with adding liver and kidney support and
+            omega 3s. A month later we had another blood test done and his levels were better but
+            some were still out of range. We felt like what we were doing was the right track for
+            him. Fast forward to today. We had his blood work done again, 6 months from our first
+            blood panel. 3 out of range! AMAZING! Such an amazing results just from changing his
+            diet.
+          </Typography>
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            He&apos;s doing amazing! He has so much energy, keeps up with Lucy&apos;s antics for the
+            most part and is just so happy. He&apos;s 15 and he&apos;s turning 16 this year! Since
+            he&apos;s older and we believe in getting in front of any health issues, we will
+            continue to get senior blood panels done every 6 months or if he shows any new issues.
+            August 2022 - 11 markers out of range, September 2022 - 7 out of range, February 2023 -
+            3 out of range.
+          </Typography>
+          <Typography variant="h5">
+            Thank you Allie for all of your guidance and love! You&apos;ll never know how much we
+            appreciate you! Finding you was the best thing that has ever happened to us and we are
+            so thankful to have you in our family.
+          </Typography>
+        </Grid>
+      </Grid>
+    </Grid>
   );
 };
 
