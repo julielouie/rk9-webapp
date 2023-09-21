@@ -175,32 +175,37 @@ const AppHeader: React.FC = () => {
                 container
                 style={{ display: 'flex', justifyContent: 'center', textAlign: 'center' }}
               >
-                <Grid item xs={12} sm={2} style={{ padding: '0 50px', fontWeight: 'bold' }}>
+                <Grid item xs={12} sm={2} style={{ fontWeight: 'bold' }}>
                   <Box style={{ cursor: 'pointer' }} onClick={() => history.push('/about')}>
                     About
                   </Box>
                 </Grid>
-                <Grid item xs={12} sm={2} style={{ padding: '0 50px', fontWeight: 'bold' }}>
+                <Grid item xs={12} sm={2} style={{ fontWeight: 'bold' }}>
                   <Box style={{ cursor: 'pointer' }} onClick={() => history.push('/philosophy')}>
                     Philosophy
                   </Box>
                 </Grid>
-                <Grid item xs={12} sm={2} style={{ padding: '0 50px', fontWeight: 'bold' }}>
+                <Grid item xs={12} sm={1} style={{ fontWeight: 'bold' }}>
                   <Box style={{ cursor: 'pointer' }} onClick={() => history.push('/training')}>
                     Training
                   </Box>
                 </Grid>
-                <Grid item xs={12} sm={2} style={{ padding: '0 50px', fontWeight: 'bold' }}>
+                <Grid item xs={12} sm={2} style={{ fontWeight: 'bold' }}>
+                  <Box style={{ cursor: 'pointer' }} onClick={() => history.push('/thenAndNow')}>
+                    Then / Now
+                  </Box>
+                </Grid>
+                <Grid item xs={12} sm={2} style={{ fontWeight: 'bold' }}>
                   <Box style={{ cursor: 'pointer' }} onClick={() => history.push('/testimonials')}>
                     Testimonials
                   </Box>
                 </Grid>
-                <Grid item xs={12} sm={2} style={{ padding: '0 50px', fontWeight: 'bold' }}>
+                <Grid item xs={12} sm={1} style={{ fontWeight: 'bold' }}>
                   <Box style={{ cursor: 'pointer' }} onClick={() => history.push('/blog')}>
                     Blog
                   </Box>
                 </Grid>
-                <Grid item xs={12} sm={2} style={{ padding: '0 50px', fontWeight: 'bold' }}>
+                <Grid item xs={12} sm={2} style={{ fontWeight: 'bold' }}>
                   <Box
                     style={{ cursor: 'pointer' }}
                     onClick={() => history.push('/clientPortal/discussion/main')}

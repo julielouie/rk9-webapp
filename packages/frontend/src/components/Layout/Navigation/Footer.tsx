@@ -121,6 +121,14 @@ const Footer: FC = () => {
                     TRAINING
                   </RouterLink>
                 </Box>
+                <Box>
+                  <RouterLink
+                    to="/thenAndNow"
+                    style={{ textDecoration: 'none', color: palette.text.contrast }}
+                  >
+                    THEN / NOW
+                  </RouterLink>
+                </Box>
               </Box>
             </Grid>
             <Grid item xs={12} sm={4}>
