@@ -19,6 +19,7 @@ import ClientPortal from './components/ClientPortal';
 import Swag from './components/Swag';
 import Settings from './components/Settings';
 import { SessionContext } from './context/SessionContext';
+import ThenAndNow from './components/ThenAndNow';
 
 const App: React.FC = () => {
   const {
@@ -42,6 +43,7 @@ const App: React.FC = () => {
                 <Route exact path="/about" component={About} />
                 <Route exact path="/philosophy" component={Philosophy} />
                 <Route exact path="/training" component={Training} />
+                <Route exact path="/thenAndNow" component={ThenAndNow} />
                 <Route exact path="/testimonials" component={Testimonials} />
                 <Route exact path="/blog" component={Blog} />
                 {user && <Route exact path="/swag" component={Swag} />}
