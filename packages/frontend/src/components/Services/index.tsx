@@ -363,7 +363,7 @@ export const Services: FC = () => {
           </Typography>
           <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
             <Typography variant="h5" style={{ fontWeight: 600, paddingBottom: '25px' }}>
-              Your Initial Dog Training Purchase of $425 includes all the good stuff listed below:
+              Your Initial Dog Training Purchase of $500 includes all the good stuff listed below:
             </Typography>
             <Typography variant="h5" style={{ paddingBottom: '25px', fontStyle: 'italic' }}>
               *click on each to learn more
