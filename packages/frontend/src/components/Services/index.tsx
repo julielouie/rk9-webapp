@@ -63,7 +63,7 @@ export const Services: FC = () => {
               <ListItemText primary="- Between-Session Support" />
             </ListItem>
             <ListItem>
-              <ListItemText primary="- Video/In-Person Sessions" />
+              <ListItemText primary="- Interactive Journal" />
             </ListItem>
             <ListItem>
               <ListItemText primary="- Troubleshooting" />
