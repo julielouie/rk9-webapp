@@ -7,19 +7,19 @@ import HeroImg from '../../assets/images/training.png';
 import ScrollToTop from '../utils/ScrollToTop';
 
 export const Services: FC = () => {
-  const [showRelationshipBuilding, setShowRelationshipBuilding] = useState(false);
-  const [showInHouseGroupClasses, setShowInHouseGroupClasses] = useState(false);
-  const [showContinuedExercise, setShowContinuedExercise] = useState(false);
-  const [showPrivateSessions, setShowPrivateSessions] = useState(false);
-  const [showVirtualPrivateSessions, setShowVirtualPrivateSessions] = useState(false);
-  const [showGroupClasses, setShowGroupClasses] = useState(false);
-  const [showBiothaneLeash, setShowBiothaneLeash] = useState(false);
-  const [showSessionSupport, setShowSessionSupport] = useState(false);
-  const [showVirtualSessionSupport, setShowVirtualSessionSupport] = useState(false);
-  const [showWellnessCoaching, setShowWellnessCoaching] = useState(false);
-  const [showVirtualWellnessCoaching, setShowVirtualWellnessCoaching] = useState(false);
-  const [showPersonalShopping, setShowPersonalShopping] = useState(false);
-  const [showVirtualPersonalShopping, setShowVirtualPersonalShopping] = useState(false);
+  // const [showRelationshipBuilding, setShowRelationshipBuilding] = useState(false);
+  // const [showInHouseGroupClasses, setShowInHouseGroupClasses] = useState(false);
+  // const [showContinuedExercise, setShowContinuedExercise] = useState(false);
+  // const [showPrivateSessions, setShowPrivateSessions] = useState(false);
+  // const [showVirtualPrivateSessions, setShowVirtualPrivateSessions] = useState(false);
+  // const [showGroupClasses, setShowGroupClasses] = useState(false);
+  // const [showBiothaneLeash, setShowBiothaneLeash] = useState(false);
+  // const [showSessionSupport, setShowSessionSupport] = useState(false);
+  // const [showVirtualSessionSupport, setShowVirtualSessionSupport] = useState(false);
+  // const [showWellnessCoaching, setShowWellnessCoaching] = useState(false);
+  // const [showVirtualWellnessCoaching, setShowVirtualWellnessCoaching] = useState(false);
+  // const [showPersonalShopping, setShowPersonalShopping] = useState(false);
+  // const [showVirtualPersonalShopping, setShowVirtualPersonalShopping] = useState(false);
   const [showOwnerParticipation, setShowOwnerParticipation] = useState(false);
   const [showAttitude, setShowAttitude] = useState(false);
 
@@ -40,6 +40,43 @@ export const Services: FC = () => {
             backgroundRepeat: 'no-repeat',
           }}
         />
+        <Grid item md={12} style={{ padding: '50px' }}>
+          <Typography variant="h5" style={{ fontWeight: 600, paddingBottom: '25px' }}>
+            After going through the information on this website, if you feel like this program is
+            for you, please reach out. We will set up a consultation, at which point we will discuss
+            pricing and the program of action for you and your dog.
+          </Typography>
+          <Typography variant="h5" style={{ paddingBottom: '25px' }}>
+            Your training program will include:
+          </Typography>
+          <List style={{ paddingBottom: '25px' }}>
+            <ListItem>
+              <ListItemText primary="- In Person Sessions" />
+            </ListItem>
+            <ListItem>
+              <ListItemText primary="- Wellness Coaching" />
+            </ListItem>
+            <ListItem>
+              <ListItemText primary="- Nutrition" />
+            </ListItem>
+            <ListItem>
+              <ListItemText primary="- Between-Session Support" />
+            </ListItem>
+            <ListItem>
+              <ListItemText primary="- Video/In-Person Sessions" />
+            </ListItem>
+            <ListItem>
+              <ListItemText primary="- Troubleshooting" />
+            </ListItem>
+            <ListItem>
+              <ListItemText primary="- Home Life Problem-Solving" />
+            </ListItem>
+          </List>
+          <Typography variant="h5" style={{ paddingBottom: '25px' }}>
+            There is also a community of other dog and handler teams and group classes that you and
+            your dog will benefit from.
+          </Typography>
+        </Grid>
         <Grid
           item
           container
@@ -151,7 +188,7 @@ export const Services: FC = () => {
             Consultation
           </Typography>
           <Typography variant="h4" style={{ display: 'flex', alignSelf: 'end', fontWeight: 600 }}>
-            $75
+            $125
           </Typography>
         </Grid>
         <Grid item md={12} style={{ padding: '50px' }}>
@@ -186,7 +223,7 @@ export const Services: FC = () => {
             and how to train animals. It is not a hack, or “quick fix”!
           </Typography>
         </Grid>
-        <Grid
+        {/* <Grid
           item
           container
           style={{
@@ -569,7 +606,7 @@ export const Services: FC = () => {
               </Collapse>
             </List>
           </Box>
-        </Grid>
+        </Grid> */}
         <Grid
           item
           container
