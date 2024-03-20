@@ -4,6 +4,7 @@ import { CardContent, Typography } from '@mui/material';
 import palette from '../../theme/palette';
 import HeroImg from '../../assets/images/philosophy.png';
 import ScrollToTop from '../utils/ScrollToTop';
+import Badge1 from '../../assets/images/5.0_badges/B1.jpeg';
 
 export const Philosophy: FC = () => {
   return (
@@ -494,6 +495,11 @@ export const Philosophy: FC = () => {
             corners.
           </Typography>
         </Grid>
+        <Grid item md={12}>
+          <Typography variant="h4" style={{ fontWeight: 600, padding: '50px 0 0 50px' }}>
+            FSDT 4.0 Certification
+          </Typography>
+        </Grid>
         <Grid item md={12} style={{ padding: '50px 50px 0 50px' }}>
           <Card variant="outlined">
             <CardContent>
@@ -832,6 +838,103 @@ export const Philosophy: FC = () => {
                     </Typography>
                   </li>
                 </ul>
+              </Box>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item md={12}>
+          <Typography variant="h4" style={{ fontWeight: 600, padding: '50px 0 0 50px' }}>
+            FSDT 5.0 Certification
+          </Typography>
+        </Grid>
+        <Grid item md={12} style={{ padding: '50px 50px 0 50px' }}>
+          <Card variant="outlined">
+            <CardContent>
+              <Box>
+                <Typography variant="h5" sx={{ fontWeight: 600, fontStyle: 'italic', mb: 2 }}>
+                  1st Badge
+                </Typography>
+                <Typography variant="h5" sx={{ mb: 2 }}>
+                  This credential is awarded to those who have completed the required coursework in
+                  the Behavior and Aggression modules of the Foundation Style Dog Training
+                  coursework and have demonstrated the ability to analyze, critique, and create
+                  behavior plans for difficult dogs.
+                </Typography>
+              </Box>
+              <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                <Typography variant="h5" style={{ fontWeight: 600, fontStyle: 'italic' }}>
+                  Course Units Include:
+                </Typography>
+                <ul>
+                  <li>
+                    <Typography variant="h5" style={{ fontStyle: 'italic' }}>
+                      Business Ethics for Professional Dog Trainers
+                    </Typography>
+                  </li>
+                  <li>
+                    <Typography variant="h5" style={{ fontStyle: 'italic' }}>
+                      Introduction to Applied Behavior Analysis
+                    </Typography>
+                  </li>
+                  <li>
+                    <Typography variant="h5" style={{ fontStyle: 'italic' }}>
+                      Understanding Cynopraxis and Least Intrusive Minimally Aversive Dog Training
+                      (LIMA)
+                    </Typography>
+                  </li>
+                  <li>
+                    <Typography variant="h5" style={{ fontStyle: 'italic' }}>
+                      Canine Ethology
+                    </Typography>
+                  </li>
+                  <li>
+                    <Typography variant="h5" style={{ fontStyle: 'italic' }}>
+                      Canine Domestication and Breed Differences
+                    </Typography>
+                  </li>
+                  <li>
+                    <Typography variant="h5" style={{ fontStyle: 'italic' }}>
+                      Canine Body Language
+                    </Typography>
+                  </li>
+                  <li>
+                    <Typography variant="h5" style={{ fontStyle: 'italic' }}>
+                      Canine Temperament Traits
+                    </Typography>
+                  </li>
+                  <li>
+                    <Typography variant="h5" style={{ fontStyle: 'italic' }}>
+                      Diagnosing and Treating Different Aggressive Behaviors
+                    </Typography>
+                  </li>
+                  <li>
+                    <Typography variant="h5" style={{ fontStyle: 'italic' }}>
+                      Creating Housebreaking Plans
+                    </Typography>
+                  </li>
+                  <li>
+                    <Typography variant="h5" style={{ fontStyle: 'italic' }}>
+                      Understanding and Treating Anxiety
+                    </Typography>
+                  </li>
+                  <li>
+                    <Typography variant="h5" style={{ fontStyle: 'italic' }}>
+                      Conducting Consultations for Complex Behavior and Aggression Problems
+                    </Typography>
+                  </li>
+                </ul>
+                <div
+                  style={{
+                    display: 'flex',
+                    alignSelf: 'center',
+                    backgroundImage: `url(${Badge1})`,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: 'cover',
+                    borderRadius: '250px',
+                    height: '400px',
+                    width: '400px',
+                  }}
+                />
               </Box>
             </CardContent>
           </Card>
