@@ -923,18 +923,28 @@ export const Philosophy: FC = () => {
                     </Typography>
                   </li>
                 </ul>
-                <div
-                  style={{
-                    display: 'flex',
-                    alignSelf: 'center',
-                    backgroundImage: `url(${Badge1})`,
-                    backgroundRepeat: 'no-repeat',
-                    backgroundSize: 'cover',
-                    borderRadius: '250px',
-                    height: '400px',
-                    width: '400px',
-                  }}
-                />
+                <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                  <iframe
+                    width="500px"
+                    height="300px"
+                    src="https://www.youtube.com/embed/OHX_jMUG0no?si=1wx99EGHCcSthGav"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    title="FSDT 5.0 Badge 1"
+                  />
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignSelf: 'center',
+                      backgroundImage: `url(${Badge1})`,
+                      backgroundRepeat: 'no-repeat',
+                      backgroundSize: 'cover',
+                      borderRadius: '250px',
+                      height: '400px',
+                      width: '400px',
+                    }}
+                  />
+                </Box>
               </Box>
             </CardContent>
           </Card>
