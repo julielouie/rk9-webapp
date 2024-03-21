@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Box, Card, Grid } from '@material-ui/core';
 import { CardContent, Typography } from '@mui/material';
 import palette from '../../theme/palette';
-import HeroImg from '../../assets/images/philosophy.png';
+import HeroImg from '../../assets/images/philosophy.jpeg';
 import ScrollToTop from '../utils/ScrollToTop';
 import Badge1 from '../../assets/images/5.0_badges/B1.jpeg';
 
